@@ -4,14 +4,18 @@ import java.util.Random;
 
 public class Wuerfel1 {
 
-	private int ergebnis;
+	private static int ergebnis;
 	
 	
-	public void wuerfel(){
+	public static void wuerfel(){
 		
 		ergebnis= new Random().nextInt(6);
-		
-		System.out.println(ergebnis);
+		String[] zahlen = { "Eins","Zwei","Drei","Vier","Fünf","Sechs" };
+		System.out.println(zahlen[ergebnis] + " gewürfelt");
 	}
 	
+	public static void main (String[]args){
+		
+		wuerfel();
+	}
 }
