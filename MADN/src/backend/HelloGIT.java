@@ -6,6 +6,7 @@ public class HelloGIT {
 		
 		System.out.println("Hallo vom ersten!");
 		System.out.println("Hallo vom zweiten!");
+		System.out.println("Hallo 3");
 
 	}
 
