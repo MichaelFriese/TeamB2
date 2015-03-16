@@ -10,8 +10,9 @@ public class Wuerfel1 {
 	public static void wuerfel(){
 		
 		ergebnis= new Random().nextInt(6);
+		ergebnis=ergebnis+1;
 		String[] zahlen = { "Eins","Zwei","Drei","Vier","Fünf","Sechs" };
-		System.out.println(zahlen[ergebnis] + " gewürfelt");
+		System.out.println(zahlen[ergebnis-1] + " gewürfelt");
 	}
 	
 	public static void main (String[]args){
