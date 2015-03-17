@@ -13,7 +13,7 @@ public class Spieler {
 		
 		
 
-		private Wuerfel1 würfel;
+		private Wuerfel1 wuerfel;
 		private String name;
 		private String farbe;
 		private int zahl;
@@ -22,14 +22,15 @@ public class Spieler {
 
 			this.name = name;
 			this.farbe = farbe;
-			würfel = new Wuerfel1();
+			wuerfel = new Wuerfel1();
 			
 			spielfigur1= new Spielfigur(farbe);
 			
 			if (farbe.equals("blau")) {
-				
-
-				
+//				spielfigur1.setSpielfigur(position);
+//				spielfigur2.setSpielfigur(position+1);
+//				spielfigur3.setSpielfigur(position+2);
+//				spielfigur4.setSpielfigur(position+3);
 
 			} else if (farbe.equals("gelb")) {
 				Spielfigur.farbe = FarbEnum.RED;
@@ -47,8 +48,8 @@ public class Spieler {
 
 		
 
-		public int würfeln() {
-			return würfeln();
+		public int wuerfeln() {
+			return wuerfeln();
 		}
 
 		public int getPosition(Spielfigur spielfigur) {

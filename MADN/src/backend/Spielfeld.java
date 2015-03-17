@@ -5,6 +5,7 @@ public class Spielfeld {
 	private String id;
 	private Spielfigur spielfigur;
 	private FarbEnum farbe=null;
+	private int position=0;
 	
 	public Spielfeld (){
 		counter ++;
@@ -22,6 +23,21 @@ public class Spielfeld {
 	public FarbEnum getFarbe(){
 		return farbe;
 	}
+	public void setSpielfigur(int position,Spielfigur spielfigur){
+		for(int i=1;i<=4;i++){
+			if(Spielfigur.farbe.equals(getFarbe())){
+				
+			}
+			
+		}
+	}
+	public int getPosition(){
+		return position;
+	}
+		
+	
+	
+	
 	@Override
 	public String toString(){
 		return this.getID() + "_"+this.getFarbe();
