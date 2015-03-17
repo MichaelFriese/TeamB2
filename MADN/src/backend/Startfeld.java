@@ -1,5 +1,7 @@
 package backend;
 
+
+
 public class Startfeld extends Spielfeld {
 	private static int counterStart = 0;
 	public Startfeld (FarbEnum farbe){
