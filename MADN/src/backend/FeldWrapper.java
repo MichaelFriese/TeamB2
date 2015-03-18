@@ -1,5 +1,7 @@
 package backend;
 
+import backend.Spieler.Spielfigur;
+
 public class FeldWrapper {
 
 	private Spielfeld [] felder;
