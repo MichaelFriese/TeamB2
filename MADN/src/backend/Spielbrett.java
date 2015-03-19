@@ -10,31 +10,31 @@ public class Spielbrett {
 		for (int i = 0; i < spielbrett.length; i++) {
 			switch (i + 1) {
 			case (1):
-				spielbrett[i] = new FeldWrapper(true, false, FarbEnum.RED,null);
+				spielbrett[i] = new FeldWrapper(true, false, FarbEnum.RED);
 			break;
 			case (11):
-				spielbrett[i] = new FeldWrapper(true, false,FarbEnum.BLUE,null);
+				spielbrett[i] = new FeldWrapper(true, false,FarbEnum.BLUE);
 			break;
 			case (21):
-				spielbrett[i] = new FeldWrapper(true, false,FarbEnum.YELLOW,null);
+				spielbrett[i] = new FeldWrapper(true, false,FarbEnum.YELLOW);
 			break;
 			case (31):
-				spielbrett[i] = new FeldWrapper(true, false,FarbEnum.GREEN,null);
+				spielbrett[i] = new FeldWrapper(true, false,FarbEnum.GREEN);
 			break;
 			case (10):
-				spielbrett[i] = new FeldWrapper(false, true,FarbEnum.BLUE,null);
+				spielbrett[i] = new FeldWrapper(false, true,FarbEnum.BLUE);
 			break;
 			case (20):
-				spielbrett[i] = new FeldWrapper(false, true,FarbEnum.GREEN,null);
+				spielbrett[i] = new FeldWrapper(false, true,FarbEnum.GREEN);
 			break;
 			case (30):
-				spielbrett[i] = new FeldWrapper(false, true,FarbEnum.YELLOW,null);
+				spielbrett[i] = new FeldWrapper(false, true,FarbEnum.YELLOW);
 			break;
 			case (40):
-				spielbrett[i] = new FeldWrapper(false, true,FarbEnum.RED,null);
+				spielbrett[i] = new FeldWrapper(false, true,FarbEnum.RED);
 			break;
 			default:
-				spielbrett[i] = new FeldWrapper(false, false,null,null);
+				spielbrett[i] = new FeldWrapper(false, false,null);
 			}
 
 		}
