@@ -1,26 +1,30 @@
 package backend;
 
+import backend.Spieler.Spielfigur;
+
 public class Regelwerk {
 	
 	private Spieler spieler;
 	private FarbEnum farbe;
-	private Wuerfel1 wuerfel;
+	
 	private int ID;
+
 	
 	
-	
-//	public String spielzug(Spieler spieler){
-//		
-//		
-//		
-//		if(spieler.getFarbe().equals("red")){
-//			if(wuerfel.getErgebnis()==6){
-//				spieler.getSp1().setPositionNew(spieler.getSp1());
-//			}
-//			
-//			
-//		}
-//	}
+	public void spielzug(Spieler spieler){
+		
+		if(spieler.getFarbe().equals(FarbEnum.RED)){
+			
+			if(spieler.getWuerfel().getRaus()==6){
+				Spielfigur sp = spieler.getSpielfigur();
+
+				
+			
+			}
+			
+			
+		}
+	}
 		
 	public int getID(){
 		if(spieler.getFarbe().equals("red")){

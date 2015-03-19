@@ -21,7 +21,8 @@ public class Wuerfel1 {
 		return ergebnis;
 	}
 	
+	public int getRaus(){
+	return 6;
 	
-	
-	
+	}
 }

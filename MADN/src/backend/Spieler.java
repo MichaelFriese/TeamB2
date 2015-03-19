@@ -4,6 +4,8 @@ package backend;
 
 public class Spieler {
 
+		private Spielfigur[] spielfigur;
+	
 		private Spielfigur sp1;
 		private Spielfigur sp2;
 		private Spielfigur sp3;
@@ -11,20 +13,50 @@ public class Spieler {
 		private FarbEnum farbe;
 		private String name;
 		private Spielbrett brett;
+		private Regelwerk regel;
+		private Wuerfel1 wuerfel;
 		
 
-		public Spieler(String name, String farbe, Spielbrett brett) {
+		public Spieler(String name, String farbe, Spielbrett brett, Regelwerk regel) {
+			this.regel=regel;
 			setFarbe(farbe);
 			this.name = name;
 			this.brett = brett;
-			sp1 = new Spielfigur(1);
+			wuerfel= new Wuerfel1();
+			
+			this.spielfigur = new Spielfigur[4];
+			
+			for(int i=0; i<4; i++ ){
+				spielfigur[i]= new Spielfigur(i + 1);
+				spielfigur[i].setStartPosition(spielfigur[i]);
+			}
+			
+			/*sp1 = new Spielfigur(1);
 			sp2 = new Spielfigur(2);
 			sp3 = new Spielfigur(3);
-			sp4 = new Spielfigur(4);
-			sp1.setStartPosition(sp1);
+			sp4 = new Spielfigur(4);*/
+			
+			/*sp1.setStartPosition(sp1);
 			sp2.setStartPosition(sp2);
 			sp3.setStartPosition(sp3);
-			sp4.setStartPosition(sp4);
+			sp4.setStartPosition(sp4);*/
+		}
+		
+		
+	
+		public Spielfigur getSpielfigur(){
+	
+			for (int i=0; i<spielfigur.length; i++){
+				System.out.println(spielfigur[i].getID());
+				if (spielfigur[i].getID() == brett.getSpielbrett()[0].getFelder()[1].getSpielfigur().getID()) {
+					System.out.println(spielfigur[i].getID() + " " + this.farbe);
+					return spielfigur[i];
+				}
+			}
+			return null;
+		}
+		public Wuerfel1 getWuerfel(){
+			return wuerfel;
 		}
 		
 		public Spielfigur getSp1() {
@@ -65,6 +97,11 @@ public class Spieler {
 			} else if (farbe.equals("red")) {
 				this.farbe = FarbEnum.RED;
 			}
+		}
+		
+		
+		public Regelwerk getRegel(){
+			return regel;
 		}
 		
 		@Override
@@ -110,7 +147,9 @@ public class Spieler {
 			public void setPositionNew(Spielfigur sp){
 				switch(farbe){
 				case RED:
-//					brett.getSpielbrett()
+					brett.getSpielbrett()[0].getFelder()[1].setSpielfigur(null);
+					brett.getSpielbrett()[0].getFelder()[0].setSpielfigur(sp);
+					System.out.println("habe Spieler verschoben");
 					break;
 				case BLUE:
 					brett.getSpielbrett()[10].getFelder()[getID()].setSpielfigur(sp);
@@ -124,6 +163,10 @@ public class Spieler {
 				}
 			}
 				
+			
+			
+			
+			
 			
 			
 //			public Spielfeld getPosition() {

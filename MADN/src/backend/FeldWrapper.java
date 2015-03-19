@@ -6,6 +6,7 @@ public class FeldWrapper {
 
 	private Spielfeld [] felder;
 	private Spielfigur spielfigur;
+	
 	public FeldWrapper(boolean istStart, boolean istEnde,FarbEnum farbe) {
 		if (istStart) {
 			felder = new Spielfeld[5];

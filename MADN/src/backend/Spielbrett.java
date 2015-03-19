@@ -44,6 +44,13 @@ public class Spielbrett {
 	public FeldWrapper[] getSpielbrett() {
 		return spielbrett;
 	}
+	public void setSpielbrett(){
+		
+	}
+	
+	
+	
+	
 	
 	@Override 
 	public String toString(){
