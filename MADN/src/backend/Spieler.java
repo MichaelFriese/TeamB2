@@ -50,15 +50,19 @@ public class Spieler {
 		public String getName() {
 			return name;
 		}
+		
+		public Spielbrett getBrett(){
+			return brett;
+		}
 
 		private void setFarbe(String farbe){
-			if (farbe.equals("blau")) {
+			if (farbe.equals("blue")) {
 				this.farbe = FarbEnum.BLUE;
-			} else if (farbe.equals("gelb")) {
+			} else if (farbe.equals("yellow")) {
 				this.farbe = FarbEnum.YELLOW;
-			} else if (farbe.equals("grün")) {
+			} else if (farbe.equals("green")) {
 				this.farbe = FarbEnum.GREEN;
-			} else if (farbe.equals("rot")) {
+			} else if (farbe.equals("red")) {
 				this.farbe = FarbEnum.RED;
 			}
 		}
@@ -103,6 +107,24 @@ public class Spieler {
 				
 				
 			}
+			public void setPositionNew(Spielfigur sp){
+				switch(farbe){
+				case RED:
+					brett.getSpielbrett()
+					break;
+				case BLUE:
+					brett.getSpielbrett()[10].getFelder()[getID()].setSpielfigur(sp);
+					break;
+				case YELLOW:
+					brett.getSpielbrett()[20].getFelder()[getID()].setSpielfigur(sp);
+					break;
+				case GREEN:
+					brett.getSpielbrett()[30].getFelder()[getID()].setSpielfigur(sp);
+					break;
+				}
+			}
+				
+			
 			
 //			public Spielfeld getPosition() {
 //				return position;

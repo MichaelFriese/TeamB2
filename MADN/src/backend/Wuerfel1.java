@@ -17,6 +17,9 @@ public class Wuerfel1 {
 		return ergebnis;
 	}
 	
+	public int getErgebnis(){
+		return ergebnis;
+	}
 	
 	
 	
