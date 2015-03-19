@@ -9,18 +9,18 @@ public class Regelwerk {
 	
 	
 	
-	public String spielzug(Spieler spieler){
-		
-		
-		
-		if(spieler.getFarbe().equals("red")){
-			if(wuerfel.getErgebnis()==6){
-				spieler.getSp1().setPositionNew(spieler.getSp1());
-			}
-			
-			
-		}
-	}
+//	public String spielzug(Spieler spieler){
+//		
+//		
+//		
+//		if(spieler.getFarbe().equals("red")){
+//			if(wuerfel.getErgebnis()==6){
+//				spieler.getSp1().setPositionNew(spieler.getSp1());
+//			}
+//			
+//			
+//		}
+//	}
 		
 	public int getID(){
 		if(spieler.getFarbe().equals("red")){

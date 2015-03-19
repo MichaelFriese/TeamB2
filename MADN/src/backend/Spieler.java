@@ -110,7 +110,7 @@ public class Spieler {
 			public void setPositionNew(Spielfigur sp){
 				switch(farbe){
 				case RED:
-					brett.getSpielbrett()
+//					brett.getSpielbrett()
 					break;
 				case BLUE:
 					brett.getSpielbrett()[10].getFelder()[getID()].setSpielfigur(sp);
