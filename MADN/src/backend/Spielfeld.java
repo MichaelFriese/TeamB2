@@ -2,55 +2,99 @@ package backend;
 
 import backend.Spieler.Spielfigur;
 
+/**
+ * Klasse zur Verwaltung der Spielfelder
+ * 
+ * @author Judy, Michi,Tobi,Doerte
+ *
+ */
+
 public class Spielfeld {
 	private static int counter = 0;
 	private String id;
 	private Spielfigur spielfigur;
-	private FarbEnum farbe=null;
-	private int position=0;
-	
-	public Spielfeld (){
-		counter ++;
-		setID("" , counter - Startfeld.getCounterStart() - Endfeld.getCounterEnde());
+	private FarbEnum farbe = null;
+	private int position = 0;
+
+	/**
+	 * Default Kontruktor setzt die ID auf das Spielfeld
+	 */
+	public Spielfeld() {
+		counter++;
+		setID("",
+				counter - Startfeld.getCounterStart()
+						- Endfeld.getCounterEnde());
 	}
-	public void setID (String prefix, int id){
+
+	/**
+	 * 
+	 * @param prefix
+	 * @param id
+	 */
+	public void setID(String prefix, int id) {
 		this.id = prefix + id;
 	}
-	public void setFarbe(FarbEnum farbe){
-		this.farbe=farbe;
+
+	/**
+	 * setzt die Farbe für das passende Spielfeld
+	 * 
+	 * @param farbe
+	 */
+	public void setFarbe(FarbEnum farbe) {
+		this.farbe = farbe;
 	}
-	public String getID (){
-		return id;
-	}
-	public FarbEnum getFarbe(){
+
+	/**
+	 * gibt die Farbe des Enums zurück
+	 * 
+	 * @return farbe
+	 */
+	public FarbEnum getFarbe() {
 		return farbe;
 	}
-	public void setSpielfigur(int position,Spielfigur spielfigur){
-		for(int i=1;i<=4;i++){
-//			if(spielfigur.farbe.equals(getFarbe())){
-//				
-//			}
-			
-		}
+
+	/**
+	 * gibt die ID des Spielfeldes zurück
+	 * 
+	 * @return ID des Spielfeldes
+	 */
+	public String getID() {
+		return id;
 	}
-	public int getPosition(){
+
+	/**
+	 * gibt die Position des Spielfeldes zurück
+	 * 
+	 * @return position
+	 */
+	public int getPosition() {
 		return position;
 	}
-		
-	
-	public Spielfigur getSpielfigur() {
-		return spielfigur;
-	}
+
+	/**
+	 * setzt die Spielfigur
+	 * 
+	 * @param spielfigur
+	 */
 	public void setSpielfigur(Spielfigur spielfigur) {
 		this.spielfigur = spielfigur;
 	}
-	
-	
+
+	/**
+	 * gibt die Spielfigur zurück
+	 * 
+	 * @return spielfigur
+	 */
+	public Spielfigur getSpielfigur() {
+		return spielfigur;
+	}
+
 	@Override
-	public String toString(){
-		if(spielfigur==null)
-			return this.getID() + "_"+this.getFarbe()+"_null";
+	public String toString() {
+		if (spielfigur == null)
+			return this.getID() + "_" + this.getFarbe() + "_null";
 		else
-			return this.getID() + "_"+this.getFarbe()+"_"+spielfigur.toString();
+			return this.getID() + "_" + this.getFarbe() + "_"
+					+ spielfigur.toString();
 	}
 }

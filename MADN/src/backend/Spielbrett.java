@@ -1,8 +1,17 @@
 package backend;
 
+/** Diee Klasse stellt das Spielbrett dar
+ * @author Judy, Michi,Tobi,Doerte
+ * @version 1
+ */
 public class Spielbrett {
 
 	private FeldWrapper spielbrett[];
+	
+	
+	/** Default-Kontruktor erzeugt beim Aufruf ein Array Objekt  vom DatenTyp FeldWrapper 
+	 * welches die 40 Spielfelder vom Spielbrett darstellen.
+	 * **/
 	
 	public Spielbrett() {
 
@@ -41,14 +50,13 @@ public class Spielbrett {
 
 	}
 	
+	
+	/** gibt das Array Spielbrett, also die 40 Felder zurück
+	 * @return Spielbrett
+	 */
 	public FeldWrapper[] getSpielbrett() {
 		return spielbrett;
 	}
-	public void setSpielbrett(){
-		
-	}
-	
-	
 	
 	
 	
