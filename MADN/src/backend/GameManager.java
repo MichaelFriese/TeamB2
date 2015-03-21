@@ -1,7 +1,17 @@
 package backend;
 
+/**
+ * Klasse zum Spielstart
+ * @author Judy, Michi,Tobi,Doerte
+ *
+ */
+
 public class GameManager {
 
+	/**
+	 * Main Methode 
+	 * @param args
+	 */
 	public static void main(String[] args) {
 		
 		Spielbrett brett = new Spielbrett();

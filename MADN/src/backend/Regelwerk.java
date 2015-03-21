@@ -2,6 +2,13 @@ package backend;
 
 import backend.Spieler.Spielfigur;
 
+
+/**
+ * Klasse zur Verwaltung der Spielregeln
+ * @author  Judy, Michi,Tobi,Doerte
+ *
+ */
+
 public class Regelwerk {
 	
 	private Spieler spieler;
@@ -9,7 +16,7 @@ public class Regelwerk {
 	
 	private int ID;
 
-	
+	//erste Versuche einen Spielzug zu führen
 	
 	public void spielzug(Spieler spieler){
 		
