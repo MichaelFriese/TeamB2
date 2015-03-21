@@ -16,7 +16,7 @@ public class Regelwerk {
 		if(spieler.getFarbe().equals(FarbEnum.RED)){
 			
 			if(spieler.getWuerfel().getRaus()==6){
-				Spielfigur sp = spieler.getSpielfigur();
+				//Spielfigur sp = spieler.getSpielfigur();
 
 				
 			
@@ -25,23 +25,5 @@ public class Regelwerk {
 			
 		}
 	}
-		
-	public int getID(){
-		if(spieler.getFarbe().equals("red")){
-		return	spieler.getSp1().getID();
-	}
-		if(spieler.getFarbe().equals("blue")){
-		return	spieler.getSp1().getID();
-	
-	}
-		if(spieler.getFarbe().equals("yellow")){
-		return	spieler.getSp1().getID();
-	
-	}
-		if(spieler.getFarbe().equals("green")){
-		return	spieler.getSp1().getID();
-	
-			}
-		return 0;
-		}
-	}
+}
+
