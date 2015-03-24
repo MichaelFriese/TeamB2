@@ -51,7 +51,7 @@ public class Spielbrett {
 	}
 	
 	
-	/** gibt das Array Spielbrett, also die 40 Felder zurÃ¼ck
+	/** gibt das Array Spielbrett, also die 40 Felder zurück
 	 * @return Spielbrett
 	 */
 	public FeldWrapper[] getSpielbrett() {

@@ -1,7 +1,7 @@
 package backend;
 
 /**
- * Klasse fÃ¼r die Verwaltung eines Spieler
+ * Klasse für die Verwaltung eines Spieler
  * 
  * @author Judy, Michi,Tobi,Doerte
  *
@@ -19,25 +19,25 @@ public class Spieler {
 	private String name;
 	private Spielbrett brett;
 	private Regelwerk regel;
-	private Wuerfel1 wuerfel;
+	private Wuerfel wuerfel;
 
 	/**
 	 * Konstruktor mit Erstellung der Spielfiguren
 	 * 
 	 * @param name des Spielers
 	 * @param farbe
-	 *            gewÃ¤hlte Farbe der Spielfigur
+	 *            gewählte Farbe der Spielfigur
 	 * @param brett
 	 *            das Spielbrett
 	 * @param regel
-	 *            die Regeln fÃ¼r das Spiel
+	 *            die Regeln für das Spiel
 	 */
 	public Spieler(String name, String farbe, Spielbrett brett, Regelwerk regel) {
 		this.regel = regel;
 		setFarbe(farbe);
 		this.name = name;
 		this.brett = brett;
-		wuerfel = new Wuerfel1();
+		wuerfel = new Wuerfel();
 
 		this.spielfigur = new Spielfigur[4];
 
@@ -49,11 +49,11 @@ public class Spieler {
 	}
 
 	/**
-	 * gibt die ZUfallszahl des WÃ¼rfels zurÃ¼ck
+	 * gibt die ZUfallszahl des Würfels zurück
 	 * 
-	 * @return gewÃ¼rfelte Zahl
+	 * @return gewürfelte Zahl
 	 */
-	public Wuerfel1 getWuerfel() {
+	public Wuerfel getWuerfel() {
 		return wuerfel;
 	}
 
@@ -77,15 +77,15 @@ public class Spieler {
 	}
 
 	/**
-	 * gibt des Namen des Spielers zurÃ¼ck
-	 * @return name, name des Spieler
+	 * gibt des Namen des Spielers zurück
+	 * @return name name des Spielers
 	 */
 	public String getName() {
 		return name;
 	}
 
 	/**
-	 * gibt das Spielbrett zurÃ¼ck
+	 * gibt das Spielbrett zurück
 	 * @return brett, gibt die 40 Spielfelder auf dem Spielbrett
 	 */
 
@@ -94,10 +94,10 @@ public class Spieler {
 	}
 
 	/**
-	 * setzt die gewÃ¤hlte Farbe des Spielers
+	 * setzt die gewählte Farbe des Spielers
 	 * 
 	 * @param farbe
-	 *            gewÃ¤hlte farbe des Spielers
+	 *            gewählte farbe des Spielers
 	 */
 	private void setFarbe(String farbe) {
 		if (farbe.equals("blue")) {
@@ -112,7 +112,7 @@ public class Spieler {
 	}
 
 	/**
-	 * gibt die Regeln des Spieles zurÃ¼ck
+	 * gibt die Regeln des Spieles zurück
 	 * 
 	 * @return regel
 	 */
@@ -121,7 +121,7 @@ public class Spieler {
 	}
 
 	/**
-	 * gibt die Spielfigur mit gewÃ¼nschter ID zurÃ¼ck
+	 * gibt die Spielfigur mit gewünschter ID zurück
 	 * 
 	 * @param i
 	 * @return Spielfigur mit angegebener ID
@@ -177,11 +177,11 @@ public class Spieler {
 		private int ID;
 
 		/**
-		 * Kontruktor der Inneren Klasse kann nur Ã¼ber die Spielerklasse
+		 * Kontruktor der Inneren Klasse kann nur über die Spielerklasse
 		 * aufgerufen werden
 		 * 
 		 * @param ID
-		 *            Ã¼bergibt jeder erstellte Spielfigur eine ID
+		 *            übergibt jeder erstellte Spielfigur eine ID
 		 */
 
 		public Spielfigur(int ID) {
@@ -189,7 +189,7 @@ public class Spieler {
 		}
 
 		/**
-		 * gibt die ID der Spielfigur zurÃ¼ck
+		 * gibt die ID der Spielfigur zurück
 		 * 
 		 * @return ID der Spielfigur
 		 */
@@ -225,7 +225,7 @@ public class Spieler {
 		}
 
 		/**
-		 * lÃ¶scht eine Spielfigur von dem Startfeld und setzt sie auf das Erste
+		 * löscht eine Spielfigur von dem Startfeld und setzt sie auf das Erste
 		 * Spielfeld
 		 * 
 		 * @param spielfigur

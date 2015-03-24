@@ -2,7 +2,8 @@ package backend;
 
 import backend.Spieler.Spielfigur;
 /**
- *Klasse fÃ¼r das einfÃ¼gen von Start und Endfeldern des Spiels
+ *Wrapper Klasse für das einfügen von Start und Endfeldern des Spiels
+ *
  * @author Judy, Michi,Tobi,Doerte
  *
  */
@@ -40,8 +41,8 @@ public class FeldWrapper {
 	}
 	
 	/**
-	 * methode um auf Start und Endfelder zugreifen zu kÃ¶nnen
-	 * @return gibt die Inhalte der Start/Endfelder zurÃ¼ck
+	 * methode um auf Start und Endfelder zugreifen zu können
+	 * @return gibt die Inhalte der Start/Endfelder zurück
 	 */
 	
 	public Spielfeld[] getFelder(){

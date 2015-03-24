@@ -7,7 +7,7 @@ import java.util.Random;
  *
  */
 
-public class Wuerfel1 {
+public class Wuerfel {
 
 	private int ergebnis;
 	

@@ -36,7 +36,7 @@ public class Spielfeld {
 	}
 
 	/**
-	 * setzt die Farbe fÃ¼r das passende Spielfeld
+	 * setzt die Farbe für das passende Spielfeld
 	 * 
 	 * @param farbe
 	 */
@@ -54,7 +54,7 @@ public class Spielfeld {
 	}
 
 	/**
-	 * gibt die ID des Spielfeldes zurÃ¼ck
+	 * gibt die ID des Spielfeldes zurück
 	 * 
 	 * @return ID des Spielfeldes
 	 */
@@ -63,7 +63,7 @@ public class Spielfeld {
 	}
 
 	/**
-	 * gibt die Position des Spielfeldes zurÃ¼ck
+	 * gibt die Position des Spielfeldes zurück
 	 * 
 	 * @return position
 	 */
@@ -81,7 +81,7 @@ public class Spielfeld {
 	}
 
 	/**
-	 * gibt die Spielfigur zurÃ¼ck
+	 * gibt die Spielfigur zurück
 	 * 
 	 * @return spielfigur
 	 */

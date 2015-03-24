@@ -3,7 +3,7 @@ package backend;
 import backend.Spieler.Spielfigur;
 
 /**
- * Klasse fÃ¼r die Startfelder
+ * Klasse für die Startfelder
  * erbt von der Oberklsse Spielfeld
  * @author Judy, Michi,Tobi,Doerte
  *
