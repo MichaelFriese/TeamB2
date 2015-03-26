@@ -22,7 +22,7 @@ public class Regelwerk {
 		
 		if(spieler.getFarbe().equals(FarbEnum.RED)){
 			
-			if(spieler.getWuerfel().getRaus()==6){
+			if(spieler.getWuerfel().wurf6()==6){
 				//Spielfigur sp = spieler.getSpielfigur();
 
 				

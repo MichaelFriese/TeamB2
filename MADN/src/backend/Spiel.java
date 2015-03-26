@@ -1,5 +1,7 @@
 package backend;
 
+import frontend.iBediener;
+
 public class Spiel implements iBediener {
 	private Spielbrett brett;
 	private Spieler[] spieler = new Spieler[4];

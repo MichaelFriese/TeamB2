@@ -39,8 +39,7 @@ public class Wuerfel {
 	 * Pseudowürfel zum testen 
 	 * @return  6
 	 */
-	public int getRaus(){
-	return 6;
-	
+	public int wurf6(){
+		return 6;
 	}
 }
