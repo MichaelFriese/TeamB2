@@ -48,6 +48,7 @@ public class Spiel implements iBediener {
 	}
 
 	public Spieler getAmZug() {
+		
 		return amZug;
 	}
 
