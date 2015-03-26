@@ -36,8 +36,6 @@ public class Regelwerk {
 	public void laufen(Spieler spieler, int ID){
 		
 		
-		
-		
 	}
 	
 }

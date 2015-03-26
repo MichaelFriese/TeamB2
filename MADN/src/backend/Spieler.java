@@ -43,7 +43,7 @@ public class Spieler {
 		this.spielfigur = new Spielfigur[4];
 
 		for (int i = 0; i < 4; i++) {
-			spielfigur[i] = new Spielfigur(i + 1);
+			spielfigur[i] = new Spielfigur(i + 1,0);
 			spielfigur[i].setzeStartPosition(spielfigur[i]);
 		}
 
@@ -149,8 +149,7 @@ public class Spieler {
 		return null;
 	}
 
-	// hier wollte ich die Position auf dem Startfeld ausgeben lassen.
-
+	
 	public String istAufStartfeld(Spieler spieler) {
 		for (int i = 1; i <= 4; i++) {
 			if (brett.getSpielbrett()[0].getFelder()[i].equals(spieler
@@ -176,6 +175,7 @@ public class Spieler {
 
 	public class Spielfigur {
 		private int ID;
+		private int position;
 		private Spielfeld spielfeld;
 
 		/**
@@ -186,7 +186,8 @@ public class Spieler {
 		 *            übergibt jeder erstellte Spielfigur eine ID
 		 */
 
-		public Spielfigur(int ID) {
+		public Spielfigur(int ID,int position) {
+			position=100;
 			this.ID = ID;
 		}
 
@@ -197,6 +198,14 @@ public class Spieler {
 		 */
 		public int getID() {
 			return ID;
+		}
+
+		public int getPosition() {
+			return position;
+		}
+
+		public void setPosition(int position) {
+			this.position = position;
 		}
 
 		public Spielfeld getSpielfeld() {
@@ -243,6 +252,7 @@ public class Spieler {
 						.setSpielfigur(null);
 				brett.getSpielbrett()[0].getFelder()[0]
 						.setSpielfigur(spielfigur);
+				spielfigur.setPosition(1);
 				System.out.println("habe Spieler verschoben");
 				break;
 			case BLUE:
@@ -260,12 +270,15 @@ public class Spieler {
 			}
 		}
 
-//		public void setSpielfeldNeu(Spielfigur spielfigur){
-//			switch(farbe){
-//			case RED:
-//				brett.getSpielbrett()[getStandort(spieler)]
-//			}
-//		}
+		public void setSpielfeldNeu(Spieler spieler, int ID){
+			switch(farbe){
+			case RED:
+				brett.getSpielbrett()[getPosition()].getFelder()[0]
+						.setSpielfigur(null);
+				setPosition(getSpielfigur(ID).getPosition()+getWuerfel().getErgebnis());
+				spieler.brett.getSpielbrett()[getPosition()].getFelder()[0].setSpielfigur(spielfigur[ID]);;
+			}
+		}
 		
 		
 		@Override

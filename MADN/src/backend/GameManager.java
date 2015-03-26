@@ -20,15 +20,18 @@ public class GameManager {
 		
 		
 		Spieler Michael = new Spieler("Michael","red", brett, regel );
+		
 		Michael.getRegel().spielzug(Michael,1);
-		Michael.getStandort(Michael, 4);
+		Michael.getWuerfel().wurf6();
+		Michael.getSpielfigur(1).setSpielfeldNeu(Michael, 1);
+		
 		//Spieler Doerte = new Spieler("Doerte","blue", brett );
 		//Spieler Judith = new Spieler("Judith","yellow", brett );
 		//Spieler Tobi = new Spieler("Tobi","green", brett );
 		
 		
 		System.out.println(brett);
-		System.out.println(Michael.getStandort(Michael, 4));
+		
 		//System.out.println(Michael.istAufStartfeld(Michael));
 
 	}
