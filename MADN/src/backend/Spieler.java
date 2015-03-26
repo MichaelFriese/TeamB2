@@ -24,7 +24,8 @@ public class Spieler {
 	/**
 	 * Konstruktor mit Erstellung der Spielfiguren
 	 * 
-	 * @param name des Spielers
+	 * @param name
+	 *            des Spielers
 	 * @param farbe
 	 *            gewählte Farbe der Spielfigur
 	 * @param brett
@@ -69,6 +70,7 @@ public class Spieler {
 
 	/**
 	 * gibt die Farbe des farbEnums wieder
+	 * 
 	 * @return farbe des Enums
 	 */
 
@@ -78,6 +80,7 @@ public class Spieler {
 
 	/**
 	 * gibt des Namen des Spielers zurück
+	 * 
 	 * @return name name des Spielers
 	 */
 	public String getName() {
@@ -86,6 +89,7 @@ public class Spieler {
 
 	/**
 	 * gibt das Spielbrett zurück
+	 * 
 	 * @return brett, gibt die 40 Spielfelder auf dem Spielbrett
 	 */
 
@@ -128,38 +132,35 @@ public class Spieler {
 	 */
 	public Spielfigur getSpielfigur(int i) {
 		i = i - 1;
+		if (i < 0)
+			i = 0;
 		return spielfigur[i];
 
 	}
 
-	/*
-	 * Hier wollte ich die Position der Spielfigur ausgeben lassen, sie sich auf
-	 * dem Spielbrett befinden.
-	 * 
-	 * 
-	 * 
-	 * public String getStandort(Spieler spieler){ for (int i=0;i<
-	 * brett.getSpielbrett().length; i++){
-	 * if(brett.getSpielbrett()[i].equals(spieler.getSpielfigur(1))){ return
-	 * brett.getSpielbrett()[i].toString();
-	 * 
-	 * }
-	 * 
-	 * }
-	 * 
-	 * 
-	 * return null; }
-	 * 
-	 * // hier wollte ich die Position auf dem Startfeld ausgeben lassen.
-	 * 
-	 * public String istAufStartfeld(Spieler spieler){ for(int i=1; i<=4;i++){
-	 * if
-	 * (brett.getSpielbrett()[0].getFelder()[i].equals(spieler.getSpielfigur(1)
-	 * )){ return brett.getSpielbrett()[0].getFelder()[i].toString(); } } return
-	 * null;
-	 * 
-	 * }
-	 */
+	public String getStandort(Spieler spieler, int ID) {
+		for (int i = 0; i < brett.getSpielbrett().length; i++) {
+			if (brett.getSpielbrett()[i].toString().contains(spieler.getSpielfigur(ID).toString())){
+			System.out.println("gefunden");
+			return brett.getSpielbrett()[i].getFelder()[0].getID();
+			}
+		}
+		
+		return null;
+	}
+
+	// hier wollte ich die Position auf dem Startfeld ausgeben lassen.
+
+	public String istAufStartfeld(Spieler spieler) {
+		for (int i = 1; i <= 4; i++) {
+			if (brett.getSpielbrett()[0].getFelder()[i].equals(spieler
+					.getSpielfigur(1))) {
+				return brett.getSpielbrett()[0].getFelder()[i].toString();
+			}
+		}
+		return null;
+
+	}
 
 	@Override
 	public String toString() {
@@ -175,6 +176,7 @@ public class Spieler {
 
 	public class Spielfigur {
 		private int ID;
+		private Spielfeld spielfeld;
 
 		/**
 		 * Kontruktor der Inneren Klasse kann nur über die Spielerklasse
@@ -195,6 +197,10 @@ public class Spieler {
 		 */
 		public int getID() {
 			return ID;
+		}
+
+		public Spielfeld getSpielfeld() {
+			return spielfeld;
 		}
 
 		/**
@@ -230,11 +236,11 @@ public class Spieler {
 		 * 
 		 * @param spielfigur
 		 */
-		// ist noch nicht fertig...
 		public void setPositionNew(Spielfigur spielfigur) {
 			switch (farbe) {
 			case RED:
-				brett.getSpielbrett()[0].getFelder()[1].setSpielfigur(null);
+				brett.getSpielbrett()[0].getFelder()[spielfigur.getID()]
+						.setSpielfigur(null);
 				brett.getSpielbrett()[0].getFelder()[0]
 						.setSpielfigur(spielfigur);
 				System.out.println("habe Spieler verschoben");
@@ -254,6 +260,14 @@ public class Spieler {
 			}
 		}
 
+//		public void setSpielfeldNeu(Spielfigur spielfigur){
+//			switch(farbe){
+//			case RED:
+//				brett.getSpielbrett()[getStandort(spieler)]
+//			}
+//		}
+		
+		
 		@Override
 		public String toString() {
 			return "Spielfigur" + "" + getID() + "_" + getName() + "_"

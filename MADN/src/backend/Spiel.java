@@ -58,6 +58,6 @@ public class Spiel implements iBediener {
 		this.amZug = amZug;
 	}
 	
-	
+
 	
 }

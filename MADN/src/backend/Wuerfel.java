@@ -40,6 +40,9 @@ public class Wuerfel {
 	 * @return  6
 	 */
 	public int wurf6(){
+		System.out.println("gewürfelt");
 		return 6;
 	}
 }
+	
+
