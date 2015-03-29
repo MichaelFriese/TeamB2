@@ -27,7 +27,7 @@ public class Wuerfel {
 	}
 	
 	/**
-	 * gibt das Ergebnis vom Wuerfel zurück
+	 * gibt das Ergebnis vom Wuerfel zurueck
 	 * @return eine Zahl zwischen 1 und 6
 	 */
 	public int getErgebnis(){
@@ -36,7 +36,7 @@ public class Wuerfel {
 	
 	
 	/**
-	 * Pseudowürfel zum testen 
+	 * Pseudowuerfel zum testen 
 	 * @return  6
 	 */
 	public int wurf6(){

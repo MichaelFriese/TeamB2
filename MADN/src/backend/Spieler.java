@@ -17,8 +17,6 @@ public class Spieler {
 	 */
 	private FarbEnum farbe;
 	private String name;
-	private Spielbrett brett;
-	private Regelwerk regel;
 	private Wuerfel wuerfel;
 
 	/**
@@ -33,40 +31,27 @@ public class Spieler {
 	 * @param regel
 	 *            die Regeln für das Spiel
 	 */
-	public Spieler(String name, String farbe, Spielbrett brett, Regelwerk regel) {
-		this.regel = regel;
+	public Spieler(String name, FarbEnum farbe) {
 		setFarbe(farbe);
-		this.name = name;
-		this.brett = brett;
+		setName(name);
 		wuerfel = new Wuerfel();
 
 		this.spielfigur = new Spielfigur[4];
 
 		for (int i = 0; i < 4; i++) {
-			spielfigur[i] = new Spielfigur(i + 1,0);
-			spielfigur[i].setzeStartPosition(spielfigur[i]);
+			spielfigur[i] = new Spielfigur(i + 1);
 		}
 
 	}
 
 	/**
-	 * gibt die ZUfallszahl des Würfels zurück
+	 * gibt die Zufallszahl des Würfels zurück
 	 * 
 	 * @return gewürfelte Zahl
 	 */
 	public Wuerfel getWuerfel() {
 		return wuerfel;
 	}
-
-	/*
-	 * public Spielfigur getSp1() { return sp1; }
-	 * 
-	 * public Spielfigur getSp2() { return sp2; }
-	 * 
-	 * public Spielfigur getSp3() { return sp3; }
-	 * 
-	 * public Spielfigur getSp4() { return sp4; }
-	 */
 
 	/**
 	 * gibt die Farbe des farbEnums wieder
@@ -88,40 +73,17 @@ public class Spieler {
 	}
 
 	/**
-	 * gibt das Spielbrett zurück
-	 * 
-	 * @return brett, gibt die 40 Spielfelder auf dem Spielbrett
-	 */
-
-	public Spielbrett getBrett() {
-		return brett;
-	}
-
-	/**
 	 * setzt die gewählte Farbe des Spielers
 	 * 
 	 * @param farbe
 	 *            gewählte farbe des Spielers
 	 */
-	private void setFarbe(String farbe) {
-		if (farbe.equals("blue")) {
-			this.farbe = FarbEnum.BLUE;
-		} else if (farbe.equals("yellow")) {
-			this.farbe = FarbEnum.YELLOW;
-		} else if (farbe.equals("green")) {
-			this.farbe = FarbEnum.GREEN;
-		} else if (farbe.equals("red")) {
-			this.farbe = FarbEnum.RED;
-		}
+	private void setFarbe(FarbEnum farbe) {
+		this.farbe = farbe;
 	}
 
-	/**
-	 * gibt die Regeln des Spieles zurück
-	 * 
-	 * @return regel
-	 */
-	public Regelwerk getRegel() {
-		return regel;
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	/**
@@ -137,29 +99,11 @@ public class Spieler {
 		return spielfigur[i];
 
 	}
-
-	public String getStandort(Spieler spieler, int ID) {
-		for (int i = 0; i < brett.getSpielbrett().length; i++) {
-			if (brett.getSpielbrett()[i].toString().contains(spieler.getSpielfigur(ID).toString())){
-			System.out.println("gefunden");
-			return brett.getSpielbrett()[i].getFelder()[0].getID();
-			}
-		}
-		
-		return null;
-	}
-
 	
-	public String istAufStartfeld(Spieler spieler) {
-		for (int i = 1; i <= 4; i++) {
-			if (brett.getSpielbrett()[0].getFelder()[i].equals(spieler
-					.getSpielfigur(1))) {
-				return brett.getSpielbrett()[0].getFelder()[i].toString();
-			}
-		}
-		return null;
-
+	public Spielfigur[] getSpielfiguren(){
+		return spielfigur;
 	}
+	
 
 	@Override
 	public String toString() {
@@ -175,7 +119,6 @@ public class Spieler {
 
 	public class Spielfigur {
 		private int ID;
-		private int position;
 		private Spielfeld spielfeld;
 
 		/**
@@ -186,9 +129,9 @@ public class Spieler {
 		 *            übergibt jeder erstellte Spielfigur eine ID
 		 */
 
-		public Spielfigur(int ID,int position) {
-			position=100;
+		private Spielfigur(int ID) {
 			this.ID = ID;
+			this.spielfeld = null;
 		}
 
 		/**
@@ -200,87 +143,16 @@ public class Spieler {
 			return ID;
 		}
 
-		public int getPosition() {
-			return position;
-		}
-
-		public void setPosition(int position) {
-			this.position = position;
-		}
-
 		public Spielfeld getSpielfeld() {
 			return spielfeld;
 		}
 
-		/**
-		 * setzt die Spielfigur auf das Startfeld
-		 * 
-		 * @param spielfigur
-		 */
-
-		public void setzeStartPosition(Spielfigur spielfigur) {
-			switch (farbe) {
-			case RED:
-				brett.getSpielbrett()[0].getFelder()[getID()]
-						.setSpielfigur(spielfigur);
-				break;
-			case BLUE:
-				brett.getSpielbrett()[10].getFelder()[getID()]
-						.setSpielfigur(spielfigur);
-			case YELLOW:
-				brett.getSpielbrett()[20].getFelder()[getID()]
-						.setSpielfigur(spielfigur);
-				break;
-			case GREEN:
-				brett.getSpielbrett()[30].getFelder()[getID()]
-						.setSpielfigur(spielfigur);
-				break;
-			}
-
-		}
-
-		/**
-		 * löscht eine Spielfigur von dem Startfeld und setzt sie auf das Erste
-		 * Spielfeld
-		 * 
-		 * @param spielfigur
-		 */
-		public void setPositionNew(Spielfigur spielfigur) {
-			switch (farbe) {
-			case RED:
-				brett.getSpielbrett()[0].getFelder()[spielfigur.getID()]
-						.setSpielfigur(null);
-				brett.getSpielbrett()[0].getFelder()[0]
-						.setSpielfigur(spielfigur);
-				spielfigur.setPosition(1);
-				System.out.println("habe Spieler verschoben");
-				break;
-			case BLUE:
-				brett.getSpielbrett()[10].getFelder()[getID()]
-						.setSpielfigur(spielfigur);
-				break;
-			case YELLOW:
-				brett.getSpielbrett()[20].getFelder()[getID()]
-						.setSpielfigur(spielfigur);
-				break;
-			case GREEN:
-				brett.getSpielbrett()[30].getFelder()[getID()]
-						.setSpielfigur(spielfigur);
-				break;
+		public void setSpielfeld(Spielfeld spielfeld) {
+			if (spielfeld != null) {
+				this.spielfeld = spielfeld;
 			}
 		}
 
-		public void setSpielfeldNeu(Spieler spieler, int ID){
-			switch(farbe){
-			case RED:
-				brett.getSpielbrett()[getPosition()].getFelder()[0]
-						.setSpielfigur(null);
-				setPosition(getSpielfigur(ID).getPosition()+getWuerfel().getErgebnis());
-				spieler.brett.getSpielbrett()[getPosition()].getFelder()[0].setSpielfigur(spielfigur[ID]);;
-			}
-		}
-		
-		
 		@Override
 		public String toString() {
 			return "Spielfigur" + "" + getID() + "_" + getName() + "_"
