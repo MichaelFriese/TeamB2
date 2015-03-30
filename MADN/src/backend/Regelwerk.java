@@ -22,16 +22,16 @@ public class Regelwerk {
 	public void rauskommen(Spieler spieler, Spielfigur spielfigur) {
 
 		if (spieler.getFarbe().equals(FarbEnum.RED)) {
-			if (spieler.getWuerfel().getErgebnis() == 6) {
-				spielfigur.getSpielfeld().setSpielfigur(null);
+//			if (spieler.getWuerfel().getErgebnis() == 6) {
+				spiel.getBrett().getSpielbrett()[0].getFelder()[spielfigur.getID()].setSpielfigur(null);
 				spielfigur.setSpielfeld(spiel.getBrett().getSpielbrett()[0]
 						.getFelder()[0]);
 				spielfigur.getSpielfeld().setSpielfigur(spielfigur);
-			}
+//			}
 		}
 		if (spieler.getFarbe().equals(FarbEnum.BLUE)) {
 			if (spieler.getWuerfel().getErgebnis() == 6) {
-				spielfigur.getSpielfeld().setSpielfigur(null);
+				spiel.getBrett().getSpielbrett()[0].getFelder()[spielfigur.getID()].setSpielfigur(null);
 				spielfigur.setSpielfeld(spiel.getBrett().getSpielbrett()[10]
 						.getFelder()[0]);
 				spielfigur.getSpielfeld().setSpielfigur(spielfigur);
@@ -39,7 +39,7 @@ public class Regelwerk {
 		}
 		if (spieler.getFarbe().equals(FarbEnum.GREEN)) {
 			if (spieler.getWuerfel().getErgebnis() == 6) {
-				spielfigur.getSpielfeld().setSpielfigur(null);
+				spiel.getBrett().getSpielbrett()[0].getFelder()[spielfigur.getID()].setSpielfigur(null);
 				spielfigur.setSpielfeld(spiel.getBrett().getSpielbrett()[20]
 						.getFelder()[0]);
 				spielfigur.getSpielfeld().setSpielfigur(spielfigur);
@@ -47,7 +47,7 @@ public class Regelwerk {
 		}
 		if (spieler.getFarbe().equals(FarbEnum.YELLOW)) {
 			if (spieler.getWuerfel().getErgebnis() == 6) {
-				spielfigur.getSpielfeld().setSpielfigur(null);
+				spiel.getBrett().getSpielbrett()[0].getFelder()[spielfigur.getID()].setSpielfigur(null);
 				spielfigur.setSpielfeld(spiel.getBrett().getSpielbrett()[30]
 						.getFelder()[0]);
 				spielfigur.getSpielfeld().setSpielfigur(spielfigur);
@@ -61,19 +61,122 @@ public class Regelwerk {
 		int oldPos = spielfigur.getSpielfeld().getPosition(); 
 		int newPos = oldPos + spieler.getWuerfel().getErgebnis();
 		
-		spielfigur.getSpielfeld().setSpielfigur(null);
-		spielfigur.setSpielfeld(spiel.getBrett().getSpielbrett()[newPos].getFelder()[0]);
+		
+		switch (spielfigur.getFarbe()) {
+		case RED:
+			if(newPos > 40){
+				newPos-=40;
+				if(newPos > 4){
+					break;
+				}
+				insEndfeldLaufen(spieler, spielfigur, newPos);
+			}
+			break;
+		case BLUE:
+			if(newPos > 10){
+				newPos-=10;
+				if(newPos > 4){
+					break;
+				}
+				insEndfeldLaufen(spieler, spielfigur, newPos);
+			}
+			break;
+		case GREEN:
+			if(newPos > 20){
+				newPos-=20;
+				if(newPos > 4){
+					break;
+				}
+				insEndfeldLaufen(spieler, spielfigur,newPos);
+			}
+			break;
+		case YELLOW:
+			if(newPos > 30){
+				newPos-=30;
+				if(newPos > 4){
+					break;
+				}
+				insEndfeldLaufen(spieler, spielfigur,newPos);
+			}
+			break;
+		}
+		
+		if(newPos >= 40){
+			newPos -= 40;
+		}
+		
+		if(spiel.getBrett().getSpielbrett()[newPos].getFelder()[0] == null){
+			spielfigur.getSpielfeld().setSpielfigur(null);
+			spielfigur.setSpielfeld(spiel.getBrett().getSpielbrett()[newPos].getFelder()[0]);
+		}
+		if(spiel.getBrett().getSpielbrett()[newPos].getFelder()[0] != null){
+			if(spieler.getFarbe().equals(spiel.getBrett().getSpielbrett()[newPos].getFelder()[0].getSpielfigur().getFarbe())){
+				System.out.println("Feld von eigener Spielfigur besetzt!");
+			}else{
+				schmeissen(spiel.getBrett().getSpielbrett()[newPos].getFelder()[0].getSpielfigur());
+			}
+		}
 	
 	}
 	
-	public void schmeissen(Spieler spieler, Spielfigur spielfigur) {
+	public void insEndfeldLaufen(Spieler spieler, Spielfigur spielfigur, int newPos){
+		switch (spielfigur.getFarbe()) {
+		case RED:
+			for(int i=1; i<=newPos; i++){
+				if(spiel.getBrett().getSpielbrett()[39].getFelder()[i].getSpielfigur() != null){
+					System.out.println("Ueberspringen nicht moeglich");
+					return;
+				}
+				spielfigur.getSpielfeld().setSpielfigur(null);
+				spielfigur.setSpielfeld(spiel.getBrett().getSpielbrett()[39].getFelder()[newPos]);
+				spielfigur.getSpielfeld().setSpielfigur(spielfigur);
+			}
+			break;
+		case BLUE:
+			for(int i=1; i<=newPos; i++){
+				if(spiel.getBrett().getSpielbrett()[9].getFelder()[i].getSpielfigur() != null){
+					System.out.println("Ueberspringen nicht moeglich");
+					return;
+				}
+				spielfigur.getSpielfeld().setSpielfigur(null);
+				spielfigur.setSpielfeld(spiel.getBrett().getSpielbrett()[9].getFelder()[newPos]);
+				spielfigur.getSpielfeld().setSpielfigur(spielfigur);
+			}
+			break;
+		case GREEN:
+			for(int i=1; i<=newPos; i++){
+				if(spiel.getBrett().getSpielbrett()[19].getFelder()[i].getSpielfigur() != null){
+					System.out.println("Ueberspringen nicht moeglich");
+					return;
+				}
+				spielfigur.getSpielfeld().setSpielfigur(null);
+				spielfigur.setSpielfeld(spiel.getBrett().getSpielbrett()[19].getFelder()[newPos]);
+				spielfigur.getSpielfeld().setSpielfigur(spielfigur);
+			}
+			break;
+		case YELLOW:
+			for(int i=1; i<=newPos; i++){
+				if(spiel.getBrett().getSpielbrett()[29].getFelder()[i].getSpielfigur() != null){
+					System.out.println("Ueberspringen nicht moeglich");
+					return;
+				}
+				spielfigur.getSpielfeld().setSpielfigur(null);
+				spielfigur.setSpielfeld(spiel.getBrett().getSpielbrett()[29].getFelder()[newPos]);
+				spielfigur.getSpielfeld().setSpielfigur(spielfigur);
+			}
+			break;
+		}
+	}
+	
+	public void schmeissen(Spielfigur spielfigur) {
 		spielfigur.getSpielfeld().setSpielfigur(null);
-		switch (spieler.getFarbe()) {
+		switch (spielfigur.getFarbe()) {
 		case RED:
 			for (int i = 0; i < spiel.getBrett().getSpielbrett()[0].getFelder().length; i++) {
 				if (spiel.getBrett().getSpielbrett()[0].getFelder()[i] == null) {
 					spiel.getBrett().getSpielbrett()[0].getFelder()[i]
 							.setSpielfigur(spielfigur);
+					System.out.println(spiel.getBrett().getSpielbrett()[0].getFelder()[i].getSpielfigur().toString()+" Wurde auf Startfeld geschmissen");
 					break;
 				}
 			}
@@ -84,6 +187,7 @@ public class Regelwerk {
 				if (spiel.getBrett().getSpielbrett()[10].getFelder()[i] == null) {
 					spiel.getBrett().getSpielbrett()[10].getFelder()[i]
 							.setSpielfigur(spielfigur);
+					System.out.println(spiel.getBrett().getSpielbrett()[10].getFelder()[i].getSpielfigur().toString()+" Wurde auf Startfeld geschmissen");
 					break;
 				}
 			}
@@ -94,6 +198,7 @@ public class Regelwerk {
 				if (spiel.getBrett().getSpielbrett()[20].getFelder()[i] == null) {
 					spiel.getBrett().getSpielbrett()[20].getFelder()[i]
 							.setSpielfigur(spielfigur);
+					System.out.println(spiel.getBrett().getSpielbrett()[20].getFelder()[i].getSpielfigur().toString()+" Wurde auf Startfeld geschmissen");
 					break;
 				}
 			}
@@ -104,6 +209,7 @@ public class Regelwerk {
 				if (spiel.getBrett().getSpielbrett()[30].getFelder()[i] == null) {
 					spiel.getBrett().getSpielbrett()[30].getFelder()[i]
 							.setSpielfigur(spielfigur);
+					System.out.println(spiel.getBrett().getSpielbrett()[30].getFelder()[i].getSpielfigur().toString()+" Wurde auf Startfeld geschmissen");
 					break;
 				}
 			}
@@ -113,7 +219,7 @@ public class Regelwerk {
 	}
 
 	/**
-	 * // * löscht eine Spielfigur von dem Startfeld und setzt sie auf das Erste
+	 * // * lï¿½scht eine Spielfigur von dem Startfeld und setzt sie auf das Erste
 	 * // * Spielfeld // * // * @param spielfigur //
 	 */
 	// public void setPositionNew(Spielfigur spielfigur) {

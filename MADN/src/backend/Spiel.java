@@ -12,7 +12,7 @@ public class Spiel implements iBediener {
 	
 	public Spiel() {
 		this.brett = new Spielbrett();
-		regelwerk = new Regelwerk(this);
+		this.regelwerk = new Regelwerk(this);
 		spieler = new ArrayList <Spieler>();
 	}
 	public Spielbrett getBrett() {
@@ -32,7 +32,7 @@ public class Spiel implements iBediener {
 		this.amZug = amZug;
 	}
 	@Override
-	public void SpielerHinzufügen (String name, String farbe){
+	public void SpielerHinzufuegen (String name, String farbe){
 		if(farbe!=null){
 		FarbEnum f=null;
 		switch(farbe.toUpperCase()){
@@ -53,9 +53,9 @@ public class Spiel implements iBediener {
 			throw new RuntimeException("Farbwahl bitte auf Englisch");
 		}
 		if (spieler.size()>=4){
-			throw new RuntimeException ("keine plätze mehr verfügbar");
+			throw new RuntimeException ("keine plï¿½tze mehr verfï¿½gbar");
 		} if (name==null){
-			throw new RuntimeException ("ungültige Eingabe");
+			throw new RuntimeException ("ungï¿½ltige Eingabe");
 		} for (Spieler s: spieler){
 			if (s.getFarbe().equals(farbe)){
 				throw new RuntimeException ("Farbe schon vergeben");
@@ -106,5 +106,9 @@ public class Spiel implements iBediener {
 //	
 //		
 //	}
+	public Regelwerk getRegelwerk() {
+		return regelwerk;
+	}
+
 		
 }

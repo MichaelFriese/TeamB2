@@ -1,7 +1,7 @@
 package backend;
 
 /**
- * Klasse für die Verwaltung eines Spieler
+ * Klasse fï¿½r die Verwaltung eines Spieler
  * 
  * @author Judy, Michi,Tobi,Doerte
  *
@@ -25,11 +25,11 @@ public class Spieler {
 	 * @param name
 	 *            des Spielers
 	 * @param farbe
-	 *            gewählte Farbe der Spielfigur
+	 *            gewï¿½hlte Farbe der Spielfigur
 	 * @param brett
 	 *            das Spielbrett
 	 * @param regel
-	 *            die Regeln für das Spiel
+	 *            die Regeln fï¿½r das Spiel
 	 */
 	public Spieler(String name, FarbEnum farbe) {
 		setFarbe(farbe);
@@ -39,15 +39,15 @@ public class Spieler {
 		this.spielfigur = new Spielfigur[4];
 
 		for (int i = 0; i < 4; i++) {
-			spielfigur[i] = new Spielfigur(i + 1);
+			spielfigur[i] = new Spielfigur(i + 1,getFarbe());
 		}
 
 	}
 
 	/**
-	 * gibt die Zufallszahl des Würfels zurück
+	 * gibt die Zufallszahl des Wï¿½rfels zurï¿½ck
 	 * 
-	 * @return gewürfelte Zahl
+	 * @return gewï¿½rfelte Zahl
 	 */
 	public Wuerfel getWuerfel() {
 		return wuerfel;
@@ -64,7 +64,7 @@ public class Spieler {
 	}
 
 	/**
-	 * gibt des Namen des Spielers zurück
+	 * gibt des Namen des Spielers zurï¿½ck
 	 * 
 	 * @return name name des Spielers
 	 */
@@ -73,10 +73,10 @@ public class Spieler {
 	}
 
 	/**
-	 * setzt die gewählte Farbe des Spielers
+	 * setzt die gewï¿½hlte Farbe des Spielers
 	 * 
 	 * @param farbe
-	 *            gewählte farbe des Spielers
+	 *            gewï¿½hlte farbe des Spielers
 	 */
 	private void setFarbe(FarbEnum farbe) {
 		this.farbe = farbe;
@@ -87,15 +87,16 @@ public class Spieler {
 	}
 
 	/**
-	 * gibt die Spielfigur mit gewünschter ID zurück
+	 * gibt die Spielfigur mit gewï¿½nschter ID zurï¿½ck
 	 * 
 	 * @param i
 	 * @return Spielfigur mit angegebener ID
 	 */
 	public Spielfigur getSpielfigur(int i) {
 		i = i - 1;
-		if (i < 0)
-			i = 0;
+		if (i < 0 ){
+			i=0;
+		}
 		return spielfigur[i];
 
 	}
@@ -120,22 +121,32 @@ public class Spieler {
 	public class Spielfigur {
 		private int ID;
 		private Spielfeld spielfeld;
+		private FarbEnum farbe;
 
 		/**
-		 * Kontruktor der Inneren Klasse kann nur über die Spielerklasse
+		 * Kontruktor der Inneren Klasse kann nur ï¿½ber die Spielerklasse
 		 * aufgerufen werden
 		 * 
 		 * @param ID
-		 *            übergibt jeder erstellte Spielfigur eine ID
+		 *            ï¿½bergibt jeder erstellte Spielfigur eine ID
 		 */
 
-		private Spielfigur(int ID) {
+		private Spielfigur(int ID, FarbEnum farbe) {
 			this.ID = ID;
 			this.spielfeld = null;
+			this.farbe = farbe;
+		}
+
+		public FarbEnum getFarbe() {
+			return farbe;
+		}
+
+		public void setFarbe(FarbEnum farbe) {
+			this.farbe = farbe;
 		}
 
 		/**
-		 * gibt die ID der Spielfigur zurück
+		 * gibt die ID der Spielfigur zurï¿½ck
 		 * 
 		 * @return ID der Spielfigur
 		 */
