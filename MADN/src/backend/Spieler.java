@@ -183,6 +183,13 @@ public class Spieler {
 				this.spielfeld = spielfeld;
 			}
 		}
+		
+		public boolean istAufStartfeld(){
+			if(this.getSpielfeld().getID().contains("S")){
+				return true;
+			}
+			return false;
+		}
 
 		@Override
 		public String toString() {
