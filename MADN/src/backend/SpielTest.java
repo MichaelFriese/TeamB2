@@ -23,6 +23,9 @@ public class SpielTest {
 		s.getRegelwerk().rauskommen(s1, s1.getSpielfigur(4));
 		s.getRegelwerk().figurZiehen(s1, s1.getSpielfigur(4));
 		
+//		s.getRegelwerk().rauskommen(s1, s1.getSpielfigur(3));
+//		s.getRegelwerk().figurZiehen(s1, s1.getSpielfigur(3));
+		
 		System.out.println(s.getBrett());
 	}
 }
