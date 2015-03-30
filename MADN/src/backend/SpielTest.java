@@ -2,7 +2,7 @@ package backend;
 
 /**
  * Klasse zum Spielstart
- * @author Judy, Michi,Tobi,Doerte
+ * @author Judith, Michi,Tobi,Doerte
  *
  */
 

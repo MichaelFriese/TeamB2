@@ -1,7 +1,7 @@
 package backend;
 
 /** Diee Klasse stellt das Spielbrett dar
- * @author Judy, Michi,Tobi,Doerte
+ * @author Judth, Michi,Tobi,Doerte
  * @version 1
  */
 public class Spielbrett {
@@ -51,7 +51,7 @@ public class Spielbrett {
 	}
 	
 	
-	/** gibt das Array Spielbrett, also die 40 Felder zurück
+	/** gibt das Array Spielbrett, also die 40 Felder zurueck
 	 * @return Spielbrett
 	 */
 	public FeldWrapper[] getSpielbrett() {

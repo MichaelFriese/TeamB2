@@ -5,7 +5,7 @@ import backend.Spieler.Spielfigur;
 /**
  * Klasse zur Verwaltung der Spielfelder
  * 
- * @author Judy, Michi,Tobi,Doerte
+ * @author Judith, Michi,Tobi,Doerte
  *
  */
 
@@ -36,7 +36,7 @@ public class Spielfeld {
 	}
 
 	/**
-	 * setzt die Farbe für das passende Spielfeld
+	 * setzt die Farbe fuer das passende Spielfeld
 	 * 
 	 * @param farbe
 	 */
@@ -54,7 +54,7 @@ public class Spielfeld {
 	}
 
 	/**
-	 * gibt die ID des Spielfeldes zurück
+	 * gibt die ID des Spielfeldes zurueck
 	 * 
 	 * @return ID des Spielfeldes
 	 */
@@ -63,7 +63,7 @@ public class Spielfeld {
 	}
 
 	/**
-	 * gibt die Position des Spielfeldes zurück
+	 * gibt die Position des Spielfeldes zurueck
 	 * 
 	 * @return position
 	 */
@@ -81,7 +81,7 @@ public class Spielfeld {
 	}
 
 	/**
-	 * gibt die Spielfigur zurück
+	 * gibt die Spielfigur zurueck
 	 * 
 	 * @return spielfigur
 	 */

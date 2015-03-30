@@ -3,7 +3,7 @@ package backend;
 import java.util.Random;
 /**
  * klasse zum Wuerfeln
- * @author Judy, Michi,Tobi,Doerte
+ * @author Judith, Michi,Tobi,Doerte
  *
  */
 
@@ -40,7 +40,7 @@ public class Wuerfel {
 	 * @return  6
 	 */
 	public int wurf6(){
-		System.out.println("gewürfelt");
+		System.out.println("gewuerfelt");
 		return 6;
 	}
 }

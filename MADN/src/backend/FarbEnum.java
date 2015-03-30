@@ -1,7 +1,7 @@
 package backend;
 
 /**
- * Enumerator für mögliche Farben
+ * Enumerator fuer moegliche Farben
  * @author Judith, Michi, Doerte, Tobi
  * 
  */

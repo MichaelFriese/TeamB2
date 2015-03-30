@@ -4,33 +4,62 @@ import java.util.ArrayList;
 
 import frontend.iBediener;
 
+/**
+ * Spiel Klasse dient zum "starten" des Spiels 
+ * @author Judith, Michi, Doerte, Tobi
+ *
+ */
 public class Spiel implements iBediener {
 	private Spielbrett brett;
 	private ArrayList<Spieler> spieler;
 	private Spieler amZug;
 	private Regelwerk regelwerk;
 	
+	/**
+	 * Konstruktor der Spielklasse
+	 * Spielbrett, Regelwerk und Spieler werden initialisiert
+	 */
 	public Spiel() {
 		this.brett = new Spielbrett();
 		this.regelwerk = new Regelwerk(this);
 		spieler = new ArrayList <Spieler>();
 	}
+	
+	/**
+	 * gibt das Spielbrett zurueck
+	 * @return brett
+	 */
 	public Spielbrett getBrett() {
 		return brett;
 	}
+	
+	/**
+	 * gibt das Array der Spieler zurueck
+	 * @return spieler
+	 */
 
 	public ArrayList <Spieler> getSpieler() {
 		return spieler;
 	}
 	
+	/**
+	 * gibt zurueck welcher Spieler am Zug ist
+	 * @return amZug
+	 */
 	public Spieler getAmZug() {
 		
 		return amZug;
 	}
 	
+	/**
+	 * setzt den Spieler, welcher an der Reihe ist
+	 * @param amZug
+	 */
 	public void setAmZug(Spieler amZug) {
 		this.amZug = amZug;
 	}
+	
+	
 	@Override
 	public void SpielerHinzufuegen (String name, String farbe){
 		if(farbe!=null){
@@ -53,9 +82,9 @@ public class Spiel implements iBediener {
 			throw new RuntimeException("Farbwahl bitte auf Englisch");
 		}
 		if (spieler.size()>=4){
-			throw new RuntimeException ("keine pl�tze mehr verf�gbar");
+			throw new RuntimeException ("keine Plaetze mehr verfuegbar");
 		} if (name==null){
-			throw new RuntimeException ("ung�ltige Eingabe");
+			throw new RuntimeException ("ungueltige Eingabe");
 		} for (Spieler s: spieler){
 			if (s.getFarbe().equals(farbe)){
 				throw new RuntimeException ("Farbe schon vergeben");
@@ -106,6 +135,10 @@ public class Spiel implements iBediener {
 //	
 //		
 //	}
+/**
+ * gibtd as Regelwerk zurueck
+ * @return regelwerk
+ */
 	public Regelwerk getRegelwerk() {
 		return regelwerk;
 	}
