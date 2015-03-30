@@ -5,7 +5,7 @@ import backend.Spieler.Spielfigur;
 /**
  * Klasse fuer die Startfelder
  * erbt von der Oberklsse Spielfeld
- * @author Judy, Michi,Tobi,Doerte
+ * @author Judith, Michi,Tobi,Doerte
  *
  */
 
