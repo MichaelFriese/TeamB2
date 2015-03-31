@@ -26,7 +26,7 @@ public class Regelwerk {
 	/**
 	 * Methode, um eine Spielfigur vom Startfeld auf ihr erstes Spielfeld zu
 	 * setzten
-	 * 
+	 *  
 	 * @param spieler
 	 * @param spielfigur
 	 */
