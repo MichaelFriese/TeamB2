@@ -52,17 +52,17 @@ public class Regelwerk {
 		// }
 		if (spieler.getFarbe().equals(FarbEnum.BLUE)) {
 			// if (spieler.getWuerfel().getErgebnis() == 6) {
-			if (spiel.getBrett().getSpielbrett()[0].getFelder()[0].getSpielfigur() == null) {
-				spiel.getBrett().getSpielbrett()[0].getFelder()[spielfigur.getID()].setSpielfigur(null);
-				spielfigur.setSpielfeld(spiel.getBrett().getSpielbrett()[0].getFelder()[0]);
+			if (spiel.getBrett().getSpielbrett()[10].getFelder()[0].getSpielfigur() == null) {
+				spiel.getBrett().getSpielbrett()[10].getFelder()[spielfigur.getID()].setSpielfigur(null);
+				spielfigur.setSpielfeld(spiel.getBrett().getSpielbrett()[10].getFelder()[0]);
 				spielfigur.getSpielfeld().setSpielfigur(spielfigur);
-			} else if (spiel.getBrett().getSpielbrett()[0].getFelder()[0].getSpielfigur() != null) {
-				if (spieler.getFarbe().equals(spiel.getBrett().getSpielbrett()[0].getFelder()[0].getSpielfigur().getFarbe())) {
+			} else if (spiel.getBrett().getSpielbrett()[10].getFelder()[0].getSpielfigur() != null) {
+				if (spieler.getFarbe().equals(spiel.getBrett().getSpielbrett()[10].getFelder()[0].getSpielfigur().getFarbe())) {
 					System.out.println("Feld von eigener Spielfigur besetzt!");
 				} else {
-					schmeissen(spiel.getBrett().getSpielbrett()[0].getFelder()[0].getSpielfigur());
-					spiel.getBrett().getSpielbrett()[0].getFelder()[spielfigur.getID()].setSpielfigur(null);
-					spielfigur.setSpielfeld(spiel.getBrett().getSpielbrett()[0].getFelder()[0]);
+					schmeissen(spiel.getBrett().getSpielbrett()[10].getFelder()[0].getSpielfigur());
+					spiel.getBrett().getSpielbrett()[10].getFelder()[spielfigur.getID()].setSpielfigur(null);
+					spielfigur.setSpielfeld(spiel.getBrett().getSpielbrett()[10].getFelder()[0]);
 					spielfigur.getSpielfeld().setSpielfigur(spielfigur);
 				}
 			}
@@ -70,43 +70,43 @@ public class Regelwerk {
 			// }
 		}
 		if (spieler.getFarbe().equals(FarbEnum.GREEN)) {
-			if (spieler.getWuerfel().getErgebnis() == 6) {
-				if (spiel.getBrett().getSpielbrett()[0].getFelder()[0].getSpielfigur() == null) {
-					spiel.getBrett().getSpielbrett()[0].getFelder()[spielfigur.getID()].setSpielfigur(null);
-					spielfigur.setSpielfeld(spiel.getBrett().getSpielbrett()[0].getFelder()[0]);
+			//if (spieler.getWuerfel().getErgebnis() == 6) {
+			if (spiel.getBrett().getSpielbrett()[20].getFelder()[0].getSpielfigur() == null) {
+				spiel.getBrett().getSpielbrett()[20].getFelder()[spielfigur.getID()].setSpielfigur(null);
+				spielfigur.setSpielfeld(spiel.getBrett().getSpielbrett()[20].getFelder()[0]);
+				spielfigur.getSpielfeld().setSpielfigur(spielfigur);
+			} else if (spiel.getBrett().getSpielbrett()[20].getFelder()[0].getSpielfigur() != null) {
+				if (spieler.getFarbe().equals(spiel.getBrett().getSpielbrett()[20].getFelder()[0].getSpielfigur().getFarbe())) {
+					System.out.println("Feld von eigener Spielfigur besetzt!");
+				} else {
+					schmeissen(spiel.getBrett().getSpielbrett()[20].getFelder()[0].getSpielfigur());
+					spiel.getBrett().getSpielbrett()[20].getFelder()[spielfigur.getID()].setSpielfigur(null);
+					spielfigur.setSpielfeld(spiel.getBrett().getSpielbrett()[20].getFelder()[0]);
 					spielfigur.getSpielfeld().setSpielfigur(spielfigur);
-				} else if (spiel.getBrett().getSpielbrett()[0].getFelder()[0].getSpielfigur() != null) {
-					if (spieler.getFarbe().equals(spiel.getBrett().getSpielbrett()[0].getFelder()[0].getSpielfigur().getFarbe())) {
-						System.out.println("Feld von eigener Spielfigur besetzt!");
-					} else {
-						schmeissen(spiel.getBrett().getSpielbrett()[0].getFelder()[0].getSpielfigur());
-						spiel.getBrett().getSpielbrett()[0].getFelder()[spielfigur.getID()].setSpielfigur(null);
-						spielfigur.setSpielfeld(spiel.getBrett().getSpielbrett()[0].getFelder()[0]);
-						spielfigur.getSpielfeld().setSpielfigur(spielfigur);
 					}
 				}
 			}
-		}
+		//}
 		if (spieler.getFarbe().equals(FarbEnum.YELLOW)) {
-			if (spieler.getWuerfel().getErgebnis() == 6) {
-				if (spiel.getBrett().getSpielbrett()[0].getFelder()[0].getSpielfigur() == null) {
-					spiel.getBrett().getSpielbrett()[0].getFelder()[spielfigur.getID()].setSpielfigur(null);
-					spielfigur.setSpielfeld(spiel.getBrett().getSpielbrett()[0].getFelder()[0]);
+			//if (spieler.getWuerfel().getErgebnis() == 6) {
+			if (spiel.getBrett().getSpielbrett()[30].getFelder()[0].getSpielfigur() == null) {
+				spiel.getBrett().getSpielbrett()[30].getFelder()[spielfigur.getID()].setSpielfigur(null);
+				spielfigur.setSpielfeld(spiel.getBrett().getSpielbrett()[30].getFelder()[0]);
+				spielfigur.getSpielfeld().setSpielfigur(spielfigur);
+			} else if (spiel.getBrett().getSpielbrett()[30].getFelder()[0].getSpielfigur() != null) {
+				if (spieler.getFarbe().equals(spiel.getBrett().getSpielbrett()[30].getFelder()[0].getSpielfigur().getFarbe())) {
+					System.out.println("Feld von eigener Spielfigur besetzt!");
+				} else {
+					schmeissen(spiel.getBrett().getSpielbrett()[30].getFelder()[0].getSpielfigur());
+					spiel.getBrett().getSpielbrett()[30].getFelder()[spielfigur.getID()].setSpielfigur(null);
+					spielfigur.setSpielfeld(spiel.getBrett().getSpielbrett()[30].getFelder()[0]);
 					spielfigur.getSpielfeld().setSpielfigur(spielfigur);
-				} else if (spiel.getBrett().getSpielbrett()[0].getFelder()[0].getSpielfigur() != null) {
-					if (spieler.getFarbe().equals(spiel.getBrett().getSpielbrett()[0].getFelder()[0].getSpielfigur().getFarbe())) {
-						System.out.println("Feld von eigener Spielfigur besetzt!");
-					} else {
-						schmeissen(spiel.getBrett().getSpielbrett()[0].getFelder()[0].getSpielfigur());
-						spiel.getBrett().getSpielbrett()[0].getFelder()[spielfigur.getID()].setSpielfigur(null);
-						spielfigur.setSpielfeld(spiel.getBrett().getSpielbrett()[0].getFelder()[0]);
-						spielfigur.getSpielfeld().setSpielfigur(spielfigur);
 					}
 				}
 
 			}
 		}
-	}
+	//}
 
 	/**
 	 * Methode, um eine Spielfigur auf den Spielfeldern zu bewegen
@@ -123,8 +123,8 @@ public class Regelwerk {
 
 		int oldPos = spielfigur.getSpielfeld().getPosition() - 1;
 		System.out.println(oldPos);
-		// int newPos = oldPos + spieler.getWuerfel().getErgebnis();
-		int newPos = 0;
+		 int newPos = oldPos + spieler.getWuerfel().getErgebnis();
+		//int newPos = 0;
 
 		if (newPos >= 40) {
 			spielfigur.setHatUmrundet(true);
