@@ -28,6 +28,13 @@ public class SpielTest {
 	 * testet, ob ein Spiel Spielbrett, spieler und ein Regelwerk kennt
 	 */
 	@Test
+	public void test0(){
+		s.getRegelwerk().rauskommen(s.getSpieler().get(0), s.getSpieler().get(0).getSpielfigur(1));
+	}
+		
+
+	
+	@Test
 	public void test() {
 		assertNotNull(s.getBrett());
 		assertNotNull(s.getSpieler());
