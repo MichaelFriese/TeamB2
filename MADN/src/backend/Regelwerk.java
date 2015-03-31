@@ -26,24 +26,56 @@ public class Regelwerk {
 	/**
 	 * Methode, um eine Spielfigur vom Startfeld auf ihr erstes Spielfeld zu
 	 * setzten
-	 *  
+	 * 
 	 * @param spieler
 	 * @param spielfigur
 	 */
 	public void rauskommen(Spieler spieler, Spielfigur spielfigur) {
 
 		if (spieler.getFarbe().equals(FarbEnum.RED)) {
-//			if (spieler.getWuerfel().getErgebnis() == 6) {
-//				spiel.getBrett().getSpielbrett()[0].getFelder()[spielfigur.getID()].setSpielfigur(null);
-//				spielfigur.setSpielfeld(spiel.getBrett().getSpielbrett()[0].getFelder()[0]);
-//				spielfigur.getSpielfeld().setSpielfigur(spielfigur);
-				
-				if (spiel.getBrett().getSpielbrett()[0].getFelder()[0].getSpielfigur() == null) {
+			// if (spieler.getWuerfel().getErgebnis() == 6) {
+			if (spiel.getBrett().getSpielbrett()[0].getFelder()[0].getSpielfigur() == null) {
+				spiel.getBrett().getSpielbrett()[0].getFelder()[spielfigur.getID()].setSpielfigur(null);
+				spielfigur.setSpielfeld(spiel.getBrett().getSpielbrett()[0].getFelder()[0]);
+				spielfigur.getSpielfeld().setSpielfigur(spielfigur);
+			} else if (spiel.getBrett().getSpielbrett()[0].getFelder()[0].getSpielfigur() != null) {
+				if (spieler.getFarbe().equals(spiel.getBrett().getSpielbrett()[0].getFelder()[0].getSpielfigur().getFarbe())) {
+					System.out.println("Feld von eigener Spielfigur besetzt!");
+				} else {
+					schmeissen(spiel.getBrett().getSpielbrett()[0].getFelder()[0].getSpielfigur());
 					spiel.getBrett().getSpielbrett()[0].getFelder()[spielfigur.getID()].setSpielfigur(null);
 					spielfigur.setSpielfeld(spiel.getBrett().getSpielbrett()[0].getFelder()[0]);
 					spielfigur.getSpielfeld().setSpielfigur(spielfigur);
 				}
-				else if (spiel.getBrett().getSpielbrett()[0].getFelder()[0].getSpielfigur() != null) {
+			}
+		}
+		// }
+		if (spieler.getFarbe().equals(FarbEnum.BLUE)) {
+			// if (spieler.getWuerfel().getErgebnis() == 6) {
+			if (spiel.getBrett().getSpielbrett()[0].getFelder()[0].getSpielfigur() == null) {
+				spiel.getBrett().getSpielbrett()[0].getFelder()[spielfigur.getID()].setSpielfigur(null);
+				spielfigur.setSpielfeld(spiel.getBrett().getSpielbrett()[0].getFelder()[0]);
+				spielfigur.getSpielfeld().setSpielfigur(spielfigur);
+			} else if (spiel.getBrett().getSpielbrett()[0].getFelder()[0].getSpielfigur() != null) {
+				if (spieler.getFarbe().equals(spiel.getBrett().getSpielbrett()[0].getFelder()[0].getSpielfigur().getFarbe())) {
+					System.out.println("Feld von eigener Spielfigur besetzt!");
+				} else {
+					schmeissen(spiel.getBrett().getSpielbrett()[0].getFelder()[0].getSpielfigur());
+					spiel.getBrett().getSpielbrett()[0].getFelder()[spielfigur.getID()].setSpielfigur(null);
+					spielfigur.setSpielfeld(spiel.getBrett().getSpielbrett()[0].getFelder()[0]);
+					spielfigur.getSpielfeld().setSpielfigur(spielfigur);
+				}
+			}
+
+			// }
+		}
+		if (spieler.getFarbe().equals(FarbEnum.GREEN)) {
+			if (spieler.getWuerfel().getErgebnis() == 6) {
+				if (spiel.getBrett().getSpielbrett()[0].getFelder()[0].getSpielfigur() == null) {
+					spiel.getBrett().getSpielbrett()[0].getFelder()[spielfigur.getID()].setSpielfigur(null);
+					spielfigur.setSpielfeld(spiel.getBrett().getSpielbrett()[0].getFelder()[0]);
+					spielfigur.getSpielfeld().setSpielfigur(spielfigur);
+				} else if (spiel.getBrett().getSpielbrett()[0].getFelder()[0].getSpielfigur() != null) {
 					if (spieler.getFarbe().equals(spiel.getBrett().getSpielbrett()[0].getFelder()[0].getSpielfigur().getFarbe())) {
 						System.out.println("Feld von eigener Spielfigur besetzt!");
 					} else {
@@ -53,28 +85,25 @@ public class Regelwerk {
 						spielfigur.getSpielfeld().setSpielfigur(spielfigur);
 					}
 				}
-//			}
-			
-		}
-		if (spieler.getFarbe().equals(FarbEnum.BLUE)) {
-//			if (spieler.getWuerfel().getErgebnis() == 6) {
-				spiel.getBrett().getSpielbrett()[10].getFelder()[spielfigur.getID()].setSpielfigur(null);
-				spielfigur.setSpielfeld(spiel.getBrett().getSpielbrett()[10].getFelder()[0]);
-				spielfigur.getSpielfeld().setSpielfigur(spielfigur);
-//			}
-		}
-		if (spieler.getFarbe().equals(FarbEnum.GREEN)) {
-			if (spieler.getWuerfel().getErgebnis() == 6) {
-				spiel.getBrett().getSpielbrett()[20].getFelder()[spielfigur.getID()].setSpielfigur(null);
-				spielfigur.setSpielfeld(spiel.getBrett().getSpielbrett()[20].getFelder()[0]);
-				spielfigur.getSpielfeld().setSpielfigur(spielfigur);
 			}
 		}
 		if (spieler.getFarbe().equals(FarbEnum.YELLOW)) {
 			if (spieler.getWuerfel().getErgebnis() == 6) {
-				spiel.getBrett().getSpielbrett()[30].getFelder()[spielfigur.getID()].setSpielfigur(null);
-				spielfigur.setSpielfeld(spiel.getBrett().getSpielbrett()[30].getFelder()[0]);
-				spielfigur.getSpielfeld().setSpielfigur(spielfigur);
+				if (spiel.getBrett().getSpielbrett()[0].getFelder()[0].getSpielfigur() == null) {
+					spiel.getBrett().getSpielbrett()[0].getFelder()[spielfigur.getID()].setSpielfigur(null);
+					spielfigur.setSpielfeld(spiel.getBrett().getSpielbrett()[0].getFelder()[0]);
+					spielfigur.getSpielfeld().setSpielfigur(spielfigur);
+				} else if (spiel.getBrett().getSpielbrett()[0].getFelder()[0].getSpielfigur() != null) {
+					if (spieler.getFarbe().equals(spiel.getBrett().getSpielbrett()[0].getFelder()[0].getSpielfigur().getFarbe())) {
+						System.out.println("Feld von eigener Spielfigur besetzt!");
+					} else {
+						schmeissen(spiel.getBrett().getSpielbrett()[0].getFelder()[0].getSpielfigur());
+						spiel.getBrett().getSpielbrett()[0].getFelder()[spielfigur.getID()].setSpielfigur(null);
+						spielfigur.setSpielfeld(spiel.getBrett().getSpielbrett()[0].getFelder()[0]);
+						spielfigur.getSpielfeld().setSpielfigur(spielfigur);
+					}
+				}
+
 			}
 		}
 	}
@@ -87,22 +116,21 @@ public class Regelwerk {
 	 */
 
 	public void figurZiehen(Spieler spieler, Spielfigur spielfigur) {
-		if(spielfigur.istAufStartfeld()){
-			System.out.println(spielfigur.toString()+" sitzt noch auf Startfeld!");
+		if (spielfigur.istAufStartfeld()) {
+			System.out.println(spielfigur.toString() + " sitzt noch auf Startfeld!");
 			return;
 		}
-		
-		int oldPos = spielfigur.getSpielfeld().getPosition()-1;
+
+		int oldPos = spielfigur.getSpielfeld().getPosition() - 1;
 		System.out.println(oldPos);
-//		int newPos = oldPos + spieler.getWuerfel().getErgebnis();
+		// int newPos = oldPos + spieler.getWuerfel().getErgebnis();
 		int newPos = 0;
-		
+
 		if (newPos >= 40) {
 			spielfigur.setHatUmrundet(true);
 		}
-		
-		
-		if(spielfigur.hatUmrundet()){
+
+		if (spielfigur.hatUmrundet()) {
 			switch (spielfigur.getFarbe()) {
 			case RED:
 				newPos -= 40;
@@ -113,9 +141,9 @@ public class Regelwerk {
 				return;
 			case BLUE:
 				newPos -= 30;
-				if(spielfigur.hatUmrundet() && newPos > 10){
-					newPos-=10;
-					if(newPos <= 4){
+				if (spielfigur.hatUmrundet() && newPos > 10) {
+					newPos -= 10;
+					if (newPos <= 4) {
 						insEndfeldLaufen(spieler, spielfigur, newPos);
 						return;
 					}
@@ -123,9 +151,9 @@ public class Regelwerk {
 				break;
 			case GREEN:
 				newPos -= 20;
-				if(spielfigur.hatUmrundet() && newPos > 20){
-					newPos-=20;
-					if(newPos <= 4){
+				if (spielfigur.hatUmrundet() && newPos > 20) {
+					newPos -= 20;
+					if (newPos <= 4) {
 						insEndfeldLaufen(spieler, spielfigur, newPos);
 						return;
 					}
@@ -133,9 +161,9 @@ public class Regelwerk {
 				break;
 			case YELLOW:
 				newPos -= 10;
-				if(spielfigur.hatUmrundet() && newPos > 30){
-					newPos-=30;
-					if(newPos <= 4){
+				if (spielfigur.hatUmrundet() && newPos > 30) {
+					newPos -= 30;
+					if (newPos <= 4) {
 						insEndfeldLaufen(spieler, spielfigur, newPos);
 						return;
 					}
@@ -149,8 +177,7 @@ public class Regelwerk {
 			spielfigur.getSpielfeld().setSpielfigur(null);
 			spielfigur.setSpielfeld(spiel.getBrett().getSpielbrett()[newPos].getFelder()[0]);
 			spielfigur.getSpielfeld().setSpielfigur(spielfigur);
-		}
-		else if (spiel.getBrett().getSpielbrett()[newPos].getFelder()[0].getSpielfigur() != null) {
+		} else if (spiel.getBrett().getSpielbrett()[newPos].getFelder()[0].getSpielfigur() != null) {
 			if (spieler.getFarbe().equals(spiel.getBrett().getSpielbrett()[newPos].getFelder()[0].getSpielfigur().getFarbe())) {
 				System.out.println("Feld von eigener Spielfigur besetzt!");
 			} else {
