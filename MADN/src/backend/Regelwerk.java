@@ -77,16 +77,21 @@ public class Regelwerk {
 		
 		int oldPos = spielfigur.getSpielfeld().getPosition();
 		// int newPos = oldPos + spieler.getWuerfel().getErgebnis();
-		int newPos = 2;
-
+		int newPos = 41;
+		
+//		if (newPos >= 40) {
+//			newPos -= 40;
+//		}
+		
 		switch (spielfigur.getFarbe()) {
 		case RED:
-			if (newPos > 40) {
+			if (newPos >= 40) {
 				newPos -= 40;
 				if (newPos > 4) {
 					break;
 				}
 				insEndfeldLaufen(spieler, spielfigur, newPos);
+				return;
 			}
 			break;
 		case BLUE:
@@ -96,6 +101,7 @@ public class Regelwerk {
 					break;
 				}
 				insEndfeldLaufen(spieler, spielfigur, newPos);
+				return;
 			}
 			break;
 		case GREEN:
@@ -105,6 +111,7 @@ public class Regelwerk {
 					break;
 				}
 				insEndfeldLaufen(spieler, spielfigur, newPos);
+				return;
 			}
 			break;
 		case YELLOW:
@@ -114,13 +121,12 @@ public class Regelwerk {
 					break;
 				}
 				insEndfeldLaufen(spieler, spielfigur, newPos);
+				return;
 			}
 			break;
 		}
 
-		if (newPos >= 40) {
-			newPos -= 40;
-		}
+		
 
 		if (spiel.getBrett().getSpielbrett()[newPos].getFelder()[0].getSpielfigur() == null) {
 			spielfigur.getSpielfeld().setSpielfigur(null);
@@ -155,10 +161,10 @@ public class Regelwerk {
 					System.out.println("Ueberspringen nicht moeglich");
 					return;
 				}
-				spielfigur.getSpielfeld().setSpielfigur(null);
-				spielfigur.setSpielfeld(spiel.getBrett().getSpielbrett()[39].getFelder()[newPos]);
-				spielfigur.getSpielfeld().setSpielfigur(spielfigur);
 			}
+			spielfigur.getSpielfeld().setSpielfigur(null);
+			spielfigur.setSpielfeld(spiel.getBrett().getSpielbrett()[39].getFelder()[newPos]);
+			spielfigur.getSpielfeld().setSpielfigur(spielfigur);
 			break;
 		case BLUE:
 			for (int i = 1; i <= newPos; i++) {
@@ -166,10 +172,10 @@ public class Regelwerk {
 					System.out.println("Ueberspringen nicht moeglich");
 					return;
 				}
-				spielfigur.getSpielfeld().setSpielfigur(null);
-				spielfigur.setSpielfeld(spiel.getBrett().getSpielbrett()[9].getFelder()[newPos]);
-				spielfigur.getSpielfeld().setSpielfigur(spielfigur);
 			}
+			spielfigur.getSpielfeld().setSpielfigur(null);
+			spielfigur.setSpielfeld(spiel.getBrett().getSpielbrett()[9].getFelder()[newPos]);
+			spielfigur.getSpielfeld().setSpielfigur(spielfigur);
 			break;
 		case GREEN:
 			for (int i = 1; i <= newPos; i++) {
@@ -177,10 +183,10 @@ public class Regelwerk {
 					System.out.println("Ueberspringen nicht moeglich");
 					return;
 				}
-				spielfigur.getSpielfeld().setSpielfigur(null);
-				spielfigur.setSpielfeld(spiel.getBrett().getSpielbrett()[19].getFelder()[newPos]);
-				spielfigur.getSpielfeld().setSpielfigur(spielfigur);
 			}
+			spielfigur.getSpielfeld().setSpielfigur(null);
+			spielfigur.setSpielfeld(spiel.getBrett().getSpielbrett()[19].getFelder()[newPos]);
+			spielfigur.getSpielfeld().setSpielfigur(spielfigur);
 			break;
 		case YELLOW:
 			for (int i = 1; i <= newPos; i++) {
@@ -188,10 +194,10 @@ public class Regelwerk {
 					System.out.println("Ueberspringen nicht moeglich");
 					return;
 				}
-				spielfigur.getSpielfeld().setSpielfigur(null);
-				spielfigur.setSpielfeld(spiel.getBrett().getSpielbrett()[29].getFelder()[newPos]);
-				spielfigur.getSpielfeld().setSpielfigur(spielfigur);
 			}
+			spielfigur.getSpielfeld().setSpielfigur(null);
+			spielfigur.setSpielfeld(spiel.getBrett().getSpielbrett()[29].getFelder()[newPos]);
+			spielfigur.getSpielfeld().setSpielfigur(spielfigur);
 			break;
 		}
 	}
