@@ -128,6 +128,7 @@ public class Spieler {
 		private int ID;
 		private Spielfeld spielfeld;
 		private FarbEnum farbe;
+		private boolean hatUmrundet;
 
 		/**
 		 * Kontruktor der Inneren Klasse kann nur ueber die Spielerklasse
@@ -141,6 +142,7 @@ public class Spieler {
 			this.ID = ID;
 			this.spielfeld = null;
 			this.farbe = farbe;
+			this.setHatUmrundet(false);
 		}
 
 		
@@ -190,12 +192,22 @@ public class Spieler {
 			}
 			return false;
 		}
+		
+		public boolean hatUmrundet() {
+			return hatUmrundet;
+		}
+		
+		public void setHatUmrundet(boolean hatUmrundet) {
+			this.hatUmrundet = hatUmrundet;
+		}
 
 		@Override
 		public String toString() {
 			return "Spielfigur" + "" + getID() + "_" + getName() + "_"
 					+ getFarbe();
 		}
+
+
 
 	}
 

@@ -68,9 +68,14 @@ public class Spielfeld {
 	 * @return position
 	 */
 	public int getPosition() {
+		this.position = Integer.parseInt(id);
 		return position;
 	}
 
+	public void setPosition(int position){
+		this.position = position;
+	}
+	
 	/**
 	 * setzt die Spielfigur
 	 * 

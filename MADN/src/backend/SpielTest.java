@@ -21,14 +21,11 @@ public class SpielTest {
 		Spieler s1 = s.getSpieler().get(0);
 		Spieler s2 = s.getSpieler().get(1);
 //		s1.getWuerfel().wurf6();
-		s.getRegelwerk().rauskommen(s1, s1.getSpielfigur(4));
-		s.getRegelwerk().figurZiehen(s1, s1.getSpielfigur(4));
-		
-//		s.getRegelwerk().rauskommen(s1, s1.getSpielfigur(3));
-//		s.getRegelwerk().figurZiehen(s1, s1.getSpielfigur(3));
-		
 		s.getRegelwerk().rauskommen(s2, s2.getSpielfigur(3));
-//		s.getRegelwerk().figurZiehen(s2, s2.getSpielfigur(3));
+//		s.getRegelwerk().figurZiehen(s1, s1.getSpielfigur(4));
+		
+		s.getRegelwerk().figurZiehen(s2, s2.getSpielfigur(3));
+		s.getRegelwerk().rauskommen(s1, s1.getSpielfigur(4));
 		System.out.println(s.getBrett());
 	}
 }

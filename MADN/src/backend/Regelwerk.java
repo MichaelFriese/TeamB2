@@ -33,11 +33,28 @@ public class Regelwerk {
 	public void rauskommen(Spieler spieler, Spielfigur spielfigur) {
 
 		if (spieler.getFarbe().equals(FarbEnum.RED)) {
-			// if (spieler.getWuerfel().getErgebnis() == 6) {
-			spiel.getBrett().getSpielbrett()[0].getFelder()[spielfigur.getID()].setSpielfigur(null);
-			spielfigur.setSpielfeld(spiel.getBrett().getSpielbrett()[0].getFelder()[0]);
-			spielfigur.getSpielfeld().setSpielfigur(spielfigur);
-			// }
+//			if (spieler.getWuerfel().getErgebnis() == 6) {
+//				spiel.getBrett().getSpielbrett()[0].getFelder()[spielfigur.getID()].setSpielfigur(null);
+//				spielfigur.setSpielfeld(spiel.getBrett().getSpielbrett()[0].getFelder()[0]);
+//				spielfigur.getSpielfeld().setSpielfigur(spielfigur);
+				
+				if (spiel.getBrett().getSpielbrett()[0].getFelder()[0].getSpielfigur() == null) {
+					spiel.getBrett().getSpielbrett()[0].getFelder()[spielfigur.getID()].setSpielfigur(null);
+					spielfigur.setSpielfeld(spiel.getBrett().getSpielbrett()[0].getFelder()[0]);
+					spielfigur.getSpielfeld().setSpielfigur(spielfigur);
+				}
+				else if (spiel.getBrett().getSpielbrett()[0].getFelder()[0].getSpielfigur() != null) {
+					if (spieler.getFarbe().equals(spiel.getBrett().getSpielbrett()[0].getFelder()[0].getSpielfigur().getFarbe())) {
+						System.out.println("Feld von eigener Spielfigur besetzt!");
+					} else {
+						schmeissen(spiel.getBrett().getSpielbrett()[0].getFelder()[0].getSpielfigur());
+						spiel.getBrett().getSpielbrett()[0].getFelder()[spielfigur.getID()].setSpielfigur(null);
+						spielfigur.setSpielfeld(spiel.getBrett().getSpielbrett()[0].getFelder()[0]);
+						spielfigur.getSpielfeld().setSpielfigur(spielfigur);
+					}
+				}
+//			}
+			
 		}
 		if (spieler.getFarbe().equals(FarbEnum.BLUE)) {
 //			if (spieler.getWuerfel().getErgebnis() == 6) {
@@ -75,58 +92,58 @@ public class Regelwerk {
 			return;
 		}
 		
-		int oldPos = spielfigur.getSpielfeld().getPosition();
-		// int newPos = oldPos + spieler.getWuerfel().getErgebnis();
-		int newPos = 41;
+		int oldPos = spielfigur.getSpielfeld().getPosition()-1;
+		System.out.println(oldPos);
+//		int newPos = oldPos + spieler.getWuerfel().getErgebnis();
+		int newPos = 0;
 		
-//		if (newPos >= 40) {
-//			newPos -= 40;
-//		}
-		
-		switch (spielfigur.getFarbe()) {
-		case RED:
-			if (newPos >= 40) {
-				newPos -= 40;
-				if (newPos > 4) {
-					break;
-				}
-				insEndfeldLaufen(spieler, spielfigur, newPos);
-				return;
-			}
-			break;
-		case BLUE:
-			if (newPos > 10) { 			// TODO Funktioniert nicht
-				newPos -= 10;
-				if (newPos > 4) {
-					break;
-				}
-				insEndfeldLaufen(spieler, spielfigur, newPos);
-				return;
-			}
-			break;
-		case GREEN:
-			if (newPos > 20) {
-				newPos -= 20;
-				if (newPos > 4) {
-					break;
-				}
-				insEndfeldLaufen(spieler, spielfigur, newPos);
-				return;
-			}
-			break;
-		case YELLOW:
-			if (newPos > 30) {
-				newPos -= 30;
-				if (newPos > 4) {
-					break;
-				}
-				insEndfeldLaufen(spieler, spielfigur, newPos);
-				return;
-			}
-			break;
+		if (newPos >= 40) {
+			spielfigur.setHatUmrundet(true);
 		}
-
 		
+		
+		if(spielfigur.hatUmrundet()){
+			switch (spielfigur.getFarbe()) {
+			case RED:
+				newPos -= 40;
+				if (!spielfigur.hatUmrundet() || newPos > 4) {
+					break;
+				}
+				insEndfeldLaufen(spieler, spielfigur, newPos);
+				return;
+			case BLUE:
+				newPos -= 30;
+				if(spielfigur.hatUmrundet() && newPos > 10){
+					newPos-=10;
+					if(newPos <= 4){
+						insEndfeldLaufen(spieler, spielfigur, newPos);
+						return;
+					}
+				}
+				break;
+			case GREEN:
+				newPos -= 20;
+				if(spielfigur.hatUmrundet() && newPos > 20){
+					newPos-=20;
+					if(newPos <= 4){
+						insEndfeldLaufen(spieler, spielfigur, newPos);
+						return;
+					}
+				}
+				break;
+			case YELLOW:
+				newPos -= 10;
+				if(spielfigur.hatUmrundet() && newPos > 30){
+					newPos-=30;
+					if(newPos <= 4){
+						insEndfeldLaufen(spieler, spielfigur, newPos);
+						return;
+					}
+				}
+				break;
+			}
+
+		}
 
 		if (spiel.getBrett().getSpielbrett()[newPos].getFelder()[0].getSpielfigur() == null) {
 			spielfigur.getSpielfeld().setSpielfigur(null);
@@ -214,39 +231,43 @@ public class Regelwerk {
 		switch (spielfigur.getFarbe()) {
 		case RED:
 			for (int i = 0; i < spiel.getBrett().getSpielbrett()[0].getFelder().length; i++) {
-				if (spiel.getBrett().getSpielbrett()[0].getFelder()[i] == null) {
-					spiel.getBrett().getSpielbrett()[0].getFelder()[i].setSpielfigur(spielfigur);
-					System.out.println(spiel.getBrett().getSpielbrett()[0].getFelder()[i].getSpielfigur().toString() + " Wurde auf Startfeld geschmissen");
-					break;
+				if (spiel.getBrett().getSpielbrett()[0].getFelder()[i].getSpielfigur() == null) {
+					spielfigur.getSpielfeld().setSpielfigur(null);
+					spielfigur.setSpielfeld(spiel.getBrett().getSpielbrett()[0].getFelder()[i]);
+					spielfigur.getSpielfeld().setSpielfigur(spielfigur);
 				}
 			}
+			System.out.println(spielfigur.toString() + " Wurde auf Startfeld geschmissen");
 			break;
 		case BLUE:
 			for (int i = 0; i < spiel.getBrett().getSpielbrett()[10].getFelder().length; i++) {
-				if (spiel.getBrett().getSpielbrett()[10].getFelder()[i] == null) {
-					spiel.getBrett().getSpielbrett()[10].getFelder()[i].setSpielfigur(spielfigur);
-					System.out.println(spiel.getBrett().getSpielbrett()[10].getFelder()[i].getSpielfigur().toString() + " Wurde auf Startfeld geschmissen");
-					break;
+				if (spiel.getBrett().getSpielbrett()[10].getFelder()[i].getSpielfigur() == null) {
+					spielfigur.getSpielfeld().setSpielfigur(null);
+					spielfigur.setSpielfeld(spiel.getBrett().getSpielbrett()[10].getFelder()[i]);
+					spielfigur.getSpielfeld().setSpielfigur(spielfigur);
 				}
 			}
+			System.out.println(spielfigur.toString() + " Wurde auf Startfeld geschmissen");
 			break;
 		case GREEN:
 			for (int i = 0; i < spiel.getBrett().getSpielbrett()[20].getFelder().length; i++) {
-				if (spiel.getBrett().getSpielbrett()[20].getFelder()[i] == null) {
-					spiel.getBrett().getSpielbrett()[20].getFelder()[i].setSpielfigur(spielfigur);
-					System.out.println(spiel.getBrett().getSpielbrett()[20].getFelder()[i].getSpielfigur().toString() + " Wurde auf Startfeld geschmissen");
-					break;
+				if (spiel.getBrett().getSpielbrett()[20].getFelder()[i].getSpielfigur() == null) {
+					spielfigur.getSpielfeld().setSpielfigur(null);
+					spielfigur.setSpielfeld(spiel.getBrett().getSpielbrett()[20].getFelder()[i]);
+					spielfigur.getSpielfeld().setSpielfigur(spielfigur);
 				}
 			}
+			System.out.println(spielfigur.toString() + " Wurde auf Startfeld geschmissen");
 			break;
 		case YELLOW:
 			for (int i = 0; i < spiel.getBrett().getSpielbrett()[30].getFelder().length; i++) {
-				if (spiel.getBrett().getSpielbrett()[30].getFelder()[i] == null) {
-					spiel.getBrett().getSpielbrett()[30].getFelder()[i].setSpielfigur(spielfigur);
-					System.out.println(spiel.getBrett().getSpielbrett()[30].getFelder()[i].getSpielfigur().toString() + " Wurde auf Startfeld geschmissen");
-					break;
+				if (spiel.getBrett().getSpielbrett()[30].getFelder()[i].getSpielfigur() == null) {
+					spielfigur.getSpielfeld().setSpielfigur(null);
+					spielfigur.setSpielfeld(spiel.getBrett().getSpielbrett()[30].getFelder()[i]);
+					spielfigur.getSpielfeld().setSpielfigur(spielfigur);
 				}
 			}
+			System.out.println(spielfigur.toString() + " Wurde auf Startfeld geschmissen");
 			break;
 		}
 

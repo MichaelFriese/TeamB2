@@ -31,6 +31,7 @@ public class Wuerfel {
 	 * @return eine Zahl zwischen 1 und 6
 	 */
 	public int getErgebnis(){
+		wuerfel();
 		return ergebnis;
 	}
 	
