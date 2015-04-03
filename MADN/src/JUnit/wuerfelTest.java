@@ -20,7 +20,7 @@ public class wuerfelTest {
 	@Test
 	public void test() {
 	
-		assertTrue(w.wuerfel() >= 1 && w.wuerfel()<= 6 );
+		assertTrue(w.wuerfeln() >= 1 && w.wuerfeln()<= 6 );
 	
 	}
 }

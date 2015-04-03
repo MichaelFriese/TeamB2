@@ -16,7 +16,7 @@ public class Wuerfel {
 	 * methode zum Wuerfeln
 	 * @return eine Zufallszahl zwischen 1 und 6
 	 */
-	public int  wuerfel(){
+	public int  wuerfeln(){
 		
 		ergebnis= new Random().nextInt(6);
 		ergebnis=ergebnis+1;
@@ -26,12 +26,17 @@ public class Wuerfel {
 		return ergebnis;
 	}
 	
+	public void wuerfel2(){
+		this.ergebnis = 2;
+		System.out.println("2 gewuerfelt");
+	}
+	
 	/**
 	 * gibt das Ergebnis vom Wuerfel zurueck
 	 * @return eine Zahl zwischen 1 und 6
 	 */
 	public int getErgebnis(){
-		wuerfel();
+//		wuerfel();
 		return ergebnis;
 	}
 	
@@ -42,6 +47,7 @@ public class Wuerfel {
 	 */
 	public int wurf6(){
 		System.out.println("gewuerfelt");
+		ergebnis = 6;
 		return 6;
 	}
 }

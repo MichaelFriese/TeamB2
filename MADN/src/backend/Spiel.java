@@ -51,17 +51,38 @@ public class Spiel implements iBediener {
 	 * @return amZug
 	 */
 	public Spieler getAmZug() {
-
 		return amZug;
 	}
 
 	/**
 	 * setzt den Spieler, welcher an der Reihe ist
-	 * 
+	 * und wuerfelt
 	 * @param amZug
 	 */
 	public void setAmZug(Spieler amZug) {
 		this.amZug = amZug;
+		System.out.println(getAmZug().toString() +" ist am Zug");
+//		getAmZug().getWuerfel().wuerfeln();
+//		getAmZug().getWuerfel().wurf6();
+		//Zum Testen wird nur 2 gewuerfelt:
+		getAmZug().getWuerfel().wuerfel2();
+	}
+	
+	/**
+	 * ermittelt Spieler der als naechstes am Zug ist
+	 * @param amZug
+	 */
+	public void setNaechster(Spieler amZug){
+		for(int i=0; i<=spieler.size()-1; i++){
+			if(amZug.equals(spieler.get(i))){
+				if(i==spieler.size()-1){
+					setAmZug(spieler.get(0));
+					return;
+				}
+				setAmZug(spieler.get(i+1));
+				return;
+			}
+		}
 	}
 
 	@Override
@@ -72,7 +93,6 @@ public class Spiel implements iBediener {
 			case "RED":
 				f = FarbEnum.RED;
 				break;
-
 			case "BLUE":
 				f = FarbEnum.BLUE;
 				break;
@@ -130,16 +150,16 @@ public class Spiel implements iBediener {
 				}
 				break;
 			}
-
 		}
+		
+		setAmZug(spieler.get(0));
+//		System.out.println(getAmZug().toString() +" ist am Zug");
+//		getAmZug().getWuerfel().wuerfeln();
+//		getAmZug().getWuerfel().wurf6();
 
 	}
 
-	// @Override
-	// public void zugDurchfuehren(int ID){
-	//
-	//
-	// }
+
 	/**
 	 * gibt das Regelwerk zurueck
 	 * 

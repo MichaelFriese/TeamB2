@@ -25,10 +25,10 @@ public class Spielbrett {
 				spielbrett[i] = new FeldWrapper(true, false,FarbEnum.BLUE);
 			break;
 			case (21):
-				spielbrett[i] = new FeldWrapper(true, false,FarbEnum.YELLOW);
+				spielbrett[i] = new FeldWrapper(true, false,FarbEnum.GREEN);
 			break;
 			case (31):
-				spielbrett[i] = new FeldWrapper(true, false,FarbEnum.GREEN);
+				spielbrett[i] = new FeldWrapper(true, false,FarbEnum.YELLOW);
 			break;
 			case (10):
 				spielbrett[i] = new FeldWrapper(false, true,FarbEnum.BLUE);
