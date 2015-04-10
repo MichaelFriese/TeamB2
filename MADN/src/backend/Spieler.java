@@ -15,6 +15,7 @@ public class Spieler {
 	private FarbEnum farbe;
 	private String name;
 	private Wuerfel wuerfel;
+	private KI ki;
 
 	/**
 	 * Konstruktor mit Erstellung der Spielfiguren
@@ -28,11 +29,17 @@ public class Spieler {
 	 * @param regel
 	 *            die Regeln fuer das Spiel
 	 */
-	public Spieler(String name, FarbEnum farbe) {
+	public Spieler(String name, FarbEnum farbe, KIEnum ki, Spiel spiel) {
 		setFarbe(farbe);
 		setName(name);
 		wuerfel = new Wuerfel();
-
+		
+		if(ki.equals("AGGRESSIV")){
+			this.ki = new KI_Aggresiv(spiel);
+		}
+		else if(ki.equals("DEFENSIV")){
+			this.ki = new KI_Defensiv(spiel);
+		}
 		this.spielfigur = new Spielfigur[4];
 
 		for (int i = 0; i < 4; i++) {
@@ -111,6 +118,10 @@ public class Spieler {
 		return spielfigur;
 	}
 	
+
+	public KI getKi() {
+		return ki;
+	}
 
 	@Override
 	public String toString() {

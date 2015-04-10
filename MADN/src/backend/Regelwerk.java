@@ -30,6 +30,17 @@ public class Regelwerk {
 	 * @param spieler
 	 * @param spielfigur
 	 */
+	
+	
+	public void aktionsWahl(Spieler spieler, Spielfigur spielfigur, int ergebnis){
+		if(spielfigur.getSpielfeld().getID().contains("S") && ergebnis ==6){
+			rauskommen(spieler,spielfigur);
+		}
+		else
+			figurZiehen(spieler,spielfigur);
+	
+	}
+	
 	public void rauskommen(Spieler spieler, Spielfigur spielfigur) {
 
 		if (spieler.getFarbe().equals(FarbEnum.RED)) {

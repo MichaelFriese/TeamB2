@@ -1,5 +1,7 @@
 package backend;
 
+import frontend.iBediener;
+
 /**
  * Klasse zum Spielstart
  * @author Judith, Michi,Tobi,Doerte
@@ -7,7 +9,6 @@ package backend;
  */
 
 public class SpielTest {
-	private static Spiel s = new Spiel();
 
 	/**
 	 * Main Methode 
@@ -15,10 +16,12 @@ public class SpielTest {
 	 */
 	public static void main(String[] args) {
 		
-		s.SpielerHinzufuegen("Rosa", "red");
-		s.SpielerHinzufuegen("Helmut", "blue");
-		s.SpielerHinzufuegen("Reiner", "Green");
-		s.SpielerHinzufuegen("Ole", "Yellow");
+		private iBediener s = new Spiel ();
+		
+		s.SpielerHinzufuegen("Rosa", "red",null);
+		s.SpielerHinzufuegen("Helmut", "blue",null);
+		s.SpielerHinzufuegen("Reiner", "Green",null);
+		s.SpielerHinzufuegen("Ole", "Yellow",null);
 		s.initSpiel();
 
 		Spieler s1 = s.getSpieler().get(0);

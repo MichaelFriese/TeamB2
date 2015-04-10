@@ -15,6 +15,7 @@ public class Spiel implements iBediener {
 	private ArrayList<Spieler> spieler;
 	private Spieler amZug;
 	private Regelwerk regelwerk;
+	
 
 	/**
 	 * Konstruktor der Spielklasse Spielbrett, Regelwerk und Spieler werden
@@ -86,7 +87,23 @@ public class Spiel implements iBediener {
 	}
 
 	@Override
-	public void SpielerHinzufuegen(String name, String farbe) {
+	public void SpielerHinzufuegen(String name, String farbe, String ki) {
+		KIEnum ai = null;
+		if(ki!=null){
+			switch (ki.toUpperCase()){
+			case "AGGRESSIV":
+				ai = KIEnum.AGGRESSIV;
+				break;
+				
+			case "DEFENSIV":
+				ai= KIEnum.DEFENSIV;
+				break;
+			
+			default:
+				throw new RuntimeException("Entweder `AGGRESSIV´ oder `DEFENSIV´");
+			}
+		}
+		
 		if (farbe != null) {
 			FarbEnum f = null;
 			switch (farbe.toUpperCase()) {
@@ -115,8 +132,8 @@ public class Spiel implements iBediener {
 				if (s.getFarbe().equals(farbe)) {
 					throw new RuntimeException("Farbe schon vergeben");
 				}
-			}
-			spieler.add(new Spieler(name, f));
+			} 
+				spieler.add(new Spieler(name, f, ai,this));
 		}
 	}
 
@@ -159,7 +176,10 @@ public class Spiel implements iBediener {
 
 	}
 
-
+	public void zugDurchfuehren(int ID){
+		
+		
+	}
 	/**
 	 * gibt das Regelwerk zurueck
 	 * 
