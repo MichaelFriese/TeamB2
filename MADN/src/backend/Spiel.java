@@ -11,6 +11,7 @@ import frontend.iBediener;
  *
  */
 public class Spiel implements iBediener {
+	
 	private Spielbrett brett;
 	private ArrayList<Spieler> spieler;
 	private Spieler amZug;
@@ -51,6 +52,7 @@ public class Spiel implements iBediener {
 	 * 
 	 * @return amZug
 	 */
+
 	public Spieler getAmZug() {
 		return amZug;
 	}
@@ -100,7 +102,7 @@ public class Spiel implements iBediener {
 				break;
 			
 			default:
-				throw new RuntimeException("Entweder `AGGRESSIV´ oder `DEFENSIV´");
+				throw new RuntimeException("Entweder `AGGRESSIVï¿½ oder `DEFENSIVï¿½");
 			}
 		}
 		
@@ -134,6 +136,8 @@ public class Spiel implements iBediener {
 				}
 			} 
 				spieler.add(new Spieler(name, f, ai,this));
+				setAmZug(spieler.get(0));
+				
 		}
 	}
 
@@ -177,7 +181,7 @@ public class Spiel implements iBediener {
 	}
 
 	public void zugDurchfuehren(int ID){
-		
+		regelwerk.aktionsWahl(amZug, amZug.getSpielfiguren()[ID], amZug.getWuerfel().wurf6());
 		
 	}
 	/**

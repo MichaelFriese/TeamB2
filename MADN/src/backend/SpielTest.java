@@ -24,7 +24,15 @@ public class SpielTest {
 		s.SpielerHinzufuegen("Ole", "Yellow",null);
 		s.initSpiel();
 
-		Spieler s1 = s.getSpieler().get(0);
+		
+		s.zugDurchfuehren(1);
+		
+		
+	
+		
+		
+		
+		/*Spieler s1 = s.getSpieler().get(0);
 		Spieler s2 = s.getSpieler().get(1);
 		Spieler s3= s.getSpieler().get(2);
 		Spieler s4= s.getSpieler().get(3);
@@ -35,11 +43,11 @@ public class SpielTest {
 		 * Spieler kommen mit jeder Zahl von Startfeld weg (Regelwerk.rauskommen())
 		 */
 		
-		spielenNachReihenfolge();
+		//spielenNachReihenfolge();
 //		spielerSchmeissen(s1);
 //		endfelderLaufen(s2);
 		
-		
+		/*
 		System.out.println(s.getBrett());
 	}
 
@@ -47,7 +55,7 @@ public class SpielTest {
 	 * Spieler laeuft um komplettes feld in Endfelder rein
 	 * @param spieler, Reihenfolge wird nicht beachtet-> Spieler übergeben
 	 */
-	public static void endfelderLaufen(Spieler spieler) {
+/*	public static void endfelderLaufen(Spieler spieler) {
 		s.getRegelwerk().rauskommen(spieler, spieler.getSpielfigur(1));
 		for(int i=1; i<=21; i++){
 			s.getRegelwerk().figurZiehen(spieler, spieler.getSpielfigur(1));			
@@ -59,7 +67,7 @@ public class SpielTest {
 	 * Rot kommt am Ende mit 2. Spielfigur vom startfeld weg
 	 * alles mit richriger Reihenfolge mit spiel.getAmZug()
 	 */
-	public static void spielenNachReihenfolge() {
+	/*public static void spielenNachReihenfolge() {
 		s.getRegelwerk().rauskommen(s.getAmZug(), s.getAmZug().getSpielfigur(1));
 		s.getRegelwerk().figurZiehen(s.getAmZug(), s.getAmZug().getSpielfigur(1));
 		s.getRegelwerk().rauskommen(s.getAmZug(), s.getAmZug().getSpielfigur(1));
@@ -77,7 +85,7 @@ public class SpielTest {
 	 * 
 	 * @param s1, Reihenfolge wird nicht beachtet-> Spieler übergeben
 	 */
-	public static void spielerSchmeissen(Spieler s1){
+	/*public static void spielerSchmeissen(Spieler s1){
 		s.getRegelwerk().rauskommen(s.getAmZug(), s.getAmZug().getSpielfigur(1));
 		s.getRegelwerk().figurZiehen(s.getAmZug(), s.getAmZug().getSpielfigur(1));
 		s.getRegelwerk().rauskommen(s.getAmZug(), s.getAmZug().getSpielfigur(1));
@@ -85,6 +93,10 @@ public class SpielTest {
 		s.getRegelwerk().figurZiehen(s1, s1.getSpielfigur(1));
 		s.getRegelwerk().figurZiehen(s1, s1.getSpielfigur(1));
 		s.getRegelwerk().figurZiehen(s1, s1.getSpielfigur(1));
+		*/
+		
+		
+		
 	}
 
 }
