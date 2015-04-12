@@ -11,6 +11,7 @@ import frontend.iBediener;
  *
  */
 public class Spiel implements iBediener {
+	
 	private Spielbrett brett;
 	private ArrayList<Spieler> spieler;
 	private Spieler amZug;
@@ -51,6 +52,7 @@ public class Spiel implements iBediener {
 	 * 
 	 * @return amZug
 	 */
+
 	public Spieler getAmZug() {
 		return amZug;
 	}

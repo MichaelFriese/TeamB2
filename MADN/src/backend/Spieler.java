@@ -11,7 +11,6 @@ public class Spieler {
 
 	private Spielfigur[] spielfigur;
 
-	
 	private FarbEnum farbe;
 	private String name;
 	private Wuerfel wuerfel;
@@ -33,17 +32,20 @@ public class Spieler {
 		setFarbe(farbe);
 		setName(name);
 		wuerfel = new Wuerfel();
-		
-//		if(ki.equals("AGGRESSIV")){
-//			this.ki = new KI_Aggresiv(spiel);
-//		}
-//		else if(ki.equals("DEFENSIV")){
-//			this.ki = new KI_Defensiv(spiel);
-//		}
-		this.spielfigur = new Spielfigur[4];
 
+		if (ki != null) {
+			if (ki.equals("AGGRESSIV")) {
+				this.ki = new KI_Aggresiv(this, spiel);
+			} else if (ki.equals("DEFENSIV")) {
+				this.ki = new KI_Defensiv(this, spiel);
+			}
+
+		}
+		
+		this.spielfigur = new Spielfigur[4];
 		for (int i = 0; i < 4; i++) {
-			spielfigur[i] = new Spielfigur(i + 1,getFarbe());
+
+			spielfigur[i] = new Spielfigur(i + 1, getFarbe());
 		}
 
 	}
@@ -86,9 +88,9 @@ public class Spieler {
 		this.farbe = farbe;
 	}
 
-	
 	/**
 	 * setzt den Namen des Spielers
+	 * 
 	 * @param name
 	 */
 	public void setName(String name) {
@@ -103,21 +105,21 @@ public class Spieler {
 	 */
 	public Spielfigur getSpielfigur(int i) {
 		i = i - 1;
-		if (i < 0 ){
-			i=0;
+		if (i < 0) {
+			i = 0;
 		}
 		return spielfigur[i];
 
 	}
-	
+
 	/**
 	 * gibt das Array der SPielfigur zurueck
+	 * 
 	 * @return spielfigur
 	 */
-	public Spielfigur[] getSpielfiguren(){
+	public Spielfigur[] getSpielfiguren() {
 		return spielfigur;
 	}
-	
 
 	public KI getKi() {
 		return ki;
@@ -156,10 +158,10 @@ public class Spieler {
 			this.setHatUmrundet(false);
 		}
 
-		
 		/**
 		 * Gibt die Farbe der Spielfigur zurueck
-		 * @return farbe 
+		 * 
+		 * @return farbe
 		 */
 		public FarbEnum getFarbe() {
 			return farbe;
@@ -180,15 +182,16 @@ public class Spieler {
 
 		/**
 		 * gibt das Spielfeld zurück
+		 * 
 		 * @return Spielfeld
 		 */
 		public Spielfeld getSpielfeld() {
 			return spielfeld;
 		}
 
-		
 		/**
 		 * setzt das Spielfeld
+		 * 
 		 * @param spielfeld
 		 */
 		public void setSpielfeld(Spielfeld spielfeld) {
@@ -196,29 +199,26 @@ public class Spieler {
 				this.spielfeld = spielfeld;
 			}
 		}
-		
-		public boolean istAufStartfeld(){
-			if(this.getSpielfeld().getID().contains("S")){
+
+		public boolean istAufStartfeld() {
+			if (this.getSpielfeld().getID().contains("S")) {
 				return true;
 			}
 			return false;
 		}
-		
+
 		public boolean hatUmrundet() {
 			return hatUmrundet;
 		}
-		
+
 		public void setHatUmrundet(boolean hatUmrundet) {
 			this.hatUmrundet = hatUmrundet;
 		}
 
 		@Override
 		public String toString() {
-			return "Spielfigur" + "" + getID() + "_" + getName() + "_"
-					+ getFarbe();
+			return "Spielfigur" + "" + getID() + "_" + getName() + "_" + getFarbe();
 		}
-
-
 
 	}
 

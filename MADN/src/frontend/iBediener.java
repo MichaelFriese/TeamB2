@@ -19,6 +19,4 @@ public interface iBediener {
 	public void zugDurchfuehrenSchmeissenTest(int ID);
 	public void zugDurchfuehrenEndfeldTest(int ID);
 
-
-
 }
