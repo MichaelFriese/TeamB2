@@ -100,7 +100,7 @@ public class Spiel implements iBediener {
 				break;
 			
 			default:
-				throw new RuntimeException("Entweder `AGGRESSIV´ oder `DEFENSIV´");
+				throw new RuntimeException("Entweder `AGGRESSIVï¿½ oder `DEFENSIVï¿½");
 			}
 		}
 		
@@ -154,13 +154,13 @@ public class Spiel implements iBediener {
 					brett.getSpielbrett()[10].getFelder()[i + 1].setSpielfigur(s.getSpielfigur(i + 1));
 				}
 				break;
-			case YELLOW:
+			case GREEN:
 				for (int i = 0; i < s.getSpielfiguren().length; i++) {
 					s.getSpielfigur(i).setSpielfeld(brett.getSpielbrett()[20].getFelder()[i + 1]);
 					brett.getSpielbrett()[20].getFelder()[i + 1].setSpielfigur(s.getSpielfigur(i + 1));
 				}
 				break;
-			case GREEN:
+			case YELLOW:
 				for (int i = 0; i < s.getSpielfiguren().length; i++) {
 					s.getSpielfigur(i).setSpielfeld(brett.getSpielbrett()[30].getFelder()[i + 1]);
 					brett.getSpielbrett()[30].getFelder()[i + 1].setSpielfigur(s.getSpielfigur(i + 1));
@@ -177,9 +177,28 @@ public class Spiel implements iBediener {
 	}
 
 	public void zugDurchfuehren(int ID){
-		
-		
+		regelwerk.aktionsWahl(getAmZug(), getAmZug().getSpielfigur(ID), getAmZug().getWuerfel().getErgebnis());
+		System.out.println(brett.toString());
 	}
+	
+	public void zugDurchfuehrenSchmeissenTest(int ID){
+		regelwerk.aktionsWahl(spieler.get(1), spieler.get(1).getSpielfigur(ID), 2);
+		regelwerk.aktionsWahl(spieler.get(0), spieler.get(0).getSpielfigur(ID), 2);
+		regelwerk.aktionsWahl(spieler.get(0), spieler.get(0).getSpielfigur(ID), 2);
+		regelwerk.aktionsWahl(spieler.get(0), spieler.get(0).getSpielfigur(ID), 2);
+		regelwerk.aktionsWahl(spieler.get(0), spieler.get(0).getSpielfigur(ID), 2);
+		regelwerk.aktionsWahl(spieler.get(0), spieler.get(0).getSpielfigur(ID), 2);
+		regelwerk.aktionsWahl(spieler.get(0), spieler.get(0).getSpielfigur(ID), 2);
+		System.out.println(brett.toString());
+	}
+	
+	public void zugDurchfuehrenEndfeldTest(int ID){
+		for(int i=1; i<=21; i++){
+			regelwerk.aktionsWahl(spieler.get(0), spieler.get(0).getSpielfigur(ID), 2);
+		}
+		System.out.println(brett.toString());
+	}
+	
 	/**
 	 * gibt das Regelwerk zurueck
 	 * 

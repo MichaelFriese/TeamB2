@@ -33,7 +33,7 @@ public class Regelwerk {
 	
 	
 	public void aktionsWahl(Spieler spieler, Spielfigur spielfigur, int ergebnis){
-		if(spielfigur.getSpielfeld().getID().contains("S") && ergebnis ==6){
+		if(spielfigur.getSpielfeld().getID().contains("S")){ // && ergebnis ==6){
 			rauskommen(spieler,spielfigur);
 		}
 		else
@@ -139,18 +139,19 @@ public class Regelwerk {
 			spielfigur.setHatUmrundet(true);
 			newPos-=40;
 		}
-
+		
 		if (spielfigur.hatUmrundet()) {
 			switch (spielfigur.getFarbe()) {
 			case RED:
-				if (!spielfigur.hatUmrundet() || newPos > 4) {
-					break;
+				newPos++;
+				if (newPos <= 4) {
+					insEndfeldLaufen(spieler, spielfigur, newPos);
+					return;
 				}
-				insEndfeldLaufen(spieler, spielfigur, newPos);
-				return;
+				break;
 			case BLUE:
-				if (spielfigur.hatUmrundet() && newPos > 10) {
-					newPos -= 10;
+				if (newPos >= 10) {
+					newPos -= 9;
 					if (newPos <= 4) {
 						insEndfeldLaufen(spieler, spielfigur, newPos);
 						return;
@@ -158,8 +159,8 @@ public class Regelwerk {
 				}
 				break;
 			case GREEN:
-				if (spielfigur.hatUmrundet() && newPos > 20) {
-					newPos -= 20;
+				if (newPos >= 20) {
+					newPos -= 19;
 					if (newPos <= 4) {
 						insEndfeldLaufen(spieler, spielfigur, newPos);
 						return;
@@ -167,8 +168,8 @@ public class Regelwerk {
 				}
 				break;
 			case YELLOW:
-				if (spielfigur.hatUmrundet() && newPos > 30) {
-					newPos -= 30;
+				if (newPos >= 30) {
+					newPos -= 29;
 					if (newPos <= 4) {
 						insEndfeldLaufen(spieler, spielfigur, newPos);
 						return;

@@ -34,12 +34,12 @@ public class Spieler {
 		setName(name);
 		wuerfel = new Wuerfel();
 		
-		if(ki.equals("AGGRESSIV")){
-			this.ki = new KI_Aggresiv(spiel);
-		}
-		else if(ki.equals("DEFENSIV")){
-			this.ki = new KI_Defensiv(spiel);
-		}
+//		if(ki.equals("AGGRESSIV")){
+//			this.ki = new KI_Aggresiv(spiel);
+//		}
+//		else if(ki.equals("DEFENSIV")){
+//			this.ki = new KI_Defensiv(spiel);
+//		}
 		this.spielfigur = new Spielfigur[4];
 
 		for (int i = 0; i < 4; i++) {
