@@ -16,10 +16,10 @@ public class SpielTest {
 	@Before
 	public void before() {
 		s = new Spiel();
-		s.SpielerHinzufuegen("Meyer", "red");
-		s.SpielerHinzufuegen("Meyer", "blue");
-		s.SpielerHinzufuegen("Meyer", "green");
-		s.SpielerHinzufuegen("Meyer", "yellow");
+		//s.SpielerHinzufuegen("Meyer", "red");
+		//s.SpielerHinzufuegen("Meyer", "blue");
+		//s.SpielerHinzufuegen("Meyer", "green");
+		//s.SpielerHinzufuegen("Meyer", "yellow");
 		s.initSpiel();
 
 	}

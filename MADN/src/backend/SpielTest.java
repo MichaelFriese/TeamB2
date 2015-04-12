@@ -16,7 +16,7 @@ public class SpielTest {
 	 */
 	public static void main(String[] args) {
 		
-		private iBediener s = new Spiel ();
+		iBediener s = new Spiel ();
 		
 		s.SpielerHinzufuegen("Rosa", "red",null);
 		s.SpielerHinzufuegen("Helmut", "blue",null);
