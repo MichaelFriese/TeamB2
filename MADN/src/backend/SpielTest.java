@@ -10,6 +10,8 @@ import frontend.iBediener;
 
 public class SpielTest {
 
+
+
 	/**
 	 * Main Methode 
 	 * @param args
@@ -18,7 +20,7 @@ public class SpielTest {
 		
 		iBediener s = new Spiel ();
 		
-		s.SpielerHinzufuegen("Rosa", "red",null);
+		/*s.SpielerHinzufuegen("Rosa", "red",null);
 		s.SpielerHinzufuegen("Helmut", "blue",null);
 		s.SpielerHinzufuegen("Reiner", "Green",null);
 		s.SpielerHinzufuegen("Ole", "Yellow",null);
@@ -33,6 +35,15 @@ public class SpielTest {
 		s.zugDurchfuehren(1);
 //		s.zugDurchfuehrenSchmeissenTest(1);
 //		s.zugDurchfuehrenEndfeldTest(1);
+		*/
+		s.SpielerHinzufuegen("Ki", "RED", "AGGRESSIV");
+		s.SpielerHinzufuegen("Ki2", "Blue", "AGGRESSIV");
+		s.initSpiel();
+		s.zugDurchfuehren(1);
+		s.zugDurchfuehren(1);
+		s.zugDurchfuehren(1);
+		s.zugDurchfuehren(1);
+		
 		
 	}
 

@@ -102,7 +102,7 @@ public class Spiel implements iBediener {
 				break;
 			
 			default:
-				throw new RuntimeException("Entweder `AGGRESSIV� oder `DEFENSIV�");
+				throw new RuntimeException("Entweder `AGGRESSIV' oder `DEFENSIV' ");
 			}
 		}
 		
@@ -178,10 +178,27 @@ public class Spiel implements iBediener {
 
 	}
 
+	/**
+	 * ruft im Regelwerk die Funktion AktionsWahl auf um damit den Spielzug zu bestimmen
+	 * @param id der Spielfigur
+	 */
+	
+	
+	
 	public void zugDurchfuehren(int ID){
+		 
+		if(amZug.getKi()!= null){
+			//TODO bei Zug durchführen noch einbauen, dass wenn es eine KI ist an die methode KIZugDefensiv/Aggressiv w
+			//weiterleiten..
+		}
 		regelwerk.aktionsWahl(getAmZug(), getAmZug().getSpielfigur(ID), getAmZug().getWuerfel().getErgebnis());
 		System.out.println(brett.toString());
 	}
+	
+	/**
+	 * Ist eine Testklasse um zu testen, dass die Figuren geschmissen werden können
+	 * @param id der Spielfigur
+	 */
 	
 	public void zugDurchfuehrenSchmeissenTest(int ID){
 		regelwerk.aktionsWahl(spieler.get(1), spieler.get(1).getSpielfigur(ID), 2);
@@ -194,6 +211,11 @@ public class Spiel implements iBediener {
 		System.out.println(brett.toString());
 	}
 	
+	
+	/**
+	 * Ist eine Testklasse um zu Testen, ob die Spielfiguren richtig ins Endfeld laufen
+	 * @param id der Spielfigur
+	 */
 	public void zugDurchfuehrenEndfeldTest(int ID){
 		for(int i=1; i<=21; i++){
 			regelwerk.aktionsWahl(spieler.get(0), spieler.get(0).getSpielfigur(ID), 2);

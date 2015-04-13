@@ -9,6 +9,8 @@ package backend;
 
 public class Spieler {
 
+	
+
 	private Spielfigur[] spielfigur;
 
 	private FarbEnum farbe;
