@@ -69,6 +69,12 @@ public class Spiel implements iBediener {
 //		getAmZug().getWuerfel().wurf6();
 		//Zum Testen wird nur 2 gewuerfelt:
 		getAmZug().getWuerfel().wuerfel2();
+		
+		if(amZug.getKi() != null){
+			amZug.getKi().kiZug();
+		}else{
+			System.out.println(amZug.getKienum());
+		}
 	}
 	
 	/**
@@ -186,11 +192,7 @@ public class Spiel implements iBediener {
 	
 	
 	public void zugDurchfuehren(int ID){
-		 
-		if(amZug.getKi()!= null){
-			//TODO bei Zug durchführen noch einbauen, dass wenn es eine KI ist an die methode KIZugDefensiv/Aggressiv w
-			//weiterleiten..
-		}
+
 		regelwerk.aktionsWahl(getAmZug(), getAmZug().getSpielfigur(ID), getAmZug().getWuerfel().getErgebnis());
 		System.out.println(brett.toString());
 	}

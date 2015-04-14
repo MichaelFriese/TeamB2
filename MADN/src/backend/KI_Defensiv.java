@@ -16,7 +16,8 @@ public class KI_Defensiv extends KI {
 	 * 
 	 */
 
-	public void kiZugDefensiv() {
+	@Override
+	public void kiZug() {
 
 		if (KIVersucheRauskommen() != null) {
 			int id = KIVersucheRauskommen().getID();

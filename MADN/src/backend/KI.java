@@ -142,5 +142,7 @@ public abstract class KI {
 	public Spiel getSpiel() {
 		return spiel;
 	}
+	
+	public abstract void kiZug();
 
 }

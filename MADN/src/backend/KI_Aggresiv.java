@@ -13,7 +13,8 @@ public class KI_Aggresiv extends KI {
 	 * im Spielfeld ziehen wenn nicht dann ist der nächste Spieler am Zug
 	 */
 
-	public void kiZugAggressiv() {
+	@Override
+	public void kiZug() {
 
 		if (KIVersucheSchmeissen() != null) {
 			int id = KIVersucheSchmeissen().getID();

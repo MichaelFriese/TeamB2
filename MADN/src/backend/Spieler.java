@@ -17,6 +17,7 @@ public class Spieler {
 	private String name;
 	private Wuerfel wuerfel;
 	private KI ki;
+	private KIEnum kienum;
 
 	/**
 	 * Konstruktor mit Erstellung der Spielfiguren
@@ -35,14 +36,14 @@ public class Spieler {
 		setName(name);
 		wuerfel = new Wuerfel();
 
-		if (ki != null) {
-			if (ki.equals("AGGRESSIV")) {
-				this.ki = new KI_Aggresiv(this, spiel);
-			} else if (ki.equals("DEFENSIV")) {
-				this.ki = new KI_Defensiv(this, spiel);
-			}
-
-		}
+//		if (ki != null) {
+//			if (ki.equals(KIEnum.AGGRESSIV)) {
+//				this.ki = new KI_Aggresiv(this, spiel);
+//			} else if (ki.equals("DEFENSIV")) {
+//				this.ki = new KI_Defensiv(this, spiel);
+//			}
+//		}
+		this.kienum = ki;
 		
 		this.spielfigur = new Spielfigur[4];
 		for (int i = 0; i < 4; i++) {
@@ -50,6 +51,10 @@ public class Spieler {
 			spielfigur[i] = new Spielfigur(i + 1, getFarbe());
 		}
 
+	}
+
+	public KIEnum getKienum() {
+		return kienum;
 	}
 
 	/**
