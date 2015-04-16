@@ -2,6 +2,7 @@ package backend;
 
 import java.util.ArrayList;
 
+
 import frontend.iBediener;
 
 /**
@@ -12,6 +13,7 @@ import frontend.iBediener;
  */
 public class Spiel implements iBediener {
 	
+	private static final long serialVersionUID= 1L;
 	private Spielbrett brett;
 	private ArrayList<Spieler> spieler;
 	private Spieler amZug;
