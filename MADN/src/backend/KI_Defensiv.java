@@ -19,21 +19,20 @@ public class KI_Defensiv extends KI {
 	@Override
 	public void kiZug() {
 
-		if (KIVersucheRauskommen() != null) {
-			int id = KIVersucheRauskommen().getID();
-			super.getSpiel().zugDurchfuehren(id);
-		}
-
-		else if (KIVersucheInsEndfeld() != null) {
+		if (KIVersucheInsEndfeld() != null) {
 			int id = KIVersucheInsEndfeld().getID();
 			super.getSpiel().zugDurchfuehren(id);
-
-		} else if (KIVersucheFigurZiehen() != null) {
-			int id = KIVersucheFigurZiehen().getID();
+			
+		} else if (KIVersucheRauskommen() != null) {
+			int id = KIVersucheRauskommen().getID();
 			super.getSpiel().zugDurchfuehren(id);
 
 		} else if (KIVersucheSchmeissen() != null) {
 			int id = KIVersucheSchmeissen().getID();
+			super.getSpiel().zugDurchfuehren(id);
+
+		} else if (KIVersucheFigurZiehen() != null) {
+			int id = KIVersucheFigurZiehen().getID();
 			super.getSpiel().zugDurchfuehren(id);
 		}
 

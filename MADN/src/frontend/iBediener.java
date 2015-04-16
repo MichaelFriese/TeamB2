@@ -1,5 +1,4 @@
 package frontend;
-import backend.Spiel;
 
 public interface iBediener {
 	
@@ -18,5 +17,10 @@ public interface iBediener {
 	public void zugDurchfuehren(int ID);
 	public void zugDurchfuehrenSchmeissenTest(int ID);
 	public void zugDurchfuehrenEndfeldTest(int ID);
+
+	void initTestSpiel();
+
+	void initTestSpielZugAggressiv();
+	void initTestSpielZugDefensiv();
 
 }

@@ -28,11 +28,38 @@ public abstract class KI {
 	 */
 
 	public Spielfigur KIVersucheRauskommen() {
+//		System.out.println("raus");
 		for (int i = 0; i < spieler.getSpielfiguren().length; i++) {
 
-			Spielfigur s = spieler.getSpielfigur(i + 1);
-			if (s.getSpielfeld().getID().contains("S")
-					&& spieler.getWuerfel().getErgebnis() == 6) {
+			Spielfigur s = spieler.getSpielfigur(i);
+			if (s.getSpielfeld().getID().contains("S")){ //&& spieler.getWuerfel().getErgebnis() == 6) {
+				
+				if(spieler.getFarbe().equals(FarbEnum.RED) && spiel.getBrett().getSpielbrett()[0].getFelder()[0].getSpielfigur() != null){
+					if(spieler.getFarbe().equals(spiel.getBrett().getSpielbrett()[0].getFelder()[0].getSpielfigur().getFarbe())){
+						KIVersucheFigurZiehen();
+						return null;
+					}
+				}
+				if(spieler.getFarbe().equals(FarbEnum.BLUE) && spiel.getBrett().getSpielbrett()[10].getFelder()[0].getSpielfigur() != null){
+					System.out.println("hier");
+					if(spieler.getFarbe().equals(spiel.getBrett().getSpielbrett()[10].getFelder()[0].getSpielfigur().getFarbe())){
+						KIVersucheFigurZiehen();
+						return null;
+					}
+				}
+				if(spieler.getFarbe().equals(FarbEnum.GREEN) && spiel.getBrett().getSpielbrett()[20].getFelder()[0].getSpielfigur() != null){
+					if(spieler.getFarbe().equals(spiel.getBrett().getSpielbrett()[20].getFelder()[0].getSpielfigur().getFarbe())){
+						KIVersucheFigurZiehen();
+						return null;
+					}
+				}
+				if(spieler.getFarbe().equals(FarbEnum.YELLOW) && spiel.getBrett().getSpielbrett()[30].getFelder()[0].getSpielfigur() != null){
+					if(spieler.getFarbe().equals(spiel.getBrett().getSpielbrett()[30].getFelder()[0].getSpielfigur().getFarbe())){
+						KIVersucheFigurZiehen();
+						return null;
+					}
+				}
+
 				return s;
 			}
 		}
@@ -47,11 +74,10 @@ public abstract class KI {
 	public Spielfigur KIVersucheInsEndfeld() {
 		for (int i = 0; i < spieler.getSpielfiguren().length; i++) {
 
-			Spielfigur s = spieler.getSpielfigur(i + 1);
+			Spielfigur s = spieler.getSpielfigur(i);
 
-			int oldPos = spiel.getBrett().getSpielbrett()[s.getSpielfeld()
-					.getPosition()].getFelder()[0].getSpielfigur()
-					.getSpielfeld().getPosition();
+//			int oldPos = spiel.getBrett().getSpielbrett()[s.getSpielfeld().getPosition()].getFelder()[0].getSpielfigur().getSpielfeld().getPosition();
+			int oldPos = s.getSpielfeld().getPosition();
 			int newPos = oldPos + spieler.getWuerfel().getErgebnis();
 
 			switch (spieler.getFarbe()) {
@@ -88,14 +114,18 @@ public abstract class KI {
 	 * @return Spielfigur
 	 */
 	public Spielfigur KIVersucheSchmeissen() {
+//		System.out.println("schmeiss");
 		for (int i = 0; i < spieler.getSpielfiguren().length; i++) {
 
-			Spielfigur s = spieler.getSpielfigur(i + 1);
-			Spielfigur s2 = spiel.getBrett().getSpielbrett()[s.getSpielfeld()
-					.getPosition() + spieler.getWuerfel().getErgebnis()]
-					.getFelder()[0].getSpielfigur();
-			if (s2 != null && !(s2.getFarbe().equals(s.getFarbe()))) {
-				return s;
+			Spielfigur s = spieler.getSpielfigur(i);
+			int newPos = (s.getSpielfeld().getPosition() + spieler.getWuerfel().getErgebnis())-1;
+			
+			if(newPos < 40){
+				Spielfigur s2 = spiel.getBrett().getSpielbrett()[newPos].getFelder()[0].getSpielfigur();
+//				System.out.println("pos"+(s.getSpielfeld().getPosition() + spieler.getWuerfel().getErgebnis()));
+				if (s2 != null && !(s2.getFarbe().equals(s.getFarbe()))) {
+					return s;
+				}
 			}
 		}
 		return null;
@@ -110,15 +140,15 @@ public abstract class KI {
 
 		for (int i = 0; i < spieler.getSpielfiguren().length; i++) {
 
-			Spielfigur s = spieler.getSpielfigur(i + 1);
-
-			if (!(s.getSpielfeld().getID().contains("S"))
-					&& spiel.getBrett().getSpielbrett()[s.getSpielfeld()
-							.getPosition() + spieler.getWuerfel().getErgebnis()]
-							.getFelder()[0].getSpielfigur() == null) {
-				return s;
-			} else
-				KIVersucheRauskommen();
+			Spielfigur s = spieler.getSpielfigur(i);
+			int newPos = (s.getSpielfeld().getPosition() + spieler.getWuerfel().getErgebnis()) -1;
+			if(newPos < 40){
+				if (!(s.getSpielfeld().getID().contains("S")) && spiel.getBrett().getSpielbrett()[newPos].getFelder()[0].getSpielfigur() == null) {
+					return s;
+				} else{
+					KIVersucheRauskommen();
+				}
+			}
 		}
 		return null;
 
@@ -142,7 +172,7 @@ public abstract class KI {
 	public Spiel getSpiel() {
 		return spiel;
 	}
-	
+
 	public abstract void kiZug();
 
 }

@@ -68,6 +68,9 @@ public class Spielfeld {
 	 * @return position
 	 */
 	public int getPosition() {
+		if(id.contains("S") || id.contains("E")){
+			return 0;
+		}
 		this.position = Integer.parseInt(id);
 		return position;
 	}

@@ -17,10 +17,12 @@ public class KI_Aggresiv extends KI {
 	public void kiZug() {
 
 		if (KIVersucheSchmeissen() != null) {
+//			System.out.println("nr1");
 			int id = KIVersucheSchmeissen().getID();
 			super.getSpiel().zugDurchfuehren(id);
 
 		} else if (KIVersucheRauskommen() != null) {
+//			System.out.println("nr2");
 			int id = KIVersucheRauskommen().getID();
 			super.getSpiel().zugDurchfuehren(id);
 
@@ -29,6 +31,7 @@ public class KI_Aggresiv extends KI {
 			super.getSpiel().zugDurchfuehren(id);
 
 		} else if (KIVersucheFigurZiehen() != null) {
+//			System.out.println("nr4");
 			int id = KIVersucheFigurZiehen().getID();
 			super.getSpiel().zugDurchfuehren(id);
 

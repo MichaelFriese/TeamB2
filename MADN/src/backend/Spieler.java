@@ -9,8 +9,6 @@ package backend;
 
 public class Spieler {
 
-	
-
 	private Spielfigur[] spielfigur;
 
 	private FarbEnum farbe;
@@ -22,32 +20,27 @@ public class Spieler {
 	/**
 	 * Konstruktor mit Erstellung der Spielfiguren
 	 * 
-	 * @param name
-	 *            des Spielers
-	 * @param farbe
-	 *            gewaehlte Farbe der Spielfigur
-	 * @param brett
-	 *            das Spielbrett
-	 * @param regel
-	 *            die Regeln fuer das Spiel
+	 * @param name des Spielers
+	 * @param farbe gewaehlte Farbe der Spielfigur
+	 * @param brett das Spielbrett
+	 * @param regel die Regeln fuer das Spiel
 	 */
 	public Spieler(String name, FarbEnum farbe, KIEnum ki, Spiel spiel) {
 		setFarbe(farbe);
 		setName(name);
 		wuerfel = new Wuerfel();
 
-//		if (ki != null) {
-//			if (ki.equals(KIEnum.AGGRESSIV)) {
-//				this.ki = new KI_Aggresiv(this, spiel);
-//			} else if (ki.equals("DEFENSIV")) {
-//				this.ki = new KI_Defensiv(this, spiel);
-//			}
-//		}
+		if (ki != null) {
+			if (ki.equals(KIEnum.AGGRESSIV)) {
+				this.ki = new KI_Aggresiv(this, spiel);
+			} else if (ki.equals(KIEnum.DEFENSIV)) {
+				this.ki = new KI_Defensiv(this, spiel);
+			}
+		}
 		this.kienum = ki;
-		
+
 		this.spielfigur = new Spielfigur[4];
 		for (int i = 0; i < 4; i++) {
-
 			spielfigur[i] = new Spielfigur(i + 1, getFarbe());
 		}
 
@@ -88,8 +81,7 @@ public class Spieler {
 	/**
 	 * setzt die gewuehlte Farbe des Spielers
 	 * 
-	 * @param farbe
-	 *            gewaehlte farbe des Spielers
+	 * @param farbe gewaehlte farbe des Spielers
 	 */
 	private void setFarbe(FarbEnum farbe) {
 		this.farbe = farbe;
@@ -119,6 +111,12 @@ public class Spieler {
 
 	}
 
+	
+	public Spielfigur getSpielfigurNeu(int i) {
+		return spielfigur[i];
+
+	}
+	
 	/**
 	 * gibt das Array der SPielfigur zurueck
 	 * 
@@ -154,8 +152,7 @@ public class Spieler {
 		 * Kontruktor der Inneren Klasse kann nur ueber die Spielerklasse
 		 * aufgerufen werden
 		 * 
-		 * @param ID
-		 *            uebergibt jeder erstellte Spielfigur eine ID
+		 * @param ID uebergibt jeder erstellte Spielfigur eine ID
 		 */
 
 		private Spielfigur(int ID, FarbEnum farbe) {
