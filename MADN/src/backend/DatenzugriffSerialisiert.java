@@ -1,12 +1,16 @@
 package backend;
 
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.io.PrintWriter;
 
 import Test.Syso;
 import Test.syso2;
+import frontend.iBediener;
 import frontend.iDatenzugriff;
 
 public class DatenzugriffSerialisiert implements iDatenzugriff {
@@ -39,6 +43,33 @@ public class DatenzugriffSerialisiert implements iDatenzugriff {
 
 	public void laden() {
 
+		ObjectInputStream ois = null;
+		try{
+			ois = new ObjectInputStream ( new FileInputStream ("out.ser"));
+			Spiel s;
+			try {
+				s = (Spiel) ois.readObject();
+				System.out.println(s);
+			} catch (ClassNotFoundException e) {
+				e.printStackTrace();
+			}
+		}
+		catch (FileNotFoundException e) {
+			System.err.println("konnte 'out.ser' nicht finden");
+		} catch (IOException e) {
+			System.err.println("Fehler bei der Ein-/Ausgabe" + e);
+
+		} finally {
+			try {
+				ois.close();
+			} catch (Exception e) {
+				System.err.println("Fehler beim Schliessen der Datei");
+			}
+		}
 	}
 
+
+	
+
+	
 }

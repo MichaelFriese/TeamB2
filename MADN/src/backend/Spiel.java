@@ -1,7 +1,7 @@
 package backend;
 
+import java.io.Serializable;
 import java.util.ArrayList;
-
 
 import frontend.iBediener;
 
@@ -11,7 +11,7 @@ import frontend.iBediener;
  * @author Judith, Michi, Doerte, Tobi
  *
  */
-public class Spiel implements iBediener {
+public class Spiel implements iBediener, Serializable {
 	
 	private static final long serialVersionUID= 1L;
 	private Spielbrett brett;
@@ -324,4 +324,12 @@ public class Spiel implements iBediener {
 		return regelwerk;
 	}
 
+	
+	@Override
+	public String toString(){
+		String s="";
+		s+= brett.toString();
+		return s;
+	}
+	
 }

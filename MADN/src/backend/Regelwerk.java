@@ -1,5 +1,7 @@
 package backend;
 
+import java.io.Serializable;
+
 import backend.Spieler.Spielfigur;
 
 /**
@@ -9,8 +11,12 @@ import backend.Spieler.Spielfigur;
  *
  */
 
-public class Regelwerk {
+public class Regelwerk implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private Spiel spiel;
 
 	/**

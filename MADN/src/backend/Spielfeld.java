@@ -1,5 +1,7 @@
 package backend;
 
+import java.io.Serializable;
+
 import backend.Spieler.Spielfigur;
 
 /**
@@ -9,7 +11,11 @@ import backend.Spieler.Spielfigur;
  *
  */
 
-public class Spielfeld {
+public class Spielfeld implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private static int counter = 0;
 	private String id;
 	private Spielfigur spielfigur;

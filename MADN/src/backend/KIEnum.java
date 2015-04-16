@@ -1,6 +1,8 @@
 package backend;
 
-public enum KIEnum {
+import java.io.Serializable;
+
+public enum KIEnum implements Serializable {
 
 	AGGRESSIV,DEFENSIV;
 }

@@ -1,11 +1,17 @@
 package backend;
 
+import java.io.Serializable;
+
 /** Diee Klasse stellt das Spielbrett dar
  * @author Judth, Michi,Tobi,Doerte
  * @version 1
  */
-public class Spielbrett {
+public class Spielbrett implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private FeldWrapper spielbrett[];
 	
 	

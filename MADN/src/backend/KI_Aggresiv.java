@@ -1,6 +1,13 @@
 package backend;
 
-public class KI_Aggresiv extends KI {
+import java.io.Serializable;
+
+public class KI_Aggresiv extends KI implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	public KI_Aggresiv(Spieler spieler, Spiel spiel) {
 		super(spieler, spiel);

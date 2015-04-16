@@ -1,5 +1,7 @@
 package backend;
 
+import java.io.Serializable;
+
 /**
  * Klasse fuer die Endfelder, erbt von Spielfeld
  * 
@@ -7,8 +9,12 @@ package backend;
  *
  */
 
-public class Endfeld extends Spielfeld {
+public class Endfeld extends Spielfeld implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	/**
 	 * @param counterEnde
 	 *            zaehlt anzahl der erstellten Endfelder. Static damit Wert an

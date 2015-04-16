@@ -1,5 +1,7 @@
 package backend;
 
+import java.io.Serializable;
+
 import backend.Spieler.Spielfigur;
 /**
  *Wrapper Klasse fuer das einfuegen von Start und Endfeldern des Spiels
@@ -8,8 +10,12 @@ import backend.Spieler.Spielfigur;
  *
  */
 
-public class FeldWrapper {
+public class FeldWrapper implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private Spielfeld [] felder;
 	private Spielfigur spielfigur;
 	

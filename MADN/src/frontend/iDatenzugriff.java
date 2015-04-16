@@ -1,10 +1,13 @@
 package frontend;
 
+import java.io.PrintWriter;
+
 public interface iDatenzugriff {
 
 	
-	public void speichern();
+	void speichern();
 	
-	public void laden();
-	
+	void laden();
+
+
 }

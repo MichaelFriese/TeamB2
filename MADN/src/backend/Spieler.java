@@ -1,5 +1,7 @@
 package backend;
 
+import java.io.Serializable;
+
 /**
  * Klasse fuer die Verwaltung eines Spieler
  * 
@@ -7,7 +9,12 @@ package backend;
  *
  */
 
-public class Spieler {
+public class Spieler implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	private Spielfigur[] spielfigur;
 
@@ -142,7 +149,11 @@ public class Spieler {
 	 *
 	 */
 
-	public class Spielfigur {
+	public class Spielfigur implements Serializable {
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = 1L;
 		private int ID;
 		private Spielfeld spielfeld;
 		private FarbEnum farbe;

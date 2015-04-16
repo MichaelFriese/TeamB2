@@ -1,5 +1,6 @@
 package backend;
 
+import java.io.Serializable;
 import java.util.Random;
 /**
  * klasse zum Wuerfeln
@@ -7,8 +8,12 @@ import java.util.Random;
  *
  */
 
-public class Wuerfel {
+public class Wuerfel implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private int ergebnis;
 	
 	

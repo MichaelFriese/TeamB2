@@ -1,9 +1,15 @@
 package backend;
 
+import java.io.Serializable;
+
 import backend.Spieler.Spielfigur;
 
-public abstract class KI {
+public abstract class KI implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private Spieler spieler;
 	private Spiel spiel;
 

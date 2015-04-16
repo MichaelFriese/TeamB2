@@ -1,6 +1,13 @@
 package backend;
 
-public class KI_Defensiv extends KI {
+import java.io.Serializable;
+
+public class KI_Defensiv extends KI implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	public KI_Defensiv(Spieler spieler, Spiel spiel) {
 		super(spieler, spiel);
