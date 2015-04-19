@@ -22,7 +22,7 @@ public class DatenzugriffCSV implements iDatenzugriff {
 		PrintWriter pw = null;
 		try{
 	
-		pw = new PrintWriter ( new FileWriter("test.txt"));
+		pw = new PrintWriter ( new FileWriter("test.csv"));
 		pw.print(spiel.toString());
 		pw.flush();
 		}
@@ -37,7 +37,7 @@ public class DatenzugriffCSV implements iDatenzugriff {
 		BufferedReader reader = null;
 		try{
 			try {
-				reader= new BufferedReader(new FileReader("Test.txt"));
+				reader= new BufferedReader(new FileReader("Test.csv"));
 			} catch (FileNotFoundException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();

@@ -36,7 +36,7 @@ public class DatenzugriffSerialisiert implements iDatenzugriff {
 			try {
 				oos.close();
 			} catch (Exception e) {
-				System.err.println("Fehler beim Schließen der Datei");
+				System.err.println("Fehler beim Schliessen der Datei");
 			}
 		}
 	}
