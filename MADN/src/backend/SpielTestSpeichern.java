@@ -42,8 +42,8 @@ public class SpielTestSpeichern {
 		
 		DatenzugriffCSV speichernCSV = new DatenzugriffCSV ((Spiel) s,"Versuch4");
 		speichernCSV.speichern();
-//		DatenzugriffCSV ladenCSV = new DatenzugriffCSV((Spiel)s,"Versuch3");
-//		ladenCSV.laden();
+		DatenzugriffCSV ladenCSV = new DatenzugriffCSV((Spiel)s,"Versuch4");
+		ladenCSV.laden();
 //		s.zugDurchfuehren(2);
 //		s.zugDurchfuehren(1);
 		

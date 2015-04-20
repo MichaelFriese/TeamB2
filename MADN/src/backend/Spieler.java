@@ -1,5 +1,7 @@
 package backend;
 
+import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.Serializable;
 
 /**
@@ -52,7 +54,24 @@ public class Spieler implements Serializable {
 		}
 
 	}
-
+	public Spieler (BufferedReader reader) throws IOException{
+		try{
+		reader.readLine();
+		String line = reader.readLine();
+		String [] fields = line.split("_");
+		setName(fields[3]);
+			}
+		
+		catch (NullPointerException e){
+			throw new IOException("Unerwartetes Dateiende");
+		}
+		catch (NumberFormatException e){
+			throw new IOException("Falsches Elementformat");
+		}
+		catch (IndexOutOfBoundsException e){
+			throw new IOException("zu wenig Datenelemente");
+		}
+	}
 	public KIEnum getKienum() {
 		return kienum;
 	}

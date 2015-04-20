@@ -12,6 +12,7 @@ import frontend.iDatenzugriff;
 public class DatenzugriffCSV implements iDatenzugriff {
 
 	private Spiel spiel;
+	private Spieler spieler;
 	private String dateiname;
 
 	public DatenzugriffCSV(Spiel spiel, String dateiname) {
@@ -102,8 +103,10 @@ public class DatenzugriffCSV implements iDatenzugriff {
 				
 			}
 			System.out.println(spiel.getAmZug());
-			pw.println(spiel.getSpieler().toString()+"/n"+spiel.getAmZug()+"\n" + s);
-			
+			for(int i=0;i<spiel.getSpieler().size();i++){
+			pw.println(	spiel.getSpieler().get(i));
+			}
+			pw.println(spiel.getAmZug()+"\n" + s);
 			pw.flush();
 			pw.close();
 
@@ -119,56 +122,21 @@ public class DatenzugriffCSV implements iDatenzugriff {
 	
 	@Override
 	public Object laden() {
-		
-		BufferedReader reader = null;
+		BufferedReader reader = null; 
 		try{
-			try {
-				reader= new BufferedReader(new FileReader(dateiname+".csv"));
-			} catch (FileNotFoundException e1) {
-				e1.printStackTrace();
-			}
-		String erg="";
-			try {
-				
-				String s=reader.readLine();
-				
-				while (s!=null){
-				erg+=s;
-//				switch(s){
-//				case "RED":
-//					if(reader.readLine().contains("RED")){
-//						spiel.setAmZug();
-//					}
-//					break;
-//				case BLUE:
-//					if(reader.readLine().contains("BLUE")){
-//					break;
-//				case YELLOW:
-//					if(reader.readLine().contains("YELLOW")){
-//					break;
-//				case GREEN:
-//					if(reader.readLine().contains("GREEN")){
-//					break;
-//				
-//				}
-			
-				s=reader.readLine();
-				}
-				return erg;
-				
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-			
+			reader = new BufferedReader(new FileReader(dateiname+".csv"));
+			Spieler s = new Spieler (reader);
+
+//			spiel.setAmZug(s);
+			System.out.println(spiel.getSpieler().toString());
+			spiel.getSpieler().clear();
+			spiel.addSpieler(s);
+//			System.out.println(s);
+			System.out.println(spiel.getSpieler().toString());
 		}
-		finally{
-			try {
-				reader.close();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
+		catch (Exception e ){
+			e.printStackTrace();
 		}
 		return null;
-	}
-	
+		}
 }

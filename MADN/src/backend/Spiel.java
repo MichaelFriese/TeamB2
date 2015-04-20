@@ -58,6 +58,10 @@ public class Spiel implements iBediener, Serializable {
 		return spieler;
 	}
 
+	public void addSpieler(Spieler s){
+		spieler.add(s);
+		
+	}
 	/**
 	 * gibt zurueck welcher Spieler am Zug ist
 	 * 
