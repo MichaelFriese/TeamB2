@@ -18,23 +18,108 @@ public class DatenzugriffCSV implements iDatenzugriff {
 	}
 
 	@Override
-	public void speichern() {
+	public void speichern() throws IOException {
+		
 		PrintWriter pw = null;
-		try{
-	
-		pw = new PrintWriter ( new FileWriter("test.csv"));
-		pw.print(spiel.toString());
-		pw.flush();
-		}
-		catch(Exception e){
-			System.err.println("Konnte Datei nicht erstellen");
+		try {
+
+			pw = new PrintWriter(new FileWriter("test.csv"));
+			
+			String s=null;
+			
+		
+			for (int i = 0; i < spiel.getBrett().getSpielbrett().length; i++) {
+				switch (i) {
+				case 0:
+					for (int j = 0; j <= 4; j++) {
+						s += spiel.getBrett().getSpielbrett()[0].getFelder()[j]
+								.toString();
+						
+					}
+					break;
+				case 10:
+					for (int j = 0; j <= 4; j++) {
+						s+= spiel.getBrett().getSpielbrett()[10].getFelder()[j]
+								.toString();
+					}
+					break;
+				case 20:
+
+					for (int j = 0; j <= 4; j++) {
+						s+= spiel.getBrett().getSpielbrett()[20].getFelder()[j]
+								.toString();
+					}
+					break;
+				case 30:
+					for (int j = 0; j <= 4; j++) {
+						s+= spiel.getBrett().getSpielbrett()[30].getFelder()[j]
+								.toString();
+					}
+					break;
+				case 40:
+					for (int j = 0; j <= 4; j++) {
+						s+= spiel.getBrett().getSpielbrett()[40].getFelder()[j]
+								.toString();
+					}
+					break;
+				case 39:
+					for (int j = 0; j <= 4; j++) {
+						s+= spiel.getBrett().getSpielbrett()[39].getFelder()[j]
+								.toString();
+					}
+					break;
+					
+				case 9:
+					for (int j = 0; j <= 4; j++) {
+						s+= spiel.getBrett().getSpielbrett()[9].getFelder()[j]
+								.toString();
+					}
+					break;
+				case 19:
+					for (int j = 0; j <= 4; j++) {
+						s+= spiel.getBrett().getSpielbrett()[19].getFelder()[j]
+								.toString();
+					}
+					break;
+				case 29:
+					for (int j = 0; j <= 4; j++) {
+						s+= spiel.getBrett().getSpielbrett()[29].getFelder()[j]
+								.toString();
+					}
+					break;
+
+				default:
+					s+= spiel.getBrett().getSpielbrett()[i].getFelder()[0]
+							.toString();
+					
+					break;
+				}
+				pw.println(s);
+			}
+
+			
+			pw.flush();
+			pw.close();
+
+		} catch (NullPointerException e) {
+			throw new IOException("UNerwartetes Dateiende");
+		} catch (NumberFormatException e) {
+			throw new IOException("Falsches Elementformat ");
+		} catch (IndexOutOfBoundsException e) {
+			throw new IOException("zu wenig Datenelemente");
 		}
 	}
-
+	
+	
 	@Override
-	public void laden() {
+	public Object laden() {
 		
 		BufferedReader reader = null;
+//		BufferedReader reader = null;
+//		String line= reader.readLine();
+//		String [] fields= line.split("_");
+		
+		//spiel.getBrett().getSpielbrett()[1].gfields[0];
 		try{
 			try {
 				reader= new BufferedReader(new FileReader("Test.csv"));
@@ -42,14 +127,16 @@ public class DatenzugriffCSV implements iDatenzugriff {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
-			String s;
+		String erg="";
 			try {
-				System.out.println("Spiel geladen");
-				s = reader.readLine();
+				
+				String s=reader.readLine();
+				
 				while (s!=null){
-				System.out.println(s);
+				erg+=s;
 				s=reader.readLine();
 				}
+				return erg;
 				
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
@@ -65,7 +152,7 @@ public class DatenzugriffCSV implements iDatenzugriff {
 				e.printStackTrace();
 			}
 		}
-
+		return null;
 	}
-
+	
 }

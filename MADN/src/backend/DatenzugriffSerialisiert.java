@@ -40,16 +40,20 @@ public class DatenzugriffSerialisiert implements iDatenzugriff {
 			}
 		}
 	}
-
-	public void laden() {
-
+	
+	
+	
+	@Override
+	public Object laden() {
+		Object s=null;
 		ObjectInputStream ois = null;
 		try{
 			ois = new ObjectInputStream ( new FileInputStream ("out.ser"));
-			Spiel s;
+		
 			try {
-				s = (Spiel) ois.readObject();
-				System.out.println(s);
+				s = ois.readObject();
+				return s;
+				
 			} catch (ClassNotFoundException e) {
 				e.printStackTrace();
 			}
@@ -66,10 +70,12 @@ public class DatenzugriffSerialisiert implements iDatenzugriff {
 				System.err.println("Fehler beim Schliessen der Datei");
 			}
 		}
+		return null;
 	}
 
 
-	
+		
+	}
 
 	
-}
+

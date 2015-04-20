@@ -1,21 +1,23 @@
 package backend;
 
+import java.io.IOException;
+
 import frontend.iBediener;
 
 public class SpielTestSpeichern {
 
 	private DatenzugriffSerialisiert speichern;
 	
-	public static void main(String[] args) {
+	public static void main(String[] args) throws IOException {
 		
 		iBediener s = new Spiel ();
 		s.SpielerHinzufuegen("Ki", "red", "aggressiv");
 //		s.SpielerHinzufuegen("Ki2", "Blue", "defensiv");
-//		s.SpielerHinzufuegen("Rosa", "red",null);
-//		s.SpielerHinzufuegen("Helmut", "blue",null);
-		s.SpielerHinzufuegen("Reiner", "Green",null);
-//		s.SpielerHinzufuegen("Ole", "Yellow",null);
-//		s.initSpiel();
+		s.SpielerHinzufuegen("Rosa", "red",null);
+	//	s.SpielerHinzufuegen("Helmut", "blue",null);
+	//	s.SpielerHinzufuegen("Reiner", "Green",null);
+	//	s.SpielerHinzufuegen("Ole", "Yellow",null);
+	//	s.initSpiel();
 //		s.zugDurchfuehren(1);
 //		s.zugDurchfuehren(1);
 //		s.zugDurchfuehren(1);
@@ -34,12 +36,12 @@ public class SpielTestSpeichern {
 //		s.initTestSpielZugAggressiv();
 
 		
-		DatenzugriffSerialisiert speichernSerialisiert = new DatenzugriffSerialisiert((Spiel) s);
-		speichernSerialisiert.speichern();
+		//DatenzugriffSerialisiert speichernSerialisiert = new DatenzugriffSerialisiert((Spiel) s);
+		//speichernSerialisiert.speichern();
 		
 		DatenzugriffCSV speichernCSV = new DatenzugriffCSV ((Spiel) s);
-		s.zugDurchfuehren(3);
 		speichernCSV.speichern();
+	
 		
 		
 		

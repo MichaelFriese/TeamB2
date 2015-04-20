@@ -1,13 +1,15 @@
 package frontend;
 
-import java.io.PrintWriter;
+import java.io.IOException;
+
+
 
 public interface iDatenzugriff {
 
 	
-	void speichern();
+	void speichern() throws IOException;
 	
-	void laden();
+	Object laden();
 
 
 }

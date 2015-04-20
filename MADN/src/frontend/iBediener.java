@@ -1,5 +1,7 @@
 package frontend;
 
+import java.io.IOException;
+
 public interface iBediener {
 	
 	/**
@@ -23,4 +25,9 @@ public interface iBediener {
 	void initTestSpielZugAggressiv();
 	void initTestSpielZugDefensiv();
 
+	Object laden(String dateiende);
+	void Speichern(String dateiende) throws IOException;
+	
+	
+	
 }

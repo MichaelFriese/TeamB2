@@ -1,9 +1,12 @@
 package backend;
 
+import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 
 import frontend.iBediener;
+import frontend.iDatenzugriff;
 
 /**
  * Spiel Klasse dient zum "starten" des Spiels
@@ -19,8 +22,11 @@ public class Spiel implements iBediener, Serializable {
 	private Spieler amZug;
 	private Regelwerk regelwerk;
 	
+	private iDatenzugriff d= new DatenzugriffCSV(this);
+	private iDatenzugriff s= new DatenzugriffSerialisiert(this);
+	
 
-	/**
+	/*
 	 * Konstruktor der Spielklasse Spielbrett, Regelwerk und Spieler werden
 	 * initialisiert
 	 */
@@ -30,6 +36,8 @@ public class Spiel implements iBediener, Serializable {
 		spieler = new ArrayList<Spieler>();
 	}
 
+
+	
 	/**
 	 * gibt das Spielbrett zurueck
 	 * 
@@ -180,6 +188,7 @@ public class Spiel implements iBediener, Serializable {
 			}
 		}
 		
+		System.out.println(brett.toString());
 		setAmZug(spieler.get(0));
 	}
 	
@@ -212,7 +221,7 @@ public class Spiel implements iBediener, Serializable {
 				break;
 			}
 		}
-//		System.out.println(brett);
+		//System.out.println(brett.toString());
 		setAmZug(spieler.get(0));
 	}
 	
@@ -330,6 +339,40 @@ public class Spiel implements iBediener, Serializable {
 		String s="";
 		s+= brett.toString();
 		return s;
+	}
+	
+	
+	
+	@Override
+	public Object laden(String dateiende){
+		if(dateiende.equals("csv")){
+			d = null;
+			return d.laden();
+		}else{
+			if(dateiende.equals("ser")){
+				s = null;
+				return s.laden();
+				
+			}
+		}
+		
+		return null;
+	}
+
+
+
+	@Override
+	public void Speichern(String dateiende) throws IOException {
+		if(dateiende.equals("csv")){
+			d = null;
+			d.speichern();
+		}else{
+			if(dateiende.equals("ser")){
+				s = null;
+				s.speichern();
+			}
+		}
+		
 	}
 	
 }
