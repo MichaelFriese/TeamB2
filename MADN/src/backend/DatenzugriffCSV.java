@@ -25,65 +25,65 @@ public class DatenzugriffCSV implements iDatenzugriff {
 
 			pw = new PrintWriter(new FileWriter("test.csv"));
 			
-			String s=null;
+			String s = " ";
 			
-		
+			
+
 			for (int i = 0; i < spiel.getBrett().getSpielbrett().length; i++) {
 				switch (i) {
 				case 0:
 					for (int j = 0; j <= 4; j++) {
-						s += spiel.getBrett().getSpielbrett()[0].getFelder()[j]
+						s += spiel.getBrett().getSpielbrett()[i].getFelder()[j]
 								.toString();
-						
 					}
 					break;
 				case 10:
 					for (int j = 0; j <= 4; j++) {
-						s+= spiel.getBrett().getSpielbrett()[10].getFelder()[j]
+						s+= spiel.getBrett().getSpielbrett()[i].getFelder()[j]
 								.toString();
 					}
 					break;
 				case 20:
 
 					for (int j = 0; j <= 4; j++) {
-						s+= spiel.getBrett().getSpielbrett()[20].getFelder()[j]
+						s+= spiel.getBrett().getSpielbrett()[i].getFelder()[j]
 								.toString();
 					}
 					break;
 				case 30:
 					for (int j = 0; j <= 4; j++) {
-						s+= spiel.getBrett().getSpielbrett()[30].getFelder()[j]
+						s+= spiel.getBrett().getSpielbrett()[i].getFelder()[j]
 								.toString();
 					}
 					break;
 				case 40:
 					for (int j = 0; j <= 4; j++) {
-						s+= spiel.getBrett().getSpielbrett()[40].getFelder()[j]
+						s+= spiel.getBrett().getSpielbrett()[i].getFelder()[j]
 								.toString();
 					}
 					break;
 				case 39:
 					for (int j = 0; j <= 4; j++) {
-						s+= spiel.getBrett().getSpielbrett()[39].getFelder()[j]
+						s+= spiel.getBrett().getSpielbrett()[i].getFelder()[j]
 								.toString();
 					}
 					break;
 					
 				case 9:
 					for (int j = 0; j <= 4; j++) {
-						s+= spiel.getBrett().getSpielbrett()[9].getFelder()[j]
+						s+= spiel.getBrett().getSpielbrett()[i].getFelder()[j]
 								.toString();
 					}
 					break;
 				case 19:
 					for (int j = 0; j <= 4; j++) {
-						s+= spiel.getBrett().getSpielbrett()[19].getFelder()[j]
+						s+= spiel.getBrett().getSpielbrett()[i].getFelder()[j]
 								.toString();
 					}
 					break;
 				case 29:
 					for (int j = 0; j <= 4; j++) {
-						s+= spiel.getBrett().getSpielbrett()[29].getFelder()[j]
+						s+= spiel.getBrett().getSpielbrett()[i].getFelder()[j]
 								.toString();
 					}
 					break;
@@ -91,12 +91,11 @@ public class DatenzugriffCSV implements iDatenzugriff {
 				default:
 					s+= spiel.getBrett().getSpielbrett()[i].getFelder()[0]
 							.toString();
-					
 					break;
 				}
-				pw.println(s);
+				
 			}
-
+			pw.println(s);
 			
 			pw.flush();
 			pw.close();
