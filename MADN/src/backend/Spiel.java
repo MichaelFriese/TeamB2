@@ -2,6 +2,7 @@ package backend;
 
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.io.Serializable;
 import java.util.ArrayList;
 
@@ -350,12 +351,51 @@ public class Spiel implements iBediener, Serializable {
 	
 	@Override
 	public Object laden(String dateiende){
+		BufferedReader reader;
 		if(dateiende.equals("csv")){
-			d = null;
-			return d.laden();
+			this.brett = new Spielbrett();
+			spieler.clear();
+			String t = (String)d.laden();
+			String [] x = t.split("/n");
+			String [] a = x[0].split("_");
+			int i = 1;
+			while(a[0].equals("Spieler")){
+				SpielerHinzufuegen(a[1], a[2], a[3]);
+				a=x[i].split("_");
+				i++;
+				}
+			while (!a[2].equals("null")){
+				if (!a[0].contains("S")){
+					Spieler spieler = null;
+					int id = -1;
+					for(Spieler search:this.getSpieler()){
+						if(search.getFarbe().equals(FarbEnum.RED) && a[4].equals("RED") ||
+							search.getFarbe().equals(FarbEnum.BLUE) && a[4].equals("BLUE") ||
+							search.getFarbe().equals(FarbEnum.GREEN) && a[4].equals("GREEN") ||
+							search.getFarbe().equals(FarbEnum.YELLOW) && a[4].equals("YELLOW"))
+							spieler = search;
+						else
+							throw new RuntimeException("Behinderter Fehler beim Laden von Spielfiguren");
+					}
+					if(a[2].contains("1"))
+						id = 1;
+					else if(a[2].contains("2"))
+						id = 2;
+					else if(a[2].contains("3"))
+						id = 3;
+					else if(a[2].contains("4"))
+						id = 4;
+						
+					spieler.getSpielfigur(id).getSpielfeld().setSpielfigur(null);
+					// BATT WARNT: funktioniert nicht mit Endfeldern!!!!
+					spieler.getSpielfigur(id).setSpielfeld(this.getBrett().getSpielbrett()[Integer.parseInt(a[0])].getFelder()[0]);
+					spieler.getSpielfigur(id).getSpielfeld().setSpielfigur(spieler.getSpielfigur(id));
+				}
+			}
+			return null;
 		}else{
 			if(dateiende.equals("ser")){
-				s = null;
+				
 				return s.laden();
 				
 			}
@@ -368,13 +408,84 @@ public class Spiel implements iBediener, Serializable {
 
 	@Override
 	public void Speichern(String dateiende) throws IOException {
+//		PrintWriter pw = null;
 		if(dateiende.equals("csv")){
-			d = null;
-			d.speichern();
+			String s = "";
+			for (int i = 0; i < getBrett().getSpielbrett().length; i++) {
+				switch (i) {
+				case 0:
+					for (int j = 0; j <= 4; j++) {
+						s += getBrett().getSpielbrett()[i].getFelder()[j]
+								.toString();
+					}
+					break;
+				case 10:
+					for (int j = 0; j <= 4; j++) {
+						s+= getBrett().getSpielbrett()[i].getFelder()[j]
+								.toString();
+					}
+					break;
+				case 20:
+
+					for (int j = 0; j <= 4; j++) {
+						s+= getBrett().getSpielbrett()[i].getFelder()[j]
+								.toString();
+					}
+					break;
+				case 30:
+					for (int j = 0; j <= 4; j++) {
+						s+= getBrett().getSpielbrett()[i].getFelder()[j]
+								.toString();
+					}
+					break;
+				case 40:
+					for (int j = 0; j <= 4; j++) {
+						s+= getBrett().getSpielbrett()[i].getFelder()[j]
+								.toString();
+					}
+					break;
+				case 39:
+					for (int j = 0; j <= 4; j++) {
+						s+= getBrett().getSpielbrett()[i].getFelder()[j]
+								.toString();
+					}
+					break;
+					
+				case 9:
+					for (int j = 0; j <= 4; j++) {
+						s+= getBrett().getSpielbrett()[i].getFelder()[j]
+								.toString();
+					}
+					break;
+				case 19:
+					for (int j = 0; j <= 4; j++) {
+						s+= getBrett().getSpielbrett()[i].getFelder()[j]
+								.toString();
+					}
+					break;
+				case 29:
+					for (int j = 0; j <= 4; j++) {
+						s+= getBrett().getSpielbrett()[i].getFelder()[j]
+								.toString();
+					}
+					break;
+
+				default:
+					s+= getBrett().getSpielbrett()[i].getFelder()[0]
+							.toString();
+					break;
+				}
+				
+			}
+			for(int i=0;i<getSpieler().size();i++){
+			s+= "/n"+getSpieler().get(i);
+			}
+			s+= "/n"+getAmZug()+"\n" + s;
+			d.speichern(s); //hier den zu speichernden String reinhauen, ist ja auch object
 		}else{
 			if(dateiende.equals("ser")){
-				s = null;
-				s.speichern();
+				
+				s.speichern(this);
 			}
 		}
 		

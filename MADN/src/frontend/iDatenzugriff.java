@@ -7,7 +7,7 @@ import java.io.IOException;
 public interface iDatenzugriff {
 
 	
-	void speichern() throws IOException;
+	void speichern(Object o) throws IOException;
 	
 	Object laden();
 

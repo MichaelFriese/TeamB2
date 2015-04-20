@@ -24,89 +24,20 @@ public class DatenzugriffCSV implements iDatenzugriff {
 		this.dateiname=dateiname;
 	}
 	@Override
-	public void speichern() throws IOException {
+	public void speichern(Object o) throws IOException {
 		
 		PrintWriter pw = null;
 		try {
 
 			pw = new PrintWriter(new FileWriter(this.dateiname+".csv"));
 			
-			String s = "";
-			
-			
-			
-
-			for (int i = 0; i < spiel.getBrett().getSpielbrett().length; i++) {
-				switch (i) {
-				case 0:
-					for (int j = 0; j <= 4; j++) {
-						s += spiel.getBrett().getSpielbrett()[i].getFelder()[j]
-								.toString();
-					}
-					break;
-				case 10:
-					for (int j = 0; j <= 4; j++) {
-						s+= spiel.getBrett().getSpielbrett()[i].getFelder()[j]
-								.toString();
-					}
-					break;
-				case 20:
-
-					for (int j = 0; j <= 4; j++) {
-						s+= spiel.getBrett().getSpielbrett()[i].getFelder()[j]
-								.toString();
-					}
-					break;
-				case 30:
-					for (int j = 0; j <= 4; j++) {
-						s+= spiel.getBrett().getSpielbrett()[i].getFelder()[j]
-								.toString();
-					}
-					break;
-				case 40:
-					for (int j = 0; j <= 4; j++) {
-						s+= spiel.getBrett().getSpielbrett()[i].getFelder()[j]
-								.toString();
-					}
-					break;
-				case 39:
-					for (int j = 0; j <= 4; j++) {
-						s+= spiel.getBrett().getSpielbrett()[i].getFelder()[j]
-								.toString();
-					}
-					break;
-					
-				case 9:
-					for (int j = 0; j <= 4; j++) {
-						s+= spiel.getBrett().getSpielbrett()[i].getFelder()[j]
-								.toString();
-					}
-					break;
-				case 19:
-					for (int j = 0; j <= 4; j++) {
-						s+= spiel.getBrett().getSpielbrett()[i].getFelder()[j]
-								.toString();
-					}
-					break;
-				case 29:
-					for (int j = 0; j <= 4; j++) {
-						s+= spiel.getBrett().getSpielbrett()[i].getFelder()[j]
-								.toString();
-					}
-					break;
-
-				default:
-					s+= spiel.getBrett().getSpielbrett()[i].getFelder()[0]
-							.toString();
-					break;
-				}
-				
+			String s = null;
+			try{
+				s = (String)o;
+			}catch(Exception e){
+				System.err.println("Kein String übergeben");
 			}
-			System.out.println(spiel.getAmZug());
-			for(int i=0;i<spiel.getSpieler().size();i++){
-			pw.println(	spiel.getSpieler().get(i));
-			}
-			pw.println(spiel.getAmZug()+"\n" + s);
+			pw.write(s);
 			pw.flush();
 			pw.close();
 
@@ -125,14 +56,21 @@ public class DatenzugriffCSV implements iDatenzugriff {
 		BufferedReader reader = null; 
 		try{
 			reader = new BufferedReader(new FileReader(dateiname+".csv"));
-			Spieler s = new Spieler (reader);
-
+			String s = reader.readLine();
+			String erg = "";
+			while ( s != null){
+				erg += s;
+				s= reader.readLine();
+			} return erg;
+			
+//			Spieler s = new Spieler (reader);
+//
 //			spiel.setAmZug(s);
-			System.out.println(spiel.getSpieler().toString());
-			spiel.getSpieler().clear();
-			spiel.addSpieler(s);
+//			System.out.println(spiel.getSpieler().toString());
+//			spiel.getSpieler().clear();
+//			spiel.addSpieler(s);
 //			System.out.println(s);
-			System.out.println(spiel.getSpieler().toString());
+//			System.out.println(spiel.getSpieler().toString());
 		}
 		catch (Exception e ){
 			e.printStackTrace();

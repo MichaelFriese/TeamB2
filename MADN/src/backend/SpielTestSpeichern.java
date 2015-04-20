@@ -40,10 +40,10 @@ public class SpielTestSpeichern {
 		//DatenzugriffSerialisiert speichernSerialisiert = new DatenzugriffSerialisiert((Spiel) s);
 		//speichernSerialisiert.speichern();
 		
-		DatenzugriffCSV speichernCSV = new DatenzugriffCSV ((Spiel) s,"Versuch4");
-		speichernCSV.speichern();
-		DatenzugriffCSV ladenCSV = new DatenzugriffCSV((Spiel)s,"Versuch4");
-		ladenCSV.laden();
+//		DatenzugriffCSV speichernCSV = new DatenzugriffCSV ((Spiel) s,"Versuch4");
+//		speichernCSV.speichern();
+//		DatenzugriffCSV ladenCSV = new DatenzugriffCSV((Spiel)s,"Versuch4");
+//		ladenCSV.laden();
 //		s.zugDurchfuehren(2);
 //		s.zugDurchfuehren(1);
 		

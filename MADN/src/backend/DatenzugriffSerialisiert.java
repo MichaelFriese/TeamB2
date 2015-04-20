@@ -22,7 +22,7 @@ public class DatenzugriffSerialisiert implements iDatenzugriff {
 	}
 
 	@Override
-	public void speichern() {
+	public void speichern(Object o) {
 		ObjectOutputStream oos = null;
 		try {
 			oos = new ObjectOutputStream(new FileOutputStream("out.ser"));

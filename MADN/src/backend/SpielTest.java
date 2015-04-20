@@ -26,9 +26,9 @@ public class SpielTest {
 		s.SpielerHinzufuegen("Reiner", "Green",null);
 		s.SpielerHinzufuegen("Ole", "Yellow",null);
 		s.initSpiel();
-//		s.zugDurchfuehren(1);
-//		s.zugDurchfuehren(1);
-//		s.zugDurchfuehren(1);
+		s.zugDurchfuehren(1);
+		s.zugDurchfuehren(1);
+		s.zugDurchfuehren(1);
 //		s.zugDurchfuehren(1);
 //		s.zugDurchfuehren(1);
 //		s.zugDurchfuehren(1);
@@ -44,7 +44,6 @@ public class SpielTest {
 //		s.initTestSpielZugDefensiv();
 //		s.initTestSpielZugAggressiv();
 
-		s.zugDurchfuehren(1);
 		//s.Speichern("csv");
 		
 		

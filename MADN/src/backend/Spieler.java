@@ -54,24 +54,24 @@ public class Spieler implements Serializable {
 		}
 
 	}
-	public Spieler (BufferedReader reader) throws IOException{
-		try{
-		reader.readLine();
-		String line = reader.readLine();
-		String [] fields = line.split("_");
-		setName(fields[3]);
-			}
-		
-		catch (NullPointerException e){
-			throw new IOException("Unerwartetes Dateiende");
-		}
-		catch (NumberFormatException e){
-			throw new IOException("Falsches Elementformat");
-		}
-		catch (IndexOutOfBoundsException e){
-			throw new IOException("zu wenig Datenelemente");
-		}
-	}
+//	public Spieler (BufferedReader reader) throws IOException{
+//		try{
+//		reader.readLine();
+//		String line = reader.readLine();
+//		String [] fields = line.split("_");
+//		setName(fields[0]);
+//			}
+//		
+//		catch (NullPointerException e){
+//			throw new IOException("Unerwartetes Dateiende");
+//		}
+//		catch (NumberFormatException e){
+//			throw new IOException("Falsches Elementformat");
+//		}
+//		catch (IndexOutOfBoundsException e){
+//			throw new IOException("zu wenig Datenelemente");
+//		}
+//	}
 	public KIEnum getKienum() {
 		return kienum;
 	}
@@ -158,7 +158,7 @@ public class Spieler implements Serializable {
 
 	@Override
 	public String toString() {
-		return getName() + "_" + getFarbe();
+		return "Spieler_" + getName() + "_" + getFarbe() + "_"+ getKienum();
 	}
 
 	/**
