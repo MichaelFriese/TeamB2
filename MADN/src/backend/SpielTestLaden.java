@@ -36,8 +36,10 @@ public class SpielTestLaden {
 //		ladenTest.laden();
 //		s.zugDurchfuehren(2);
 //		
-		DatenzugriffCSV ladenCSV = new DatenzugriffCSV((Spiel)s);
+		DatenzugriffCSV ladenCSV = new DatenzugriffCSV((Spiel)s, "Versuch3");
 		ladenCSV.laden();
+		
+		s.zugDurchfuehren(3);
 		
 		
 	}

@@ -12,20 +12,26 @@ import frontend.iDatenzugriff;
 public class DatenzugriffCSV implements iDatenzugriff {
 
 	private Spiel spiel;
+	private String dateiname;
 
-	public DatenzugriffCSV(Spiel spiel) {
+	public DatenzugriffCSV(Spiel spiel, String dateiname) {
 		this.spiel = spiel;
+		setDateiname(dateiname);
 	}
 
+	public void setDateiname(String dateiname){
+		this.dateiname=dateiname;
+	}
 	@Override
 	public void speichern() throws IOException {
 		
 		PrintWriter pw = null;
 		try {
 
-			pw = new PrintWriter(new FileWriter("test.csv"));
+			pw = new PrintWriter(new FileWriter(this.dateiname+".csv"));
 			
-			String s = " ";
+			String s = "";
+			
 			
 			
 
@@ -95,7 +101,8 @@ public class DatenzugriffCSV implements iDatenzugriff {
 				}
 				
 			}
-			pw.println(s);
+			System.out.println(spiel.getAmZug());
+			pw.println(spiel.getSpieler().toString()+"/n"+spiel.getAmZug()+"\n" + s);
 			
 			pw.flush();
 			pw.close();
@@ -114,16 +121,10 @@ public class DatenzugriffCSV implements iDatenzugriff {
 	public Object laden() {
 		
 		BufferedReader reader = null;
-//		BufferedReader reader = null;
-//		String line= reader.readLine();
-//		String [] fields= line.split("_");
-		
-		//spiel.getBrett().getSpielbrett()[1].gfields[0];
 		try{
 			try {
-				reader= new BufferedReader(new FileReader("Test.csv"));
+				reader= new BufferedReader(new FileReader(dateiname+".csv"));
 			} catch (FileNotFoundException e1) {
-				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
 		String erg="";
@@ -133,12 +134,29 @@ public class DatenzugriffCSV implements iDatenzugriff {
 				
 				while (s!=null){
 				erg+=s;
+//				switch(s){
+//				case "RED":
+//					if(reader.readLine().contains("RED")){
+//						spiel.setAmZug();
+//					}
+//					break;
+//				case BLUE:
+//					if(reader.readLine().contains("BLUE")){
+//					break;
+//				case YELLOW:
+//					if(reader.readLine().contains("YELLOW")){
+//					break;
+//				case GREEN:
+//					if(reader.readLine().contains("GREEN")){
+//					break;
+//				
+//				}
+			
 				s=reader.readLine();
 				}
 				return erg;
 				
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			
@@ -147,7 +165,6 @@ public class DatenzugriffCSV implements iDatenzugriff {
 			try {
 				reader.close();
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}

@@ -21,8 +21,9 @@ public class Spiel implements iBediener, Serializable {
 	private ArrayList<Spieler> spieler;
 	private Spieler amZug;
 	private Regelwerk regelwerk;
+	private String dateiname;
 	
-	private iDatenzugriff d= new DatenzugriffCSV(this);
+	private iDatenzugriff d= new DatenzugriffCSV(this, dateiname);
 	private iDatenzugriff s= new DatenzugriffSerialisiert(this);
 	
 

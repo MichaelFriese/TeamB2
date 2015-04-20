@@ -106,9 +106,9 @@ public class Spielfeld implements Serializable {
 	@Override
 	public String toString() {
 		if (spielfigur == null)
-			return this.getID() + "_" + this.getFarbe() + "_null";
+			return this.getID() + "_" + this.getFarbe() + "_null" +"\n";
 		else
 			return this.getID() + "_" + this.getFarbe() + "_"
-					+ spielfigur.toString();
+					+ spielfigur.toString()+ "\n";
 	}
 }

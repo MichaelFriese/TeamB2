@@ -11,13 +11,14 @@ public class SpielTestSpeichern {
 	public static void main(String[] args) throws IOException {
 		
 		iBediener s = new Spiel ();
-		s.SpielerHinzufuegen("Ki", "red", "aggressiv");
+//		s.SpielerHinzufuegen("Ki", "red", "aggressiv");
 //		s.SpielerHinzufuegen("Ki2", "Blue", "defensiv");
 		s.SpielerHinzufuegen("Rosa", "red",null);
-	//	s.SpielerHinzufuegen("Helmut", "blue",null);
-	//	s.SpielerHinzufuegen("Reiner", "Green",null);
-	//	s.SpielerHinzufuegen("Ole", "Yellow",null);
-	//	s.initSpiel();
+		
+		s.SpielerHinzufuegen("Helmut", "blue",null);
+		s.SpielerHinzufuegen("Reiner", "Green",null);
+		s.SpielerHinzufuegen("Ole", "Yellow",null);
+		s.initSpiel();
 //		s.zugDurchfuehren(1);
 //		s.zugDurchfuehren(1);
 //		s.zugDurchfuehren(1);
@@ -31,7 +32,7 @@ public class SpielTestSpeichern {
 		
 		
 		
-		s.initTestSpiel();
+//		s.initTestSpiel();
 //		s.initTestSpielZugDefensiv();
 //		s.initTestSpielZugAggressiv();
 
@@ -39,10 +40,15 @@ public class SpielTestSpeichern {
 		//DatenzugriffSerialisiert speichernSerialisiert = new DatenzugriffSerialisiert((Spiel) s);
 		//speichernSerialisiert.speichern();
 		
-		DatenzugriffCSV speichernCSV = new DatenzugriffCSV ((Spiel) s);
+		DatenzugriffCSV speichernCSV = new DatenzugriffCSV ((Spiel) s,"Versuch4");
 		speichernCSV.speichern();
-	
+//		DatenzugriffCSV ladenCSV = new DatenzugriffCSV((Spiel)s,"Versuch3");
+//		ladenCSV.laden();
+//		s.zugDurchfuehren(2);
+//		s.zugDurchfuehren(1);
 		
+		
+//		speichernCSV.speichern();
 		
 		
 		
