@@ -6,11 +6,16 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.io.Serializable;
 
 import frontend.iDatenzugriff;
 
-public class DatenzugriffCSV implements iDatenzugriff {
+public class DatenzugriffCSV implements iDatenzugriff, Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private Spiel spiel;
 	private Spieler spieler;
 	private String dateiname;
@@ -24,7 +29,7 @@ public class DatenzugriffCSV implements iDatenzugriff {
 		this.dateiname=dateiname;
 	}
 	@Override
-	public void speichern(String dateiname,Object o) throws IOException {
+	public void speichern(String dateiname, String dateiende, Object o) throws IOException {
 		
 		PrintWriter pw = null;
 		try {

@@ -406,17 +406,14 @@ public class Spiel implements iBediener, Serializable {
 	@Override
 	public Object laden(String dateiname, String dateiende) {
 		if (dateiende.equals("csv")) {
-			this.brett = new Spielbrett();
-			
+//			this.brett = new Spielbrett();
 			spieler.clear();
 			String t = (String) d.laden(dateiname);
 			String[] x = t.split("\n");
 			String[] a = x[0].split("_");
 			int i = 1;
-			System.out.println(a[0]);
 			
 			while (a[0].equals("Spieler")) {
-				System.out.println(a[1] + "--" + a[2] + "--" + a[3]);
 				SpielerHinzufuegen(a[1], a[2], a[3]);
 				
 				a = x[i].split("_");
@@ -434,10 +431,6 @@ public class Spiel implements iBediener, Serializable {
 					int id = -1;
 					System.out.println(this.getSpieler().size());
 					for (Spieler search : this.getSpieler()) {
-						System.out.println(">> "+search.getFarbe());
-						System.out.println(">> "+a[4]);
-						System.out.println(search.getFarbe()==FarbEnum.RED);
-						System.out.println(a[4].equals("RED"));
 						if (   (search.getFarbe()==FarbEnum.RED && a[4].equals("RED"))
 							|| (search.getFarbe()==FarbEnum.BLUE && a[4].equals("BLUE"))
 							|| (search.getFarbe()==FarbEnum.GREEN && a[4].equals("GREEN"))
@@ -457,10 +450,6 @@ public class Spiel implements iBediener, Serializable {
 					} else if (a[2].contains("4")) {
 						id = 4;
 					}
-					System.out.println();
-					System.out.println(spieler);
-					System.out.println(id);
-					System.out.println(spieler.getSpielfigur(id));
 					spieler.getSpielfigur(id).getSpielfeld()
 							.setSpielfigur(null);
 					// BATT WARNT: funktioniert nicht mit Endfeldern!!!!
@@ -477,7 +466,7 @@ public class Spiel implements iBediener, Serializable {
 		} else {
 			if (dateiende.equals("ser")) {
 
-				return s.laden(dateiname);
+				return s.laden(dateiende);
 
 			}
 		}
@@ -488,7 +477,6 @@ public class Spiel implements iBediener, Serializable {
 	@Override
 	public void Speichern(String dateiname, String dateiende)
 			throws IOException {
-		// PrintWriter pw = null;
 		if (dateiende.equals("csv")) {
 			String s = "";
 			for (Spieler spieler:this.getSpieler()) {
@@ -564,16 +552,19 @@ public class Spiel implements iBediener, Serializable {
 
 			}
 			
-			d.speichern(dateiname, s); // hier den zu speichernden String
+			d.speichern(dateiname, dateiende, s); // hier den zu speichernden String
 			// reinhauen, ist ja auch object
 
 		} else {
 			if (dateiende.equals("ser")) {
-
-				s.speichern(dateiname, this);
+				s.speichern(dateiname, dateiende, this);
 			}
 		}
 
+	}
+
+	public String getDateiname() {
+		return dateiname;
 	}
 
 }

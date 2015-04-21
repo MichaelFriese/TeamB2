@@ -7,14 +7,19 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.PrintWriter;
+import java.io.Serializable;
 
 import Test.Syso;
 import Test.syso2;
 import frontend.iBediener;
 import frontend.iDatenzugriff;
 
-public class DatenzugriffSerialisiert implements iDatenzugriff {
+public class DatenzugriffSerialisiert implements iDatenzugriff, Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private Spiel spiel;
 
 //	public DatenzugriffSerialisiert(Spiel spiel) {
@@ -22,11 +27,11 @@ public class DatenzugriffSerialisiert implements iDatenzugriff {
 //	}
 
 	@Override
-	public void speichern(String dateiname,Object o) {
+	public void speichern(String dateiname, String dateiende, Object o) {
 		ObjectOutputStream oos = null;
 		try {
-			oos = new ObjectOutputStream(new FileOutputStream("out.ser"));
-			oos.writeObject(spiel);
+			oos = new ObjectOutputStream(new FileOutputStream( dateiname+".ser"));
+			oos.writeObject(o);
 		} catch (FileNotFoundException e) {
 			System.err.println("konnte 'out.ser' nicht erzeugen");
 		} catch (IOException e) {
@@ -48,10 +53,11 @@ public class DatenzugriffSerialisiert implements iDatenzugriff {
 		Object s=null;
 		ObjectInputStream ois = null;
 		try{
-			ois = new ObjectInputStream ( new FileInputStream ("out.ser"));
+			ois = new ObjectInputStream ( new FileInputStream (dateiname+".ser"));
 		
 			try {
 				s = ois.readObject();
+				System.out.println("Spiel geladen");
 				return s;
 				
 			} catch (ClassNotFoundException e) {

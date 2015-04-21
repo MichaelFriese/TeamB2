@@ -11,46 +11,20 @@ public class SpielTestSpeichern {
 	public static void main(String[] args) throws IOException {
 		
 		iBediener s = new Spiel ();
-//		s.SpielerHinzufuegen("Ki", "red", "aggressiv");
-//		s.SpielerHinzufuegen("Ki2", "Blue", "defensiv");
+
 		s.SpielerHinzufuegen("Rosa", "red",null);
 		
 		s.SpielerHinzufuegen("Helmut", "blue",null);
 		s.SpielerHinzufuegen("Reiner", "Green",null);
 		s.SpielerHinzufuegen("Ole", "Yellow",null);
 		s.initSpiel();
-//		s.zugDurchfuehren(1);
-//		s.zugDurchfuehren(1);
-//		s.zugDurchfuehren(1);
-//		s.zugDurchfuehren(1);
-//		s.zugDurchfuehren(1);
-//		s.zugDurchfuehren(1);
-//		s.zugDurchfuehren(1);
-//		s.zugDurchfuehren(1);
-//		s.zugDurchfuehrenSchmeissenTest(1);
-//		s.zugDurchfuehrenEndfeldTest(1);
-		
-		
-		
-//		s.initTestSpiel();
-//		s.initTestSpielZugDefensiv();
-//		s.initTestSpielZugAggressiv();
+	
+		s.Speichern("CSVFinal", "csv");
+//		DatenzugriffSerialisiert speichernSer= new DatenzugriffSerialisiert((Spiel) s);
+		s.Speichern("supertest5", "ser");
+//		s.Speichern("Supertest2", "csv");
+//		s.Speichern("supertest4", "ser", s);
 
-		
-		//DatenzugriffSerialisiert speichernSerialisiert = new DatenzugriffSerialisiert((Spiel) s);
-		//speichernSerialisiert.speichern();
-		
-//		DatenzugriffCSV speichernCSV = new DatenzugriffCSV ((Spiel) s,"Versuch");
-//		speichernCSV.speichern(s.toString());
-//		DatenzugriffCSV ladenCSV = new DatenzugriffCSV((Spiel)s,"Versuch4");
-		s.zugDurchfuehren(2);
-		s.Speichern("Supertest", "csv");
-//		ladenCSV.laden();
-//		s.zugDurchfuehren(2);
-//		s.zugDurchfuehren(1);
-		
-		
-//		speichernCSV.speichern();
 		
 		
 		

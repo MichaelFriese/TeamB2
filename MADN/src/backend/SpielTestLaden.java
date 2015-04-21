@@ -1,48 +1,21 @@
 package backend;
 
 import frontend.iBediener;
+import frontend.iDatenzugriff;
 
 public class SpielTestLaden {
 
 	public static void main(String[] args) {
 		iBediener s = new Spiel ();
-//		s.SpielerHinzufuegen("Ki", "red", "aggressiv");
-//		s.SpielerHinzufuegen("Ki2", "Blue", "defensiv");
-//		s.SpielerHinzufuegen("Rosa", "red",null);
-//		s.SpielerHinzufuegen("Helmut", "blue",null);
-//		s.SpielerHinzufuegen("Reiner", "Green",null);
-//		s.SpielerHinzufuegen("Ole", "Yellow",null);
-//		s.initSpiel();
-//		s.zugDurchfuehren(1);
-//		s.zugDurchfuehren(1);
-//		s.zugDurchfuehren(1);
-//		s.zugDurchfuehren(1);
-//		s.zugDurchfuehren(1);
-//		s.zugDurchfuehren(1);
-//		s.zugDurchfuehren(1);
-//		s.zugDurchfuehren(1);
-//		s.zugDurchfuehrenSchmeissenTest(1);
-//		s.zugDurchfuehrenEndfeldTest(1);
+//		s.laden("Supertest2","csv");
 		
-		
-		
-//		s.initSpiel();
-//		s.initTestSpielZugDefensiv();
-//		s.initTestSpielZugAggressiv();
-
-		
-//		DatenzugriffSerialisiert ladenTest = new DatenzugriffSerialisiert((Spiel) s);
-//		System.out.println("Spielstand geladen");
-//		ladenTest.laden();
+//		iDatenzugriff speicherSer = new DatenzugriffSerialisiert();
+//		s=(Spiel)speicherSer.laden("supertest5");
 //		s.zugDurchfuehren(2);
-//		
-//		DatenzugriffCSV ladenCSV = new DatenzugriffCSV((Spiel)s, "Versuch");
-//		s.zugDurchfuehren(1);
-//		s.zugDurchfuehren(1);
-//		s.zugDurchfuehren(1);
-		s.laden("Supertest","csv");
-		System.out.println(s);
-		s.zugDurchfuehren(2);
+		
+		s.laden("CSVFinal", "csv");
+		s.zugDurchfuehren(3);
+		
 		
 		
 	}
