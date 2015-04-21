@@ -471,7 +471,6 @@ public class Spiel implements iBediener, Serializable {
 					}
 					spieler.getSpielfigur(id).getSpielfeld()
 							.setSpielfigur(null);
-					// BATT WARNT: funktioniert nicht mit Endfeldern!!!!
 					spieler.getSpielfigur(id).setSpielfeld(
 							this.getBrett().getSpielbrett()[Integer
 									.parseInt(a[0])].getFelder()[0]);
@@ -571,8 +570,7 @@ public class Spiel implements iBediener, Serializable {
 
 			}
 			
-			d.speichern(dateiname, dateiende, s); // hier den zu speichernden String
-			// reinhauen, ist ja auch object
+			d.speichern(dateiname, dateiende, s); 
 
 		} else {
 			if (dateiende.equals("ser")) {
