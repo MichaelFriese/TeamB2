@@ -14,7 +14,9 @@ public class SpielTestLaden {
 //		s.zugDurchfuehren(2);
 		
 		s.laden("CSVFinal", "csv");
-		s.zugDurchfuehren(3);
+	
+		
+		
 		
 		
 		

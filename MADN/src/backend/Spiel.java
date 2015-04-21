@@ -422,6 +422,25 @@ public class Spiel implements iBediener, Serializable {
 			initSpiel();
 			//hier Spieler am Zug einbauen!!
 //			i++;
+			if(a[0].contains("AmZug")){
+				System.err.println(a[3]);
+				for (Spieler searched : this.getSpieler()) {
+			
+					if((searched.getFarbe()==FarbEnum.RED && a[3].equals("RED"))){
+					setAmZug(searched);
+					}
+					if((searched.getFarbe()==FarbEnum.BLUE && a[3].equals("BLUE"))){
+						setAmZug(searched);
+					}
+					if((searched.getFarbe()==FarbEnum.GREEN && a[3].equals("GREEN"))){
+						setAmZug(searched);
+					}
+					if((searched.getFarbe()==FarbEnum.YELLOW && a[3].equals("YELLOW"))){
+						setAmZug(searched);			
+					}
+						}				
+			System.err.println(getAmZug());
+			}
 			a = x[i].split("_");
 			//hier SPieler am zug einbauen!!
 			
