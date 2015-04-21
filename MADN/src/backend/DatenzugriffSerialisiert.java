@@ -17,12 +17,12 @@ public class DatenzugriffSerialisiert implements iDatenzugriff {
 
 	private Spiel spiel;
 
-	public DatenzugriffSerialisiert(Spiel spiel) {
-		this.spiel = spiel;
-	}
+//	public DatenzugriffSerialisiert(Spiel spiel) {
+//		this.spiel = spiel;
+//	}
 
 	@Override
-	public void speichern(Object o) {
+	public void speichern(String dateiname,Object o) {
 		ObjectOutputStream oos = null;
 		try {
 			oos = new ObjectOutputStream(new FileOutputStream("out.ser"));
@@ -44,7 +44,7 @@ public class DatenzugriffSerialisiert implements iDatenzugriff {
 	
 	
 	@Override
-	public Object laden() {
+	public Object laden(String dateiname) {
 		Object s=null;
 		ObjectInputStream ois = null;
 		try{

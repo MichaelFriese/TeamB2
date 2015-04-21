@@ -8,10 +8,10 @@ public class SpielTestLaden {
 		iBediener s = new Spiel ();
 //		s.SpielerHinzufuegen("Ki", "red", "aggressiv");
 //		s.SpielerHinzufuegen("Ki2", "Blue", "defensiv");
-		s.SpielerHinzufuegen("Rosa", "red",null);
-		s.SpielerHinzufuegen("Helmut", "blue",null);
-		s.SpielerHinzufuegen("Reiner", "Green",null);
-		s.SpielerHinzufuegen("Ole", "Yellow",null);
+//		s.SpielerHinzufuegen("Rosa", "red",null);
+//		s.SpielerHinzufuegen("Helmut", "blue",null);
+//		s.SpielerHinzufuegen("Reiner", "Green",null);
+//		s.SpielerHinzufuegen("Ole", "Yellow",null);
 //		s.initSpiel();
 //		s.zugDurchfuehren(1);
 //		s.zugDurchfuehren(1);
@@ -26,7 +26,7 @@ public class SpielTestLaden {
 		
 		
 		
-		s.initTestSpiel();
+//		s.initSpiel();
 //		s.initTestSpielZugDefensiv();
 //		s.initTestSpielZugAggressiv();
 
@@ -36,13 +36,13 @@ public class SpielTestLaden {
 //		ladenTest.laden();
 //		s.zugDurchfuehren(2);
 //		
-		DatenzugriffCSV ladenCSV = new DatenzugriffCSV((Spiel)s, "Versuch4");
+//		DatenzugriffCSV ladenCSV = new DatenzugriffCSV((Spiel)s, "Versuch");
 //		s.zugDurchfuehren(1);
 //		s.zugDurchfuehren(1);
 //		s.zugDurchfuehren(1);
-		ladenCSV.laden();
-		
-		s.zugDurchfuehren(3);
+		s.laden("Supertest","csv");
+		System.out.println(s);
+		s.zugDurchfuehren(2);
 		
 		
 	}

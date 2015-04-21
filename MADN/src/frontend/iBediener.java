@@ -25,8 +25,8 @@ public interface iBediener {
 	void initTestSpielZugAggressiv();
 	void initTestSpielZugDefensiv();
 
-	Object laden(String dateiende);
-	void Speichern(String dateiende) throws IOException;
+	Object laden(String dateiname, String dateiende);
+	void Speichern(String dateiname, String dateiende) throws IOException;
 	
 	
 	

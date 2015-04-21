@@ -15,21 +15,21 @@ public class DatenzugriffCSV implements iDatenzugriff {
 	private Spieler spieler;
 	private String dateiname;
 
-	public DatenzugriffCSV(Spiel spiel, String dateiname) {
-		this.spiel = spiel;
-		setDateiname(dateiname);
-	}
+//	public DatenzugriffCSV() {
+//		this.spiel = spiel;
+//		setDateiname(dateiname);
+//	}
 
 	public void setDateiname(String dateiname){
 		this.dateiname=dateiname;
 	}
 	@Override
-	public void speichern(Object o) throws IOException {
+	public void speichern(String dateiname,Object o) throws IOException {
 		
 		PrintWriter pw = null;
 		try {
 
-			pw = new PrintWriter(new FileWriter(this.dateiname+".csv"));
+			pw = new PrintWriter(new FileWriter(dateiname+".csv"));
 			
 			String s = null;
 			try{
@@ -52,14 +52,14 @@ public class DatenzugriffCSV implements iDatenzugriff {
 	
 	
 	@Override
-	public Object laden() {
+	public Object laden(String dateiname) {
 		BufferedReader reader = null; 
 		try{
 			reader = new BufferedReader(new FileReader(dateiname+".csv"));
 			String s = reader.readLine();
 			String erg = "";
 			while ( s != null){
-				erg += s;
+				erg += s+"\n";
 				s= reader.readLine();
 			} return erg;
 			
