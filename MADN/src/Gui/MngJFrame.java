@@ -1,90 +1,113 @@
 package Gui;
 
 import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Component;
-import java.awt.Dimension;
-import java.awt.FlowLayout;
-import java.awt.Font;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
 import java.awt.GridLayout;
-import java.awt.image.BufferedImage;
-import java.io.File;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.IOException;
-
-import javax.imageio.ImageIO;
-import javax.swing.BoxLayout;
-import javax.swing.Icon;
-import javax.swing.ImageIcon;
+import javax.swing.ButtonGroup;
 import javax.swing.JButton;
-import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
-import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
-import javax.swing.JSpinner;
-import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
-import javax.swing.SpinnerListModel;
-import javax.swing.SwingConstants;
 
-public class MngJFrame extends JFrame {
+import backend.Spiel;
+import frontend.iBediener;
 
-	private JLabel lblHeader, lblCenter;
-	private JButton würfeln;
-	private JPanel pnlCenter, pnlNorth, pnlEast, pnlWest, pnlSouth;
-	private JTextArea ausgabe;
+public class MngJFrame extends JFrame implements ActionListener{
+	private static final long serialVersionUID = 1L;
 
+	private iBediener s;
+	
+	private JFrame dialogfenster = new JFrame("Startfenster");
+	private JTextField namen[] = new JTextField[4];
+	private JComboBox farbwahl[] = new JComboBox[4];
+	private JRadioButton kiAgg[] = new JRadioButton[4];
+	private JRadioButton kiDef[] = new JRadioButton[4];
+	private ButtonGroup group[] = new ButtonGroup[4];
+	private JComboBox kiwahl[] = new JComboBox[4];
+	
 	public MngJFrame() throws IOException {
 
 		setTitle("Mensch ärger dich nicht");
-
+		s = new Spiel();
 	    
 	}
 
 
 	
 	public void dialogfenster(){
-//		JFrame dialogfenster = new JFrame("Startfenster");
 		JPanel panel = new JPanel();
-		setSize(500,500);
-		add(panel);
+		dialogfenster.setSize(500,500);
+		dialogfenster.add(panel);
 		panel.setLayout(new GridLayout(6,3));
 		
 		JLabel name = new JLabel("Name");
 		JLabel farbe = new JLabel("Farbe");
-		JLabel ki = new JLabel("KI");
+		JLabel ki1 = new JLabel("KI/Mensch");
 		panel.add(name);
 		panel.add(farbe);
-		panel.add(ki);
-		
-		JTextField namen[] = new JTextField[4];
-		JComboBox farbwahl[] = new JComboBox[4];
-		JRadioButton kiauswahl[] = new JRadioButton[4];
+		panel.add(ki1);
+//		panel.add(ki2);
+	
 		String f[] = {"Red", "Yellow", "Blue", "Green"};
+		String k[] = {"Mensch", "KI Aggressiv", "KI Defensiv"};
 		for(int i=0; i< namen.length; i++){
 			namen[i] = new JTextField();
 			panel.add(namen[i]);
 			farbwahl[i] = new JComboBox(f);
 			panel.add(farbwahl[i]);
-			kiauswahl[i] = new JRadioButton();
-			panel.add(kiauswahl[i]);
+			
+			kiwahl[i] = new JComboBox(k);
+			panel.add(kiwahl[i]);
+			
+//			kiAgg[i] = new JRadioButton();
+//			kiDef[i] = new JRadioButton();
+//			group[i] = new ButtonGroup();
+//			group[i].add(kiAgg[i]);
+//			group[i].add(kiDef[i]);
+//			panel.add(kiAgg[i]);
+//			panel.add(kiDef[i]);
 		}
 		
 		JButton ok = new JButton("Spiel starten");
 		panel.add(ok);
 		
-		setAlwaysOnTop(true);
-		setContentPane(panel);
-		setDefaultCloseOperation(EXIT_ON_CLOSE);
+		ok.addActionListener(this);
+		
+		dialogfenster.setAlwaysOnTop(true);
+		dialogfenster.setContentPane(panel);
+		dialogfenster.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		panel.paintComponents(panel.getGraphics());
-		setVisible(true);
-//		dialogfenster.pack();
+		dialogfenster.setVisible(true);
+		dialogfenster.pack();
+	}
+	
+	public void actionPerformed(ActionEvent e){
+		String label = e.getActionCommand();
+		if(label.equals("Spiel starten")){
+			for(int i=0; i<4; i++){
+				if(!namen[i].getText().equals("")){
+					if(kiwahl[i].getSelectedItem().toString().equals("KI Aggressiv")){
+						s.SpielerHinzufuegen(namen[i].getText(), farbwahl[i].getSelectedItem().toString(), "aggressiv");
+					}else if(kiwahl[i].getSelectedItem().toString().equals("KI Defensiv")){
+						s.SpielerHinzufuegen(namen[i].getText(), farbwahl[i].getSelectedItem().toString(), "defensiv");
+					}
+					else{
+						s.SpielerHinzufuegen(namen[i].getText(), farbwahl[i].getSelectedItem().toString(), "null");
+					}
+				}
+			}
+			s.initSpiel();
+//			dialogfenster.setVisible(false);
+			dialogfenster.dispose();
+			spiel();
+		}
 	}
 	
 	public void spiel(){
@@ -129,9 +152,7 @@ public class MngJFrame extends JFrame {
 		JButton b2 = new JButton("bla");
 		p1.add(b2, BorderLayout.EAST);
 		
-		
-//		createWidgets();
-//		addWidgets();
+
 		setSize(1000,800);
 		setResizable(false);
 		setVisible(true);
