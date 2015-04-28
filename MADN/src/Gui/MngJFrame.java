@@ -1,28 +1,58 @@
 package Gui;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
+import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import java.awt.GridLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.Image;
+import java.awt.MediaTracker;
+import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
+
+import javax.imageio.ImageIO;
+import javax.swing.BoxLayout;
 import javax.swing.ButtonGroup;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
+import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
+import javax.swing.JSpinner;
+import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import javax.swing.SpinnerListModel;
+import javax.swing.SwingConstants;
 
 import backend.Spiel;
 import frontend.iBediener;
 
-public class MngJFrame extends JFrame implements ActionListener{
-	private static final long serialVersionUID = 1L;
 
-	private iBediener s;
+public class MngJFrame extends JFrame {
+
+	private JLabel lblHeader, lblCenter;
+	private JButton wuerfeln;
+	private JPanel pnlCenter, pnlNorth, pnlEast, pnlWest, pnlSouth;
+	private JTextArea ausgabe;
+	private JButton laden;
+	private JButton ueber;
+	private JButton beenden;
+	private JButton start;
+	private JButton ok;
+	private eventHandling e;
 	
 	private JFrame dialogfenster = new JFrame("Startfenster");
 	private JTextField namen[] = new JTextField[4];
@@ -32,16 +62,103 @@ public class MngJFrame extends JFrame implements ActionListener{
 	private ButtonGroup group[] = new ButtonGroup[4];
 	private JComboBox kiwahl[] = new JComboBox[4];
 	
-	public MngJFrame() throws IOException {
-
+	private iBediener s;
+	
+	public MngJFrame() {
+		
+		this.e= new eventHandling(this);
 		setTitle("Mensch ärger dich nicht");
-		s = new Spiel();
+		initComponents();
+		initUI();
+		this.e.setButtonBeenden(beenden);
+		this.e.setButtonLaden(laden);
+		this.e.setButtonStart(start);
+		this.e.setButtonUeber(ueber);
+		this.e.setButtonOk(ok);
+		s= new Spiel();
+//		dialogfenster();
+
 	    
+	}
+	
+	public JFrame getDialogFenster(){
+		return dialogfenster;
+	}
+	public JTextField[] getNamen(){
+		return namen;
+	}
+	public JComboBox[] getFarbe(){
+		return farbwahl;
+	}
+	public JComboBox[] getKI(){
+		return kiwahl;
+	}
+	
+	public iBediener getSpiel(){
+		return s;
+	}
+	private void initUI(){
+		
+		setTitle("Mensch aergere dich nicht");
+		setSize(800,600);
+		setLocationRelativeTo(null);
+		setDefaultCloseOperation(EXIT_ON_CLOSE);
+		
+		JPanel panel3= new JPanel();
+		panel3.setLayout(new FlowLayout());
+		
+		start = new JButton("Start");
+		laden = new JButton("Laden");
+		beenden = new JButton("Beenden");
+		ueber = new JButton("Ueber");
+		
+
+		start.addActionListener(e);
+		laden.addActionListener(e);
+		beenden.addActionListener(e);
+		ueber.addActionListener(e);
+		
+		panel3.add(start,BorderLayout.CENTER);
+		panel3.add(laden,BorderLayout.CENTER);
+		panel3.add(beenden,BorderLayout.CENTER);
+		panel3.add(ueber,BorderLayout.CENTER);
+		getContentPane().add(panel3,BorderLayout.PAGE_END);
+		
+		
+		
+	}
+	
+	private void initComponents(){
+	
+		setContentPane(new JPanel(){
+			/**
+			 * 
+			 */
+			private static final long serialVersionUID = 1L;
+			private Image img;
+			{
+			
+			img= getToolkit().createImage("bgBild.jpg");
+			
+			MediaTracker mt = new MediaTracker(this);
+			mt.addImage(img, 1);
+			try{
+				mt.waitForAll();}
+			catch(Exception e){
+			e.printStackTrace();
+			}
+				
+			}
+			protected void paintComponent(Graphics g){
+				g.drawImage(img,0,0,getWidth(),getHeight(), this);
+		}
+		});
 	}
 
 
 	
 	public void dialogfenster(){
+		
 		JPanel panel = new JPanel();
 		dialogfenster.setSize(500,500);
 		dialogfenster.add(panel);
@@ -78,7 +195,8 @@ public class MngJFrame extends JFrame implements ActionListener{
 		JButton ok = new JButton("Spiel starten");
 		panel.add(ok);
 		
-		ok.addActionListener(this);
+		ok.addActionListener(e);
+		e.setButtonOk(ok);
 		
 		dialogfenster.setAlwaysOnTop(true);
 		dialogfenster.setContentPane(panel);
@@ -88,50 +206,14 @@ public class MngJFrame extends JFrame implements ActionListener{
 		dialogfenster.pack();
 	}
 	
-	public void actionPerformed(ActionEvent e){
-		String label = e.getActionCommand();
-		if(label.equals("Spiel starten")){
-			for(int i=0; i<4; i++){
-				if(!namen[i].getText().equals("")){
-					if(kiwahl[i].getSelectedItem().toString().equals("KI Aggressiv")){
-						s.SpielerHinzufuegen(namen[i].getText(), farbwahl[i].getSelectedItem().toString(), "aggressiv");
-					}else if(kiwahl[i].getSelectedItem().toString().equals("KI Defensiv")){
-						s.SpielerHinzufuegen(namen[i].getText(), farbwahl[i].getSelectedItem().toString(), "defensiv");
-					}
-					else{
-						s.SpielerHinzufuegen(namen[i].getText(), farbwahl[i].getSelectedItem().toString(), "null");
-					}
-				}
-			}
-			s.initSpiel();
-//			dialogfenster.setVisible(false);
-			dialogfenster.dispose();
-			spiel();
-		}
-	}
-	
 	public void spiel(){
+		JFrame fmSpiel = new JFrame();
 		JPanel p1 = new JPanel();
-		add(p1);
+		fmSpiel.add(p1);
 		p1.setLayout(new BorderLayout());
-		
-		
-
-//		JTable table = new JTable( 12, 12 );
-//		p1.add( new JScrollPane( table ), BorderLayout.CENTER );
-//		GridBagLayout gbl = new GridBagLayout();
-//		p1.add(gbl, BorderLayout.CENTER);
+			
 		JPanel pCen = new JPanel();
 		p1.add(pCen, BorderLayout.CENTER);
-		
-//		pCen.setLayout(new GridBagLayout());
-//		GridBagConstraints c=new GridBagConstraints();
-//		
-//		c.fill=GridBagConstraints.HORIZONTAL;
-//	    c.gridx=0; c.gridy=0; //c.weightx=0.5;
-//	    pCen.add(testbutton,c);
-//	    c.gridx=1; c.gridy=1; //c.weightx=0.5;
-//	    pCen.add(testbutton2,c);
 		
 		pCen.setLayout(new GridLayout(12,12));
 		JButton array[] = new JButton[144];
@@ -152,11 +234,15 @@ public class MngJFrame extends JFrame implements ActionListener{
 		JButton b2 = new JButton("bla");
 		p1.add(b2, BorderLayout.EAST);
 		
-
-		setSize(1000,800);
-		setResizable(false);
-		setVisible(true);
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		fmSpiel.setSize(1000,800);
+		fmSpiel.setResizable(false);
+		fmSpiel.setVisible(true);
+		fmSpiel.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
-
+	public static void main(String[]args){
+		
+		MngJFrame main = new MngJFrame();
+		main.setVisible(true);
+	
+		}
 }
