@@ -8,6 +8,7 @@ import java.util.ArrayList;
 
 import frontend.iBediener;
 import frontend.iDatenzugriff;
+import Gui.MngJFrame;
 
 /**
  * Spiel Klasse dient zum "starten" des Spiels
@@ -23,6 +24,7 @@ public class Spiel implements iBediener, Serializable {
 	private Spieler amZug;
 	private Regelwerk regelwerk;
 	private String dateiname;
+	private MngJFrame gui;
 
 	private iDatenzugriff d = new DatenzugriffCSV();
 	private iDatenzugriff s = new DatenzugriffSerialisiert();
@@ -35,6 +37,11 @@ public class Spiel implements iBediener, Serializable {
 		this.brett = new Spielbrett();
 		this.regelwerk = new Regelwerk(this);
 		spieler = new ArrayList<Spieler>();
+	}
+	
+	public Spiel(MngJFrame gui){
+		this();
+		this.gui = gui;
 	}
 
 	/**
@@ -79,10 +86,13 @@ public class Spiel implements iBediener, Serializable {
 	public void setAmZug(Spieler amZug) {
 		this.amZug = amZug;
 		System.out.println(getAmZug().toString() + " ist am Zug");
+		gui.getAusgabe().setText(gui.getAusgabe().getText()+"\n"+getAmZug().toString() + " ist am Zug");
 		// getAmZug().getWuerfel().wuerfeln();
 		// getAmZug().getWuerfel().wurf6();
 		// Zum Testen wird nur 2 gewuerfelt:
 		getAmZug().getWuerfel().wuerfel2();
+		gui.getAusgabe().setText(gui.getAusgabe().getText()+"\n"+getAmZug().getWuerfel().getErgebnis()+" gewuerfelt");
+		
 
 		if (amZug.getKi() != null) {
 			amZug.getKi().kiZug();
@@ -124,8 +134,7 @@ public class Spiel implements iBediener, Serializable {
 				break;
 
 			default:
-				throw new RuntimeException(
-						"Entweder `AGGRESSIV' oder `DEFENSIV' ");
+				throw new RuntimeException("Entweder `AGGRESSIV' oder `DEFENSIV' ");
 			}
 		}
 
@@ -169,34 +178,26 @@ public class Spiel implements iBediener, Serializable {
 			switch (farbe) {
 			case RED:
 				for (int i = 0; i < s.getSpielfiguren().length; i++) {
-					s.getSpielfigur(i).setSpielfeld(
-							brett.getSpielbrett()[0].getFelder()[i + 1]);
-					brett.getSpielbrett()[0].getFelder()[i + 1].setSpielfigur(s
-							.getSpielfigur(i + 1));
+					s.getSpielfigur(i).setSpielfeld(brett.getSpielbrett()[0].getFelder()[i + 1]);
+					brett.getSpielbrett()[0].getFelder()[i + 1].setSpielfigur(s.getSpielfigur(i + 1));
 				}
 				break;
 			case BLUE:
 				for (int i = 0; i < s.getSpielfiguren().length; i++) {
-					s.getSpielfigur(i).setSpielfeld(
-							brett.getSpielbrett()[10].getFelder()[i + 1]);
-					brett.getSpielbrett()[10].getFelder()[i + 1]
-							.setSpielfigur(s.getSpielfigur(i + 1));
+					s.getSpielfigur(i).setSpielfeld(brett.getSpielbrett()[10].getFelder()[i + 1]);
+					brett.getSpielbrett()[10].getFelder()[i + 1].setSpielfigur(s.getSpielfigur(i + 1));
 				}
 				break;
 			case GREEN:
 				for (int i = 0; i < s.getSpielfiguren().length; i++) {
-					s.getSpielfigur(i).setSpielfeld(
-							brett.getSpielbrett()[20].getFelder()[i + 1]);
-					brett.getSpielbrett()[20].getFelder()[i + 1]
-							.setSpielfigur(s.getSpielfigur(i + 1));
+					s.getSpielfigur(i).setSpielfeld(brett.getSpielbrett()[20].getFelder()[i + 1]);
+					brett.getSpielbrett()[20].getFelder()[i + 1].setSpielfigur(s.getSpielfigur(i + 1));
 				}
 				break;
 			case YELLOW:
 				for (int i = 0; i < s.getSpielfiguren().length; i++) {
-					s.getSpielfigur(i).setSpielfeld(
-							brett.getSpielbrett()[30].getFelder()[i + 1]);
-					brett.getSpielbrett()[30].getFelder()[i + 1]
-							.setSpielfigur(s.getSpielfigur(i + 1));
+					s.getSpielfigur(i).setSpielfeld(brett.getSpielbrett()[30].getFelder()[i + 1]);
+					brett.getSpielbrett()[30].getFelder()[i + 1].setSpielfigur(s.getSpielfigur(i + 1));
 				}
 				break;
 			}
@@ -212,37 +213,25 @@ public class Spiel implements iBediener, Serializable {
 			FarbEnum farbe = s.getFarbe();
 			switch (farbe) {
 			case RED:
-				s.getSpielfigurNeu(0).setSpielfeld(
-						brett.getSpielbrett()[0].getFelder()[1]);
-				brett.getSpielbrett()[0].getFelder()[1].setSpielfigur(s
-						.getSpielfigurNeu(0));
+				s.getSpielfigurNeu(0).setSpielfeld(brett.getSpielbrett()[0].getFelder()[1]);
+				brett.getSpielbrett()[0].getFelder()[1].setSpielfigur(s.getSpielfigurNeu(0));
 
-				s.getSpielfigurNeu(1).setSpielfeld(
-						brett.getSpielbrett()[39].getFelder()[0]);
-				brett.getSpielbrett()[39].getFelder()[0].setSpielfigur(s
-						.getSpielfigurNeu(1));
+				s.getSpielfigurNeu(1).setSpielfeld(brett.getSpielbrett()[39].getFelder()[0]);
+				brett.getSpielbrett()[39].getFelder()[0].setSpielfigur(s.getSpielfigurNeu(1));
 
-				s.getSpielfigurNeu(2).setSpielfeld(
-						brett.getSpielbrett()[3].getFelder()[0]);
-				brett.getSpielbrett()[3].getFelder()[0].setSpielfigur(s
-						.getSpielfigurNeu(2));
+				s.getSpielfigurNeu(2).setSpielfeld(brett.getSpielbrett()[3].getFelder()[0]);
+				brett.getSpielbrett()[3].getFelder()[0].setSpielfigur(s.getSpielfigurNeu(2));
 
-				s.getSpielfigurNeu(3).setSpielfeld(
-						brett.getSpielbrett()[20].getFelder()[0]);
-				brett.getSpielbrett()[20].getFelder()[0].setSpielfigur(s
-						.getSpielfigurNeu(3));
+				s.getSpielfigurNeu(3).setSpielfeld(brett.getSpielbrett()[20].getFelder()[0]);
+				brett.getSpielbrett()[20].getFelder()[0].setSpielfigur(s.getSpielfigurNeu(3));
 				break;
 			case GREEN:
 				for (int i = 1; i < s.getSpielfiguren().length; i++) {
-					s.getSpielfigur(i).setSpielfeld(
-							brett.getSpielbrett()[20].getFelder()[i + 1]);
-					brett.getSpielbrett()[20].getFelder()[i + 1]
-							.setSpielfigur(s.getSpielfigur(i + 1));
+					s.getSpielfigur(i).setSpielfeld(brett.getSpielbrett()[20].getFelder()[i + 1]);
+					brett.getSpielbrett()[20].getFelder()[i + 1].setSpielfigur(s.getSpielfigur(i + 1));
 				}
-				s.getSpielfigur(0).setSpielfeld(
-						brett.getSpielbrett()[5].getFelder()[0]);
-				brett.getSpielbrett()[5].getFelder()[0].setSpielfigur(s
-						.getSpielfigur(0));
+				s.getSpielfigur(0).setSpielfeld(brett.getSpielbrett()[5].getFelder()[0]);
+				brett.getSpielbrett()[5].getFelder()[0].setSpielfigur(s.getSpielfigur(0));
 				break;
 			}
 		}
@@ -256,32 +245,22 @@ public class Spiel implements iBediener, Serializable {
 			FarbEnum farbe = s.getFarbe();
 			switch (farbe) {
 			case RED:
-				s.getSpielfigurNeu(0).setSpielfeld(
-						brett.getSpielbrett()[0].getFelder()[1]);
-				brett.getSpielbrett()[0].getFelder()[1].setSpielfigur(s
-						.getSpielfigurNeu(0));
+				s.getSpielfigurNeu(0).setSpielfeld(brett.getSpielbrett()[0].getFelder()[1]);
+				brett.getSpielbrett()[0].getFelder()[1].setSpielfigur(s.getSpielfigurNeu(0));
 
-				s.getSpielfigurNeu(1).setSpielfeld(
-						brett.getSpielbrett()[39].getFelder()[0]);
-				brett.getSpielbrett()[39].getFelder()[0].setSpielfigur(s
-						.getSpielfigurNeu(1));
+				s.getSpielfigurNeu(1).setSpielfeld(brett.getSpielbrett()[39].getFelder()[0]);
+				brett.getSpielbrett()[39].getFelder()[0].setSpielfigur(s.getSpielfigurNeu(1));
 
-				s.getSpielfigurNeu(2).setSpielfeld(
-						brett.getSpielbrett()[3].getFelder()[0]);
-				brett.getSpielbrett()[5].getFelder()[0].setSpielfigur(s
-						.getSpielfigurNeu(2));
+				s.getSpielfigurNeu(2).setSpielfeld(brett.getSpielbrett()[3].getFelder()[0]);
+				brett.getSpielbrett()[5].getFelder()[0].setSpielfigur(s.getSpielfigurNeu(2));
 
-				s.getSpielfigurNeu(3).setSpielfeld(
-						brett.getSpielbrett()[20].getFelder()[0]);
-				brett.getSpielbrett()[20].getFelder()[0].setSpielfigur(s
-						.getSpielfigurNeu(3));
+				s.getSpielfigurNeu(3).setSpielfeld(brett.getSpielbrett()[20].getFelder()[0]);
+				brett.getSpielbrett()[20].getFelder()[0].setSpielfigur(s.getSpielfigurNeu(3));
 				break;
 			case GREEN:
 				for (int i = 0; i < s.getSpielfiguren().length; i++) {
-					s.getSpielfigurNeu(i).setSpielfeld(
-							brett.getSpielbrett()[20].getFelder()[i + 1]);
-					brett.getSpielbrett()[20].getFelder()[i + 1]
-							.setSpielfigur(s.getSpielfigurNeu(i));
+					s.getSpielfigurNeu(i).setSpielfeld(brett.getSpielbrett()[20].getFelder()[i + 1]);
+					brett.getSpielbrett()[20].getFelder()[i + 1].setSpielfigur(s.getSpielfigurNeu(i));
 				}
 			}
 		}
@@ -295,37 +274,25 @@ public class Spiel implements iBediener, Serializable {
 			FarbEnum farbe = s.getFarbe();
 			switch (farbe) {
 			case RED:
-				s.getSpielfigurNeu(0).setSpielfeld(
-						brett.getSpielbrett()[0].getFelder()[1]);
-				brett.getSpielbrett()[0].getFelder()[1].setSpielfigur(s
-						.getSpielfigurNeu(0));
+				s.getSpielfigurNeu(0).setSpielfeld(brett.getSpielbrett()[0].getFelder()[1]);
+				brett.getSpielbrett()[0].getFelder()[1].setSpielfigur(s.getSpielfigurNeu(0));
 
-				s.getSpielfigurNeu(1).setSpielfeld(
-						brett.getSpielbrett()[39].getFelder()[2]);
-				brett.getSpielbrett()[39].getFelder()[2].setSpielfigur(s
-						.getSpielfigurNeu(1));
+				s.getSpielfigurNeu(1).setSpielfeld(brett.getSpielbrett()[39].getFelder()[2]);
+				brett.getSpielbrett()[39].getFelder()[2].setSpielfigur(s.getSpielfigurNeu(1));
 
-				s.getSpielfigurNeu(2).setSpielfeld(
-						brett.getSpielbrett()[3].getFelder()[0]);
-				brett.getSpielbrett()[3].getFelder()[0].setSpielfigur(s
-						.getSpielfigurNeu(2));
+				s.getSpielfigurNeu(2).setSpielfeld(brett.getSpielbrett()[3].getFelder()[0]);
+				brett.getSpielbrett()[3].getFelder()[0].setSpielfigur(s.getSpielfigurNeu(2));
 
-				s.getSpielfigurNeu(3).setSpielfeld(
-						brett.getSpielbrett()[20].getFelder()[0]);
-				brett.getSpielbrett()[20].getFelder()[0].setSpielfigur(s
-						.getSpielfigurNeu(3));
+				s.getSpielfigurNeu(3).setSpielfeld(brett.getSpielbrett()[20].getFelder()[0]);
+				brett.getSpielbrett()[20].getFelder()[0].setSpielfigur(s.getSpielfigurNeu(3));
 				break;
 			case GREEN:
 				for (int i = 1; i < s.getSpielfiguren().length; i++) {
-					s.getSpielfigurNeu(i).setSpielfeld(
-							brett.getSpielbrett()[20].getFelder()[i + 1]);
-					brett.getSpielbrett()[20].getFelder()[i + 1]
-							.setSpielfigur(s.getSpielfigurNeu(i));
+					s.getSpielfigurNeu(i).setSpielfeld(brett.getSpielbrett()[20].getFelder()[i + 1]);
+					brett.getSpielbrett()[20].getFelder()[i + 1].setSpielfigur(s.getSpielfigurNeu(i));
 				}
-				s.getSpielfigur(0).setSpielfeld(
-						brett.getSpielbrett()[5].getFelder()[0]);
-				brett.getSpielbrett()[5].getFelder()[0].setSpielfigur(s
-						.getSpielfigur(0));
+				s.getSpielfigur(0).setSpielfeld(brett.getSpielbrett()[5].getFelder()[0]);
+				brett.getSpielbrett()[5].getFelder()[0].setSpielfigur(s.getSpielfigur(0));
 				break;
 			}
 		}
@@ -342,8 +309,7 @@ public class Spiel implements iBediener, Serializable {
 	 */
 	public void zugDurchfuehren(int ID) {
 
-		regelwerk.aktionsWahl(getAmZug(), getAmZug().getSpielfigur(ID),
-				getAmZug().getWuerfel().getErgebnis());
+		regelwerk.aktionsWahl(getAmZug(), getAmZug().getSpielfigur(ID), getAmZug().getWuerfel().getErgebnis());
 		System.out.println(brett.toString());
 	}
 
@@ -355,20 +321,13 @@ public class Spiel implements iBediener, Serializable {
 	 *            der Spielfigur
 	 */
 	public void zugDurchfuehrenSchmeissenTest(int ID) {
-		regelwerk.aktionsWahl(spieler.get(1), spieler.get(1).getSpielfigur(ID),
-				2);
-		regelwerk.aktionsWahl(spieler.get(0), spieler.get(0).getSpielfigur(ID),
-				2);
-		regelwerk.aktionsWahl(spieler.get(0), spieler.get(0).getSpielfigur(ID),
-				2);
-		regelwerk.aktionsWahl(spieler.get(0), spieler.get(0).getSpielfigur(ID),
-				2);
-		regelwerk.aktionsWahl(spieler.get(0), spieler.get(0).getSpielfigur(ID),
-				2);
-		regelwerk.aktionsWahl(spieler.get(0), spieler.get(0).getSpielfigur(ID),
-				2);
-		regelwerk.aktionsWahl(spieler.get(0), spieler.get(0).getSpielfigur(ID),
-				2);
+		regelwerk.aktionsWahl(spieler.get(1), spieler.get(1).getSpielfigur(ID), 2);
+		regelwerk.aktionsWahl(spieler.get(0), spieler.get(0).getSpielfigur(ID), 2);
+		regelwerk.aktionsWahl(spieler.get(0), spieler.get(0).getSpielfigur(ID), 2);
+		regelwerk.aktionsWahl(spieler.get(0), spieler.get(0).getSpielfigur(ID), 2);
+		regelwerk.aktionsWahl(spieler.get(0), spieler.get(0).getSpielfigur(ID), 2);
+		regelwerk.aktionsWahl(spieler.get(0), spieler.get(0).getSpielfigur(ID), 2);
+		regelwerk.aktionsWahl(spieler.get(0), spieler.get(0).getSpielfigur(ID), 2);
 		System.out.println(brett.toString());
 	}
 
@@ -381,8 +340,7 @@ public class Spiel implements iBediener, Serializable {
 	 */
 	public void zugDurchfuehrenEndfeldTest(int ID) {
 		for (int i = 1; i <= 21; i++) {
-			regelwerk.aktionsWahl(spieler.get(0),
-					spieler.get(0).getSpielfigur(ID), 2);
+			regelwerk.aktionsWahl(spieler.get(0), spieler.get(0).getSpielfigur(ID), 2);
 		}
 		System.out.println(brett.toString());
 	}
@@ -406,59 +364,56 @@ public class Spiel implements iBediener, Serializable {
 	@Override
 	public Object laden(String dateiname, String dateiende) {
 		if (dateiende.equals("csv")) {
-//			this.brett = new Spielbrett();
+			// this.brett = new Spielbrett();
 			spieler.clear();
 			String t = (String) d.laden(dateiname);
 			String[] x = t.split("\n");
 			String[] a = x[0].split("_");
 			int i = 1;
-			
+
 			while (a[0].equals("Spieler")) {
 				SpielerHinzufuegen(a[1], a[2], a[3]);
-				
+
 				a = x[i].split("_");
 				i++;
 			}
 			initSpiel();
-			//hier Spieler am Zug einbauen!!
-//			i++;
-			if(a[0].contains("AmZug")){
+			// hier Spieler am Zug einbauen!!
+			// i++;
+			if (a[0].contains("AmZug")) {
 				System.err.println(a[3]);
 				for (Spieler searched : this.getSpieler()) {
-			
-					if((searched.getFarbe()==FarbEnum.RED && a[3].equals("RED"))){
-					setAmZug(searched);
-					}
-					if((searched.getFarbe()==FarbEnum.BLUE && a[3].equals("BLUE"))){
+
+					if ((searched.getFarbe() == FarbEnum.RED && a[3].equals("RED"))) {
 						setAmZug(searched);
 					}
-					if((searched.getFarbe()==FarbEnum.GREEN && a[3].equals("GREEN"))){
+					if ((searched.getFarbe() == FarbEnum.BLUE && a[3].equals("BLUE"))) {
 						setAmZug(searched);
 					}
-					if((searched.getFarbe()==FarbEnum.YELLOW && a[3].equals("YELLOW"))){
-						setAmZug(searched);			
+					if ((searched.getFarbe() == FarbEnum.GREEN && a[3].equals("GREEN"))) {
+						setAmZug(searched);
 					}
-						}				
-			System.err.println(getAmZug());
+					if ((searched.getFarbe() == FarbEnum.YELLOW && a[3].equals("YELLOW"))) {
+						setAmZug(searched);
+					}
+				}
+				System.err.println(getAmZug());
 			}
 			a = x[i].split("_");
-			//hier SPieler am zug einbauen!!
-			
+			// hier SPieler am zug einbauen!!
+
 			while (!a[2].equals("null")) {
 				if (!a[0].contains("S")) {
 					Spieler spieler = null;
 					int id = -1;
 					System.out.println(this.getSpieler().size());
 					for (Spieler search : this.getSpieler()) {
-						if (   (search.getFarbe()==FarbEnum.RED && a[4].equals("RED"))
-							|| (search.getFarbe()==FarbEnum.BLUE && a[4].equals("BLUE"))
-							|| (search.getFarbe()==FarbEnum.GREEN && a[4].equals("GREEN"))
-							|| (search.getFarbe()==FarbEnum.YELLOW && a[4].equals("YELLOW")))
+						if ((search.getFarbe() == FarbEnum.RED && a[4].equals("RED")) || (search.getFarbe() == FarbEnum.BLUE && a[4].equals("BLUE"))
+								|| (search.getFarbe() == FarbEnum.GREEN && a[4].equals("GREEN")) || (search.getFarbe() == FarbEnum.YELLOW && a[4].equals("YELLOW")))
 							spieler = search;
 					}
-					if (spieler == null){
-						throw new RuntimeException(
-								"Behinderter Fehler beim Laden von Spielfiguren");
+					if (spieler == null) {
+						throw new RuntimeException("Behinderter Fehler beim Laden von Spielfiguren");
 					}
 					if (a[2].contains("1")) {
 						id = 1;
@@ -469,13 +424,9 @@ public class Spiel implements iBediener, Serializable {
 					} else if (a[2].contains("4")) {
 						id = 4;
 					}
-					spieler.getSpielfigur(id).getSpielfeld()
-							.setSpielfigur(null);
-					spieler.getSpielfigur(id).setSpielfeld(
-							this.getBrett().getSpielbrett()[Integer
-									.parseInt(a[0])].getFelder()[0]);
-					spieler.getSpielfigur(id).getSpielfeld()
-							.setSpielfigur(spieler.getSpielfigur(id));
+					spieler.getSpielfigur(id).getSpielfeld().setSpielfigur(null);
+					spieler.getSpielfigur(id).setSpielfeld(this.getBrett().getSpielbrett()[Integer.parseInt(a[0])].getFelder()[0]);
+					spieler.getSpielfigur(id).getSpielfeld().setSpielfigur(spieler.getSpielfigur(id));
 				}
 				i++;
 				a = x[i].split("_");
@@ -493,84 +444,73 @@ public class Spiel implements iBediener, Serializable {
 	}
 
 	@Override
-	public void Speichern(String dateiname, String dateiende)
-			throws IOException {
+	public void Speichern(String dateiname, String dateiende) throws IOException {
 		if (dateiende.equals("csv")) {
 			String s = "";
-			for (Spieler spieler:this.getSpieler()) {
-				s +=  spieler+"\n";
+			for (Spieler spieler : this.getSpieler()) {
+				s += spieler + "\n";
 			}
-			
+
 			s += "AmZug_" + getAmZug() + "\n";
-			
+
 			for (int i = 0; i < getBrett().getSpielbrett().length; i++) {
 				switch (i) {
 				case 0:
 					for (int j = 0; j <= 4; j++) {
-						s += getBrett().getSpielbrett()[i].getFelder()[j]
-								.toString();
+						s += getBrett().getSpielbrett()[i].getFelder()[j].toString();
 					}
 					break;
 				case 10:
 					for (int j = 0; j <= 4; j++) {
-						s += getBrett().getSpielbrett()[i].getFelder()[j]
-								.toString();
+						s += getBrett().getSpielbrett()[i].getFelder()[j].toString();
 					}
 					break;
 				case 20:
 
 					for (int j = 0; j <= 4; j++) {
-						s += getBrett().getSpielbrett()[i].getFelder()[j]
-								.toString();
+						s += getBrett().getSpielbrett()[i].getFelder()[j].toString();
 					}
 					break;
 				case 30:
 					for (int j = 0; j <= 4; j++) {
-						s += getBrett().getSpielbrett()[i].getFelder()[j]
-								.toString();
+						s += getBrett().getSpielbrett()[i].getFelder()[j].toString();
 					}
 					break;
 				case 40:
 					for (int j = 0; j <= 4; j++) {
-						s += getBrett().getSpielbrett()[i].getFelder()[j]
-								.toString();
+						s += getBrett().getSpielbrett()[i].getFelder()[j].toString();
 					}
 					break;
 				case 39:
 					for (int j = 0; j <= 4; j++) {
-						s += getBrett().getSpielbrett()[i].getFelder()[j]
-								.toString();
+						s += getBrett().getSpielbrett()[i].getFelder()[j].toString();
 					}
 					break;
 
 				case 9:
 					for (int j = 0; j <= 4; j++) {
-						s += getBrett().getSpielbrett()[i].getFelder()[j]
-								.toString();
+						s += getBrett().getSpielbrett()[i].getFelder()[j].toString();
 					}
 					break;
 				case 19:
 					for (int j = 0; j <= 4; j++) {
-						s += getBrett().getSpielbrett()[i].getFelder()[j]
-								.toString();
+						s += getBrett().getSpielbrett()[i].getFelder()[j].toString();
 					}
 					break;
 				case 29:
 					for (int j = 0; j <= 4; j++) {
-						s += getBrett().getSpielbrett()[i].getFelder()[j]
-								.toString();
+						s += getBrett().getSpielbrett()[i].getFelder()[j].toString();
 					}
 					break;
 
 				default:
-					s += getBrett().getSpielbrett()[i].getFelder()[0]
-							.toString();
+					s += getBrett().getSpielbrett()[i].getFelder()[0].toString();
 					break;
 				}
 
 			}
-			
-			d.speichern(dateiname, dateiende, s); 
+
+			d.speichern(dateiname, dateiende, s);
 
 		} else {
 			if (dateiende.equals("ser")) {

@@ -33,7 +33,7 @@ public class Wuerfel implements Serializable {
 	
 	public void wuerfel2(){
 		this.ergebnis = 2;
-		System.out.println("2 gewuerfelt");
+//		System.out.println("2 gewuerfelt");
 	}
 	
 	/**

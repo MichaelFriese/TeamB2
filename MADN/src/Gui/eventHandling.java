@@ -1,6 +1,7 @@
 package Gui;
 
 import java.awt.BorderLayout;
+import java.awt.Component;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -34,12 +35,37 @@ public class eventHandling extends JFrame implements ActionListener, iBediener {
 	private static JButton schliessen;
 	private MngJFrame frame;
 	private JFrame dialogfenster = new JFrame("Startfenster");
+	private JButton[] figurenRot;
+	private JButton[] figurenGruen;
+	private JButton[] figurenGelb;
+	private JButton[] figurenBlau;
+	private JButton ziehen;
+	private int spielfigurID=0;
 		
+
+	public void setFigurenGruen(JButton[] figurenGruen) {
+		this.figurenGruen = figurenGruen;
+	}
+
+	public void setFigurenGelb(JButton[] figurenGelb) {
+		this.figurenGelb = figurenGelb;
+	}
+
+	public void setFigurenBlau(JButton[] figurenBlau) {
+		this.figurenBlau = figurenBlau;
+	}
+
 	public eventHandling(MngJFrame frame){
 		this.frame=frame;
 		setButtonSchliessen(schliessen);
 	}
 	
+	public void setButtonZiehen(JButton ziehen){
+		this.ziehen = ziehen;
+	}
+	public void setFigurenRot(JButton[] figurenRot) {
+		this.figurenRot = figurenRot;
+	}
 	public void setButtonOk(JButton ok){
 		this.ButtonOk=ok;
 	}
@@ -72,14 +98,18 @@ public class eventHandling extends JFrame implements ActionListener, iBediener {
 					if(!frame.getNamen()[i].getText().equals("")){
 						if(frame.getKI()[i].getSelectedItem().toString().equals("KI Aggressiv")){
 							frame.getSpiel().SpielerHinzufuegen(frame.getNamen()[i].getText(), frame.getFarbe()[i].getSelectedItem().toString(), "aggressiv");
+							frame.figurButton(frame.getFarbe()[i].getSelectedItem().toString());
 						}else if(frame.getKI()[i].getSelectedItem().toString().equals("KI Defensiv")){
 							frame.getSpiel().SpielerHinzufuegen(frame.getNamen()[i].getText(), frame.getFarbe()[i].getSelectedItem().toString(), "defensiv");
+							frame.figurButton(frame.getFarbe()[i].getSelectedItem().toString());
 						}
 						else{
 							frame.getSpiel().SpielerHinzufuegen(frame.getNamen()[i].getText(), frame.getFarbe()[i].getSelectedItem().toString(), "null");
+							frame.figurButton(frame.getFarbe()[i].getSelectedItem().toString());
 						}
 					}
 				}
+				
 				frame.getSpiel().initSpiel();
 				frame.getDialogFenster().setVisible(false);
 				frame.getDialogFenster().dispose();
@@ -88,43 +118,7 @@ public class eventHandling extends JFrame implements ActionListener, iBediener {
 		}
 		
 		if(EventSource == ButtonStart){
-//			JPanel panel = new JPanel();
-//			setSize(500,500);
-//			add(panel);
-//			panel.setLayout(new GridLayout(6,3));
-//			
-//			JLabel name = new JLabel("Name");
-//			JLabel farbe = new JLabel("Farbe");
-//			JLabel ki = new JLabel("KI");
-//			panel.add(name);
-//			panel.add(farbe);
-//			panel.add(ki);
-//			
-//			JTextField namen[] = new JTextField[4];
-//			JComboBox farbwahl[] = new JComboBox[4];
-//			JRadioButton kiauswahl[] = new JRadioButton[4];
-//			String f[] = {"Red", "Yellow", "Blue", "Green"};
-//			for(int i=0; i< namen.length; i++){
-//				namen[i] = new JTextField();
-//				panel.add(namen[i]);
-//				farbwahl[i] = new JComboBox(f);
-//				panel.add(farbwahl[i]);
-//				kiauswahl[i] = new JRadioButton();
-//				panel.add(kiauswahl[i]);
-//			
-//				setAlwaysOnTop(true);
-//				setContentPane(panel);
-//				panel.paintComponents(panel.getGraphics());
-//				setVisible(true);
-//			}
-//			JButton ok = new JButton("Spiel starten");
-//			panel.add(ok);
-//			
-//			setAlwaysOnTop(true);
-//			setContentPane(panel);
-//			setDefaultCloseOperation(EXIT_ON_CLOSE);
-//			panel.paintComponents(panel.getGraphics());
-//			setVisible(true);
+
 			frame.dialogfenster();
 		}
 		if(EventSource == ButtonUeber){{
@@ -138,7 +132,7 @@ public class eventHandling extends JFrame implements ActionListener, iBediener {
 			ueber.setAlwaysOnTop(true);
 			JLabel text = new JLabel("Autoren: \n Doerte, Michael, Tobi");
 			text.setBounds(getWidth()/2,0,500,100);
-			JButton schliessen = new JButton("schließen");
+			JButton schliessen = new JButton("schlieï¿½en");
 			schliessen.addActionListener(this);
 			schliessen.setBounds(100, 75, 100, 30);
 			ueber.add(text);
@@ -157,7 +151,109 @@ public class eventHandling extends JFrame implements ActionListener, iBediener {
 			JFileChooser chooser = new JFileChooser();
 			chooser.showOpenDialog(null);
 			laden(chooser.getSelectedFile().getName(), "csv");
+		}
+		
+		if(EventSource == figurenRot[0]){
+			frame.getZiehen().setEnabled(true);
+			spielfigurID = 1;
+		}
+		
+		if(EventSource == figurenRot[1]){
+			frame.getZiehen().setEnabled(true);
+			spielfigurID = 2;
+		}
+		
+		
+		if(EventSource == figurenRot[2]){
+			frame.getZiehen().setEnabled(true);
+			spielfigurID = 3;
+		}
+		
+		
+		if(EventSource == figurenRot[3]){
+			frame.getZiehen().setEnabled(true);
+			spielfigurID = 4;
+		}
+		
+		if(EventSource == figurenBlau[0]){
+			frame.getZiehen().setEnabled(true);
+			spielfigurID = 1;
+		}
+		
+		if(EventSource == figurenBlau[1]){
+			frame.getZiehen().setEnabled(true);
+			spielfigurID = 2;
+		}
+		
+		
+		if(EventSource == figurenBlau[2]){
+			frame.getZiehen().setEnabled(true);
+			spielfigurID = 3;
+		}
+		
+		
+		if(EventSource == figurenBlau[3]){
+			frame.getZiehen().setEnabled(true);
+			spielfigurID = 4;
+		}
+		
+		
+		
+		if(EventSource == figurenGelb[0]){
+			frame.getZiehen().setEnabled(true);
+			spielfigurID = 1;
+		}
+		
+		if(EventSource == figurenGelb[1]){
+			frame.getZiehen().setEnabled(true);
+			spielfigurID = 2;
+		}
+		
+		
+		if(EventSource == figurenGelb[2]){
+			frame.getZiehen().setEnabled(true);
+			spielfigurID = 3;
+		}
+		
+		
+		if(EventSource == figurenGelb[3]){
+			frame.getZiehen().setEnabled(true);
+			spielfigurID = 4;
+		}
+		
+		
+		if(EventSource == figurenGruen[0]){
+			frame.getZiehen().setEnabled(true);
+			spielfigurID = 1;
+		}
+		
+		if(EventSource == figurenGruen[1]){
+			frame.getZiehen().setEnabled(true);
+			spielfigurID = 2;
+		}
+		
+		
+		if(EventSource == figurenGruen[2]){
+			frame.getZiehen().setEnabled(true);
+			spielfigurID = 3;
+		}
+		
+		
+		if(EventSource == figurenGruen[3]){
+			frame.getZiehen().setEnabled(true);
+			spielfigurID = 4;
+		}
+		
+		if(EventSource == ziehen){
+			Spiel sp = (Spiel) frame.getS();
+			int oldPos = sp.getSpieler().get(0).getSpielfigur(spielfigurID).getSpielfeld().getPosition();
+			frame.getS().zugDurchfuehren(spielfigurID);
+			int newPos = sp.getSpieler().get(0).getSpielfigur(spielfigurID).getSpielfeld().getPosition();
 			
+			frame.getFields()[newPos-1].add(frame.getFigurenRed()[0]);
+//			frame.getRed()[0].repaint(200);
+			frame.getFields()[oldPos-1].repaint(200);
+			frame.getFields()[newPos-1].repaint(200);
 		}
 	}
 		public Object laden(String dateiname, String dateieinde) {
