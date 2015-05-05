@@ -213,11 +213,16 @@ public class MngJFrame extends JFrame {
 		panel.add(farbe);
 		panel.add(ki1);
 		// panel.add(ki2);
+		
+		JButton ok = new JButton("Spiel starten");
+		
+		ok.setEnabled(false);
 
 		String f[] = { "Red", "Yellow", "Blue", "Green" };
 		String k[] = { "Mensch", "KI Aggressiv", "KI Defensiv" };
 		for (int i = 0; i < namen.length; i++) {
 			namen[i] = new JTextField();
+			namen[0].addCaretListener(new eventHandling(ok));
 			panel.add(namen[i]);
 			farbwahl[i] = new JComboBox(f);
 			panel.add(farbwahl[i]);
@@ -234,9 +239,8 @@ public class MngJFrame extends JFrame {
 			// panel.add(kiDef[i]);
 		}
 
-		JButton ok = new JButton("Spiel starten");
+		
 		panel.add(ok);
-
 		ok.addActionListener(e);
 		e.setButtonOk(ok);
 

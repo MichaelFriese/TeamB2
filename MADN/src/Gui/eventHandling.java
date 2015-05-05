@@ -17,6 +17,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
+import javax.swing.event.CaretEvent;
+import javax.swing.event.CaretListener;
 
 import backend.FarbEnum;
 import backend.Spiel;
@@ -24,7 +26,7 @@ import backend.Spieler;
 import backend.Spieler.Spielfigur;
 import frontend.iBediener;
 
-public class eventHandling extends JFrame implements ActionListener, iBediener {
+public class eventHandling extends JFrame implements ActionListener, iBediener,CaretListener {
 
 	/**
 	 * 
@@ -46,6 +48,7 @@ public class eventHandling extends JFrame implements ActionListener, iBediener {
 	private JButton ziehen;
 	private int spielfigurID = 0;
 	private JButton aktuelleFigur;
+	private JButton btn;
 
 	public void setFigurenGruen(JButton[] figurenGruen) {
 		this.figurenGruen = figurenGruen;
@@ -63,6 +66,11 @@ public class eventHandling extends JFrame implements ActionListener, iBediener {
 		this.frame = frame;
 		setButtonSchliessen(schliessen);
 	}
+	
+	public eventHandling(JButton btn){
+		this.btn= btn;
+	}
+	
 
 	public void setButtonZiehen(JButton ziehen) {
 		this.ziehen = ziehen;
@@ -457,6 +465,15 @@ public class eventHandling extends JFrame implements ActionListener, iBediener {
 	@Override
 	public void Speichern(String dateiname, String dateiende) throws IOException {
 		// TODO Auto-generated method stub
+	}
+
+	@Override
+	public void caretUpdate(CaretEvent e) {
+		JTextField field= (JTextField)e.getSource();
+		
+		String text= field.getText();
+		btn.setEnabled(!text.trim().isEmpty());
+		
 	}
 
 }
