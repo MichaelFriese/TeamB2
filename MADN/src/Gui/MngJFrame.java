@@ -49,6 +49,7 @@ public class MngJFrame extends JFrame {
 	private JButton beenden;
 	private JButton start;
 	private JButton ok;
+	private JButton wuerfel;
 	private eventHandling e;
 
 	private JFrame dialogfenster = new JFrame("Startfenster");
@@ -90,6 +91,8 @@ public class MngJFrame extends JFrame {
 		this.e.setButtonStart(start);
 		this.e.setButtonUeber(ueber);
 		this.e.setButtonOk(ok);
+		this.e.setButtonWuerfel(wuerfel);
+		
 		s = new Spiel(this);
 
 		// dialogfenster();
@@ -400,9 +403,18 @@ public class MngJFrame extends JFrame {
 		// ausgabe.setText("123");
 		mainPanel.add(new JScrollPane(ausgabe), BorderLayout.SOUTH);
 
+		
 		JPanel pWest = new JPanel();
 		JLabel b1 = new JLabel("Wuerfelergebnis");
+		ImageIcon erg1 = new ImageIcon("erg1.png"); 
+		pWest.setLayout(new BorderLayout());
+		wuerfel= new JButton("Ergebniss");
+		wuerfel.setSize(100,100);
+		
 		pWest.add(b1);
+		pWest.add(wuerfel);
+		
+		
 		mainPanel.add(pWest, BorderLayout.WEST);
 
 		JPanel pEast = new JPanel();
@@ -418,7 +430,39 @@ public class MngJFrame extends JFrame {
 		fmSpiel.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		fmSpiel.setVisible(true);
 	}
-
+	public void setIconNeu(int erg){
+		ImageIcon erg1 = new ImageIcon("erg1.png");
+		ImageIcon erg2 = new ImageIcon("erg2.png");
+		ImageIcon erg3 = new ImageIcon("erg3.png");
+		ImageIcon erg4 = new ImageIcon("erg4.png");
+		ImageIcon erg5 = new ImageIcon("erg5.png");
+		ImageIcon erg6 = new ImageIcon("erg6.png");
+		if(erg==1){
+			wuerfel.setIcon(erg1);
+			wuerfel.repaint();
+		}
+		if(erg==2){
+			wuerfel.setIcon(erg2);
+			wuerfel.repaint();
+		}
+		if(erg==3){
+			wuerfel.setIcon(erg3);
+			wuerfel.repaint();
+		}
+		if(erg==4){
+			wuerfel.setIcon(erg4);
+			wuerfel.repaint();
+		}
+		if(erg==5){
+			wuerfel.setIcon(erg5);
+			wuerfel.repaint();
+		}
+		if(erg==6){
+			wuerfel.setIcon(erg6);
+			wuerfel.repaint();
+		}
+	}
+	
 	public JPanel[] getBlue() {
 		return blue;
 	}

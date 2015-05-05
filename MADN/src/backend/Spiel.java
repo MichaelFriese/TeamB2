@@ -322,10 +322,15 @@ public class Spiel implements iBediener, Serializable {
 	 */
 	public void zugDurchfuehren(int ID) {
 		setGeschmissen(null);
+		setIconBild(getAmZug().getWuerfel().getErgebnis());
 		regelwerk.aktionsWahl(getAmZug(), getAmZug().getSpielfigur(ID), getAmZug().getWuerfel().getErgebnis());
 		System.out.println(brett.toString());
 	}
-
+	@Override
+	public int setIconBild(int erg){
+		gui.setIconNeu(erg);
+		return erg;
+	}
 	/**
 	 * Ist eine Testklasse um zu testen, dass die Figuren geschmissen werden
 	 * können
@@ -454,6 +459,9 @@ public class Spiel implements iBediener, Serializable {
 		}
 
 		return null;
+	}
+	public int getWuerfel(){
+		return amZug.getWuerfel().getErgebnis();
 	}
 
 	@Override

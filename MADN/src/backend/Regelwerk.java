@@ -137,7 +137,8 @@ public class Regelwerk implements Serializable {
 			System.out.println(spielfigur.toString() + " sitzt noch auf Startfeld!");
 			return;
 		}
-
+		int erg = spieler.getWuerfel().getErgebnis();
+		System.err.println(erg);
 		int oldPos = spielfigur.getSpielfeld().getPosition() - 1;
 		int newPos = oldPos + spieler.getWuerfel().getErgebnis();
 
@@ -152,6 +153,7 @@ public class Regelwerk implements Serializable {
 				newPos++;
 				if (newPos <= 4) {
 					insEndfeldLaufen(spieler, spielfigur, newPos);
+					
 				}
 				return;
 //				break;

@@ -9,6 +9,7 @@ import java.awt.event.ActionListener;
 import java.io.IOException;
 
 import javax.swing.ButtonGroup;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFileChooser;
@@ -38,6 +39,7 @@ public class eventHandling extends JFrame implements ActionListener, iBediener,C
 	private JButton ButtonBeenden;
 	private JButton ButtonSchliessen;
 	private JButton ButtonOk;
+	private JButton ButtonWuerfel;
 	private static JButton schliessen;
 	private MngJFrame frame;
 	private JFrame dialogfenster = new JFrame("Startfenster");
@@ -87,6 +89,9 @@ public class eventHandling extends JFrame implements ActionListener, iBediener,C
 	public void setButtonStart(JButton start) {
 		this.ButtonStart = start;
 	}
+	public void setButtonWuerfel(JButton wuerfel){
+		this.ButtonWuerfel=wuerfel;
+	}
 
 	public void setButtonLaden(JButton laden) {
 		this.ButtonLaden = laden;
@@ -109,6 +114,8 @@ public class eventHandling extends JFrame implements ActionListener, iBediener,C
 		Object EventSource = a_event.getSource();
 		if (EventSource == ButtonBeenden) {
 			System.exit(0);
+		}
+		if(EventSource == ButtonWuerfel){
 		}
 		if (EventSource == ButtonOk) {
 			String label = a_event.getActionCommand();
@@ -476,4 +483,19 @@ public class eventHandling extends JFrame implements ActionListener, iBediener,C
 		
 	}
 
+	@Override
+	public int getWuerfel() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int setIconBild(int erg) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	
+	
+	
 }

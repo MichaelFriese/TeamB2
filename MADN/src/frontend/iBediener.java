@@ -21,12 +21,15 @@ public interface iBediener {
 	public void zugDurchfuehrenEndfeldTest(int ID);
 
 	void initTestSpiel();
+	int getWuerfel();
 
 	void initTestSpielZugAggressiv();
 	void initTestSpielZugDefensiv();
 
 	Object laden(String dateiname, String dateiende);
 	void Speichern(String dateiname, String dateiende) throws IOException;
+
+	int setIconBild(int erg);
 	
 	
 	
