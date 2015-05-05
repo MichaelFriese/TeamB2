@@ -222,7 +222,7 @@ public class MngJFrame extends JFrame {
 		String k[] = { "Mensch", "KI Aggressiv", "KI Defensiv" };
 		for (int i = 0; i < namen.length; i++) {
 			namen[i] = new JTextField();
-			namen[0].addCaretListener(new eventHandling(ok));
+			namen[i].addCaretListener(new eventHandling(ok));
 			panel.add(namen[i]);
 			farbwahl[i] = new JComboBox(f);
 			panel.add(farbwahl[i]);
