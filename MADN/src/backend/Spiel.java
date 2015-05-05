@@ -323,7 +323,7 @@ public class Spiel implements iBediener, Serializable {
 	public void zugDurchfuehren(int ID) {
 		setGeschmissen(null);
 		regelwerk.aktionsWahl(getAmZug(), getAmZug().getSpielfigur(ID), getAmZug().getWuerfel().getErgebnis());
-//		System.out.println(brett.toString());
+		System.out.println(brett.toString());
 	}
 
 	/**

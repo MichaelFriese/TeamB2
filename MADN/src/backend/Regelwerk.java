@@ -40,7 +40,9 @@ public class Regelwerk implements Serializable {
 	public void aktionsWahl(Spieler spieler, Spielfigur spielfigur, int ergebnis) {
 		if (spielfigur.getSpielfeld().getID().contains("S")) { // && ergebnis==6){
 			rauskommen(spieler, spielfigur);
-		} else
+		}else if(spielfigur.getSpielfeld().getID().contains("E")){
+			imEndfeldLaufen(spieler,spielfigur,ergebnis);
+		} else 
 			figurZiehen(spieler, spielfigur);
 
 	}
@@ -150,9 +152,9 @@ public class Regelwerk implements Serializable {
 				newPos++;
 				if (newPos <= 4) {
 					insEndfeldLaufen(spieler, spielfigur, newPos);
-					return;
 				}
-				break;
+				return;
+//				break;
 			case BLUE:
 				if (newPos >= 10) {
 					newPos -= 9;
@@ -327,5 +329,87 @@ public class Regelwerk implements Serializable {
 	}
 
 	// TODO: Methode im Endfeld vorlaufen!
+	public void imEndfeldLaufen(Spieler spieler, Spielfigur spielfigur, int erg){
+		int posEndfeld=Integer.parseInt(spielfigur.getSpielfeld().getID().substring(1));
+		boolean gelaufen = false;
+		switch (spielfigur.getFarbe()) {
+		case RED:
+			if(posEndfeld+erg < 5){
+				for(int i=erg-1; i>0; i--){
+					if(spiel.getBrett().getSpielbrett()[39].getFelder()[posEndfeld+erg-i].getSpielfigur() != null){
+						System.err.println("kein ueberspringen"+(posEndfeld+erg-i));
+						return;
+					}
+				}
+				if(spiel.getBrett().getSpielbrett()[39].getFelder()[posEndfeld+erg].getSpielfigur() != null){
+					return;
+				}
+				spielfigur.getSpielfeld().setSpielfigur(null);
+				spielfigur.setSpielfeld(spiel.getBrett().getSpielbrett()[39].getFelder()[posEndfeld+erg]);
+				spielfigur.getSpielfeld().setSpielfigur(spielfigur);
+				gelaufen = true;
+			}
+			break;
+		case BLUE:
+			if(posEndfeld+erg < 5){
+				for(int i=erg-1; i>0; i++){
+					if(spiel.getBrett().getSpielbrett()[9].getFelder()[posEndfeld+erg-i].getSpielfigur() != null){
+						System.err.println("besetzt/kein ueberspringen"+(posEndfeld+erg-i));
+						return;
+					}
+				}
+				if(spiel.getBrett().getSpielbrett()[9].getFelder()[posEndfeld+erg].getSpielfigur() != null){
+					return;
+				}
+				spielfigur.getSpielfeld().setSpielfigur(null);
+				spielfigur.setSpielfeld(spiel.getBrett().getSpielbrett()[9].getFelder()[posEndfeld+erg]);
+				spielfigur.getSpielfeld().setSpielfigur(spielfigur);
+				gelaufen = true;
+			}
+			break;
+		case GREEN:
+			if(posEndfeld+erg < 5){
+				for(int i=erg-1; i>0; i++){
+					if(spiel.getBrett().getSpielbrett()[19].getFelder()[posEndfeld+erg-i].getSpielfigur() != null){
+						System.out.println("besetzt/kein ueberspringen");
+						return;
+					}
+				}
+				if(spiel.getBrett().getSpielbrett()[19].getFelder()[posEndfeld+erg].getSpielfigur() != null){
+					return;
+				}
+				spielfigur.getSpielfeld().setSpielfigur(null);
+				spielfigur.setSpielfeld(spiel.getBrett().getSpielbrett()[19].getFelder()[posEndfeld+erg]);
+				spielfigur.getSpielfeld().setSpielfigur(spielfigur);
+				gelaufen = true;
+			}
+			break;
+		case YELLOW:
+			if(posEndfeld+erg < 5){
+				for(int i=erg-1; i>0; i++){
+					if(spiel.getBrett().getSpielbrett()[29].getFelder()[posEndfeld+erg-i].getSpielfigur() != null){
+						System.out.println("besetzt/kein ueberspringen");
+						return;
+					}
+				}
+				if(spiel.getBrett().getSpielbrett()[29].getFelder()[posEndfeld+erg].getSpielfigur() != null){
+					return;
+				}
+				spielfigur.getSpielfeld().setSpielfigur(null);
+				spielfigur.setSpielfeld(spiel.getBrett().getSpielbrett()[29].getFelder()[posEndfeld+erg]);
+				spielfigur.getSpielfeld().setSpielfigur(spielfigur);
+				gelaufen = true;
+			}
+			break;
+		}
+
+		if(gelaufen == true){
+			if (spieler.getWuerfel().getErgebnis() != 6) {
+				spiel.setNaechster(spieler);
+			} else {
+				spiel.setAmZug(spieler);
+			}
+		}
+	}
 
 }
