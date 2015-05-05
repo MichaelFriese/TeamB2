@@ -6,6 +6,7 @@ import java.io.PrintWriter;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+import backend.Spieler.Spielfigur;
 import frontend.iBediener;
 import frontend.iDatenzugriff;
 import Gui.MngJFrame;
@@ -22,6 +23,15 @@ public class Spiel implements iBediener, Serializable {
 	private Spielbrett brett;
 	private ArrayList<Spieler> spieler;
 	private Spieler amZug;
+	private Spielfigur geschmissen;
+	public Spielfigur getGeschmissen() {
+		return geschmissen;
+	}
+
+	public void setGeschmissen(Spielfigur geschmissen) {
+		this.geschmissen = geschmissen;
+	}
+
 	private Regelwerk regelwerk;
 	private String dateiname;
 	private MngJFrame gui;
@@ -87,10 +97,10 @@ public class Spiel implements iBediener, Serializable {
 		this.amZug = amZug;
 		System.out.println(getAmZug().toString() + " ist am Zug");
 		gui.getAusgabe().setText(gui.getAusgabe().getText()+"\n"+getAmZug().toString() + " ist am Zug");
-		// getAmZug().getWuerfel().wuerfeln();
+		getAmZug().getWuerfel().wuerfeln();
 		// getAmZug().getWuerfel().wurf6();
 		// Zum Testen wird nur 2 gewuerfelt:
-		getAmZug().getWuerfel().wuerfel2();
+//		getAmZug().getWuerfel().wuerfel2();
 		gui.getAusgabe().setText(gui.getAusgabe().getText()+"\n"+getAmZug().getWuerfel().getErgebnis()+" gewuerfelt");
 		
 
@@ -99,6 +109,8 @@ public class Spiel implements iBediener, Serializable {
 		} else {
 			System.out.println(amZug.getKienum());
 		}
+		
+		
 		// System.out.println(brett.toString());
 	}
 
@@ -178,32 +190,33 @@ public class Spiel implements iBediener, Serializable {
 			switch (farbe) {
 			case RED:
 				for (int i = 0; i < s.getSpielfiguren().length; i++) {
-					s.getSpielfigur(i).setSpielfeld(brett.getSpielbrett()[0].getFelder()[i + 1]);
+					s.getSpielfigur(i+1).setSpielfeld(brett.getSpielbrett()[0].getFelder()[i + 1]);
 					brett.getSpielbrett()[0].getFelder()[i + 1].setSpielfigur(s.getSpielfigur(i + 1));
 				}
+//				s.getSpielfigur(4).setSpielfeld(brett.getSpielbrett()[0].getFelder()[4]);
 				break;
 			case BLUE:
 				for (int i = 0; i < s.getSpielfiguren().length; i++) {
-					s.getSpielfigur(i).setSpielfeld(brett.getSpielbrett()[10].getFelder()[i + 1]);
+					s.getSpielfigur(i+1).setSpielfeld(brett.getSpielbrett()[10].getFelder()[i + 1]);
 					brett.getSpielbrett()[10].getFelder()[i + 1].setSpielfigur(s.getSpielfigur(i + 1));
 				}
 				break;
 			case GREEN:
 				for (int i = 0; i < s.getSpielfiguren().length; i++) {
-					s.getSpielfigur(i).setSpielfeld(brett.getSpielbrett()[20].getFelder()[i + 1]);
+					s.getSpielfigur(i+1).setSpielfeld(brett.getSpielbrett()[20].getFelder()[i + 1]);
 					brett.getSpielbrett()[20].getFelder()[i + 1].setSpielfigur(s.getSpielfigur(i + 1));
 				}
 				break;
 			case YELLOW:
 				for (int i = 0; i < s.getSpielfiguren().length; i++) {
-					s.getSpielfigur(i).setSpielfeld(brett.getSpielbrett()[30].getFelder()[i + 1]);
+					s.getSpielfigur(i+1).setSpielfeld(brett.getSpielbrett()[30].getFelder()[i + 1]);
 					brett.getSpielbrett()[30].getFelder()[i + 1].setSpielfigur(s.getSpielfigur(i + 1));
 				}
 				break;
 			}
 		}
 
-		System.out.println(brett.toString());
+//		System.out.println(brett.toString());
 		setAmZug(spieler.get(0));
 	}
 
@@ -308,9 +321,9 @@ public class Spiel implements iBediener, Serializable {
 	 *            der Spielfigur
 	 */
 	public void zugDurchfuehren(int ID) {
-
+		setGeschmissen(null);
 		regelwerk.aktionsWahl(getAmZug(), getAmZug().getSpielfigur(ID), getAmZug().getWuerfel().getErgebnis());
-		System.out.println(brett.toString());
+//		System.out.println(brett.toString());
 	}
 
 	/**

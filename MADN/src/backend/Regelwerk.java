@@ -323,6 +323,7 @@ public class Regelwerk implements Serializable {
 			System.out.println(spielfigur.toString() + " Wurde auf Startfeld geschmissen");
 			break;
 		}
+		spiel.setGeschmissen(spielfigur);
 	}
 
 	// TODO: Methode im Endfeld vorlaufen!

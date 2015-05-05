@@ -272,6 +272,7 @@ public class MngJFrame extends JFrame {
 		// pCen.add(bild);
 
 		pCen.setLayout(null);
+		pCen.setBackground(Color.WHITE);
 		// JButton but1 = new JButton("asd");
 		// but1.setEnabled(false);
 		// pCen.add(but1);
@@ -412,6 +413,22 @@ public class MngJFrame extends JFrame {
 		fmSpiel.setResizable(false);
 		fmSpiel.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		fmSpiel.setVisible(true);
+	}
+
+	public JPanel[] getBlue() {
+		return blue;
+	}
+
+	public JPanel[] getGreen() {
+		return green;
+	}
+
+	public JPanel[] getYellow() {
+		return yellow;
+	}
+
+	public JPanel getpCen() {
+		return pCen;
 	}
 
 	public JButton[] getFigurenBlue() {
