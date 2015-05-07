@@ -63,6 +63,7 @@ public class Regelwerk implements Serializable {
 					spiel.getBrett().getSpielbrett()[0].getFelder()[spielfigur.getID()].setSpielfigur(null);
 					spielfigur.setSpielfeld(spiel.getBrett().getSpielbrett()[0].getFelder()[0]);
 					spielfigur.getSpielfeld().setSpielfigur(spielfigur);
+					
 				}
 			}
 			// }
@@ -121,8 +122,9 @@ public class Regelwerk implements Serializable {
 			}
 			// }
 		}
-
+		if(spiel.getAmZug().getKi()==null){
 		spiel.setAmZug(spieler);
+		}
 	}
 
 	/**
@@ -203,9 +205,9 @@ public class Regelwerk implements Serializable {
 			}
 		}
 
-		if (spieler.getWuerfel().getErgebnis() != 6) {
+		if (spieler.getWuerfel().getErgebnis() != 6 && spiel.getAmZug().getKi()==null) {
 			spiel.setNaechster(spieler);
-		} else {
+		} else if(spiel.getAmZug().getKi()==null){
 			spiel.setAmZug(spieler);
 		}
 
@@ -269,9 +271,9 @@ public class Regelwerk implements Serializable {
 			break;
 		}
 
-		if (spieler.getWuerfel().getErgebnis() != 6) {
+		if (spieler.getWuerfel().getErgebnis() != 6 && spiel.getAmZug().getKi()==null) {
 			spiel.setNaechster(spieler);
-		} else {
+		} else if(spiel.getAmZug().getKi()==null){
 			spiel.setAmZug(spieler);
 		}
 	}
@@ -406,9 +408,9 @@ public class Regelwerk implements Serializable {
 		}
 
 		if(gelaufen == true){
-			if (spieler.getWuerfel().getErgebnis() != 6) {
+			if (spieler.getWuerfel().getErgebnis() != 6 && spiel.getAmZug().getKi()==null) {
 				spiel.setNaechster(spieler);
-			} else {
+			} else if(spiel.getAmZug().getKi()==null){
 				spiel.setAmZug(spieler);
 			}
 		}

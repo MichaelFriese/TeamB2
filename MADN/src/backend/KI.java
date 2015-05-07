@@ -5,10 +5,11 @@ import java.io.Serializable;
 import backend.Spieler.Spielfigur;
 
 public abstract class KI implements Serializable {
+	
+	
+	
 
-	/**
-	 * 
-	 */
+	private boolean gezogen= false;
 	private static final long serialVersionUID = 1L;
 	private Spieler spieler;
 	private Spiel spiel;
@@ -179,6 +180,14 @@ public abstract class KI implements Serializable {
 		return spiel;
 	}
 
+	
+	public boolean getGezogenButton() {
+		return gezogen;
+	}
+
+	public void setGezogenButton(boolean gezogen) {
+		this.gezogen = gezogen;
+	}
 	public abstract void kiZug();
 
 }

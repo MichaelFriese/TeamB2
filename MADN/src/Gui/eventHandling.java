@@ -51,6 +51,11 @@ public class eventHandling extends JFrame implements ActionListener, iBediener,C
 	private int spielfigurID = 0;
 	private JButton aktuelleFigur;
 	private JButton btn;
+	private JButton buttonKiWeiter;
+
+	public void setButtonKiWeiter(JButton kiWeiter) {
+		buttonKiWeiter = kiWeiter;
+	}
 
 	public void setFigurenGruen(JButton[] figurenGruen) {
 		this.figurenGruen = figurenGruen;
@@ -310,6 +315,15 @@ public class eventHandling extends JFrame implements ActionListener, iBediener,C
 			}
 		}
 
+		if(EventSource==buttonKiWeiter){
+			frame.getKiWeiter().setEnabled(false);
+			if(sp.getAmZug().getWuerfel().getErgebnis()==6){
+				sp.setAmZug(sp.getAmZug());
+			}else{
+			sp.setNaechster(sp.getAmZug());
+			}
+		}
+		
 		if (EventSource == ziehen) {
 			frame.getS().zugDurchfuehren(spielfigurID);
 			int newPos = lokalAmZug.getSpielfigur(spielfigurID).getSpielfeld().getPosition();

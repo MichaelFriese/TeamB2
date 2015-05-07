@@ -322,8 +322,8 @@ public class Spiel implements iBediener, Serializable {
 	 */
 	public void zugDurchfuehren(int ID) {
 		setGeschmissen(null);
-		setIconBild(getAmZug().getWuerfel().getErgebnis());
 		regelwerk.aktionsWahl(getAmZug(), getAmZug().getSpielfigur(ID), getAmZug().getWuerfel().getErgebnis());
+		setIconBild(getAmZug().getWuerfel().getErgebnis());
 		System.out.println(brett.toString());
 	}
 	@Override
@@ -543,6 +543,10 @@ public class Spiel implements iBediener, Serializable {
 
 	public String getDateiname() {
 		return dateiname;
+	}
+
+	public MngJFrame getGui() {
+		return gui;
 	}
 
 }

@@ -44,6 +44,8 @@ public class KI_Aggresiv extends KI implements Serializable {
 
 		} else
 			super.getSpiel().setNaechster(super.getSpieler());
+			setGezogenButton(true);
+			super.getSpiel().getGui().getKiWeiter().setEnabled(true);
 	}
 
 }

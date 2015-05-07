@@ -50,6 +50,9 @@ public class MngJFrame extends JFrame {
 	private JButton start;
 	private JButton ok;
 	private JButton wuerfel;
+	private JButton kiWeiter;
+	
+
 	private eventHandling e;
 
 	private JFrame dialogfenster = new JFrame("Startfenster");
@@ -97,6 +100,10 @@ public class MngJFrame extends JFrame {
 
 		// dialogfenster();
 
+	}
+	
+	public JButton getKiWeiter() {
+		return kiWeiter;
 	}
 
 	public JFrame getDialogFenster() {
@@ -418,9 +425,18 @@ public class MngJFrame extends JFrame {
 		mainPanel.add(pWest, BorderLayout.WEST);
 
 		JPanel pEast = new JPanel();
+		pEast.setLayout(new GridLayout(6,1));
 		ziehen = new JButton("Figur ziehen");
 		ziehen.setEnabled(false);
 		pEast.add(ziehen);
+		
+		kiWeiter = new JButton("ki weiter");
+		kiWeiter.setEnabled(false);
+		kiWeiter.addActionListener(e);
+		e.setButtonKiWeiter(kiWeiter);
+		pEast.add(kiWeiter);
+		
+		
 		mainPanel.add(pEast, BorderLayout.EAST);
 		ziehen.addActionListener(e);
 		e.setButtonZiehen(ziehen);
