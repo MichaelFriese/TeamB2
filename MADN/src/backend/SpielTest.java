@@ -19,7 +19,7 @@ public class SpielTest {
 	public static void main(String[] args) {
 		
 		iBediener s = new Spiel ();
-		s.SpielerHinzufuegen("Ki", "red", "aggressiv");
+//		s.SpielerHinzufuegen("Ki", "red", "aggressiv");
 //		s.SpielerHinzufuegen("Ki2", "Blue", "defensiv");
 //		s.SpielerHinzufuegen("Rosa", "red",null);
 //		s.SpielerHinzufuegen("Helmut", "blue",null);
