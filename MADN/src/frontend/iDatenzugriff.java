@@ -1,6 +1,12 @@
 package frontend;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
+
+import backend.Spiel;
+
+import com.itextpdf.text.DocumentException;
+
 
 
 
@@ -11,5 +17,8 @@ public interface iDatenzugriff {
 	
 	Object laden(String dateiname);
 
+	 void spielfeld(Spiel spiel) throws FileNotFoundException, DocumentException;
+	
+	
 
 }

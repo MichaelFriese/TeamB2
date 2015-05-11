@@ -2,6 +2,7 @@ package backend;
 
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.IOException;
 
 import com.itextpdf.text.BaseColor;
 import com.itextpdf.text.Document;
@@ -12,87 +13,26 @@ import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
 
-public class DatenzugriffPDF {
-	
-	public static void main(String[] args) throws FileNotFoundException,
-	DocumentException {
+import frontend.iDatenzugriff;
 
-Rectangle pageSize = new Rectangle(216f, 720f);
+public class DatenzugriffPDF implements iDatenzugriff {
 
-Document document = new Document(pageSize, 36f, 72f, 108f, 180f);
-
-PdfWriter.getInstance(document, new FileOutputStream("test.pdf"));
-document.open();
-
-PdfPTable table1 = new PdfPTable(1);
-table1.addCell("Spielstand : Mensch Ärger Dich nicht");
-PdfPTable table2 = new PdfPTable(1);
-table2.addCell("		");
-// document.add(table1);
-Spiel spiel = new Spiel();
-spiel.SpielerHinzufuegen("hans", "red", null);
-spiel.SpielerHinzufuegen("hans", "yellow", null);
-
-spiel.initSpiel();
-
-spiel.zugDurchfuehren(1);
-spiel.zugDurchfuehren(1);
-spiel.zugDurchfuehren(1);
-spiel.zugDurchfuehren(1);
-spiel.zugDurchfuehren(1);
-spiel.zugDurchfuehren(1);
-spiel.zugDurchfuehren(1);
-spiel.zugDurchfuehren(1);
-spiel.zugDurchfuehren(1);
-spiel.zugDurchfuehren(1);
-spiel.zugDurchfuehren(1);
-spiel.zugDurchfuehren(1);
-spiel.zugDurchfuehren(1);
-spiel.zugDurchfuehren(1);
-spiel.zugDurchfuehren(1);
-spiel.zugDurchfuehren(1);
-spiel.zugDurchfuehren(1);
-spiel.zugDurchfuehren(1);
-spiel.zugDurchfuehren(1);
-spiel.zugDurchfuehren(1);
-spiel.zugDurchfuehren(1);
-spiel.zugDurchfuehren(1);
-spiel.zugDurchfuehren(1);
-spiel.zugDurchfuehren(1);
-spiel.zugDurchfuehren(1);
-spiel.zugDurchfuehren(1);
-spiel.zugDurchfuehren(1);
-spiel.zugDurchfuehren(1);
-spiel.zugDurchfuehren(1);
-spiel.zugDurchfuehren(1);
-spiel.zugDurchfuehren(1);
-spiel.zugDurchfuehren(1);
-
-
-
-
-
-
-
-
-PdfPTable table = spielfeld(spiel);
-document.add(table1);
-document.add(table2);
-document.add(table);
-
-document.close();
-
-}
 	
 	
 	
 	
-	
-	
-	
-	
-	
-	public static PdfPTable spielfeld(Spiel spiel) {
+	@Override
+	public  void spielfeld(Spiel spiel) throws FileNotFoundException, DocumentException {
+		
+		Rectangle pageSize = new Rectangle(216f, 720f);
+
+		Document document = new Document(pageSize, 36f, 72f, 108f, 180f);
+
+		PdfWriter.getInstance(document, new FileOutputStream("Spielstand.pdf"));
+		document.open();
+
+		PdfPTable table1 = new PdfPTable(1);
+		table1.addCell("Spielstand");
 
 		PdfPTable table = new PdfPTable(11);
 		table.setWidthPercentage(1000 / 6.23f);
@@ -1676,7 +1616,39 @@ document.close();
 
 						}
 			}
-		return table;}
+		document.add(table);
+
+		document.close();
+	}
+
+
+
+
+
+
+
+
+
+	@Override
+	public void speichern(String dateiname, String dateiende, Object o)
+			throws IOException {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+
+
+
+
+
+
+
+	@Override
+	public Object laden(String dateiname) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 	
 	

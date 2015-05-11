@@ -9,6 +9,8 @@ import java.io.ObjectOutputStream;
 import java.io.PrintWriter;
 import java.io.Serializable;
 
+import com.itextpdf.text.DocumentException;
+
 import Test.Syso;
 import Test.syso2;
 import frontend.iBediener;
@@ -77,6 +79,15 @@ public class DatenzugriffSerialisiert implements iDatenzugriff, Serializable {
 			}
 		}
 		return null;
+	}
+
+
+
+	@Override
+	public void spielfeld(Spiel spiel) throws FileNotFoundException,
+			DocumentException {
+		// TODO Auto-generated method stub
+		
 	}
 
 
