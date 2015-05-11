@@ -32,27 +32,47 @@ table2.addCell("		");
 Spiel spiel = new Spiel();
 spiel.SpielerHinzufuegen("hans", "red", null);
 spiel.SpielerHinzufuegen("hans", "yellow", null);
-spiel.SpielerHinzufuegen("hans", "green", null);
-spiel.SpielerHinzufuegen("hans", "blue", null);
+
 spiel.initSpiel();
+
 spiel.zugDurchfuehren(1);
 spiel.zugDurchfuehren(1);
 spiel.zugDurchfuehren(1);
 spiel.zugDurchfuehren(1);
 spiel.zugDurchfuehren(1);
-spiel.zugDurchfuehren(1);spiel.zugDurchfuehren(2);
 spiel.zugDurchfuehren(1);
 spiel.zugDurchfuehren(1);
 spiel.zugDurchfuehren(1);
-spiel.zugDurchfuehren(2);
 spiel.zugDurchfuehren(1);
-spiel.zugDurchfuehren(3);
-spiel.zugDurchfuehren(2);
 spiel.zugDurchfuehren(1);
-spiel.zugDurchfuehren(3);
 spiel.zugDurchfuehren(1);
-spiel.zugDurchfuehren(4);
 spiel.zugDurchfuehren(1);
+spiel.zugDurchfuehren(1);
+spiel.zugDurchfuehren(1);
+spiel.zugDurchfuehren(1);
+spiel.zugDurchfuehren(1);
+spiel.zugDurchfuehren(1);
+spiel.zugDurchfuehren(1);
+spiel.zugDurchfuehren(1);
+spiel.zugDurchfuehren(1);
+spiel.zugDurchfuehren(1);
+spiel.zugDurchfuehren(1);
+spiel.zugDurchfuehren(1);
+spiel.zugDurchfuehren(1);
+spiel.zugDurchfuehren(1);
+spiel.zugDurchfuehren(1);
+spiel.zugDurchfuehren(1);
+spiel.zugDurchfuehren(1);
+spiel.zugDurchfuehren(1);
+spiel.zugDurchfuehren(1);
+spiel.zugDurchfuehren(1);
+spiel.zugDurchfuehren(1);
+
+
+
+
+
+
 
 
 PdfPTable table = spielfeld(spiel);
@@ -133,7 +153,8 @@ document.close();
 		}else if(i==60){
 			 if (spiel.getBrett().getSpielbrett()[39].getFelder()[1]
 						.getSpielfigur() != null) {
-					cell.setBackgroundColor(BaseColor.BLACK);
+				 cell.setBorderWidth(2f);
+					cell.setBorderColor(BaseColor.RED);
 					table.addCell(cell);
 					}else{
 						cell.setBackgroundColor(BaseColor.RED);
@@ -143,7 +164,8 @@ document.close();
 		}else if(i==59){
 			 if (spiel.getBrett().getSpielbrett()[39].getFelder()[2]
 						.getSpielfigur() != null) {
-					cell.setBackgroundColor(BaseColor.BLACK);
+				 cell.setBorderWidth(2f);
+					cell.setBorderColor(BaseColor.RED);
 					table.addCell(cell);
 					}else{
 						cell.setBackgroundColor(BaseColor.RED);
@@ -153,7 +175,8 @@ document.close();
 		}else if(i==58){
 			 if (spiel.getBrett().getSpielbrett()[39].getFelder()[3]
 						.getSpielfigur() != null) {
-					cell.setBackgroundColor(BaseColor.BLACK);
+				 cell.setBorderWidth(2f);
+					cell.setBorderColor(BaseColor.RED);
 					table.addCell(cell);
 					}else{
 						cell.setBackgroundColor(BaseColor.RED);
@@ -163,7 +186,8 @@ document.close();
 		}else if(i==57){
 			 if (spiel.getBrett().getSpielbrett()[39].getFelder()[4]
 						.getSpielfigur() != null) {
-					cell.setBackgroundColor(BaseColor.BLACK);
+				 cell.setBorderWidth(2f);
+					cell.setBorderColor(BaseColor.RED);
 					table.addCell(cell);
 					}else{
 						cell.setBackgroundColor(BaseColor.RED);
