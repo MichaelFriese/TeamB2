@@ -52,6 +52,11 @@ public class eventHandling extends JFrame implements ActionListener, iBediener,C
 	private JButton aktuelleFigur;
 	private JButton btn;
 	private JButton buttonKiWeiter;
+	private JButton aussetzen;
+	
+	public void setButtonAussetzen(JButton aussetzen){
+		this.aussetzen = aussetzen;
+	}
 
 	public void setButtonKiWeiter(JButton kiWeiter) {
 		buttonKiWeiter = kiWeiter;
@@ -117,6 +122,8 @@ public class eventHandling extends JFrame implements ActionListener, iBediener,C
 	@Override
 	public void actionPerformed(ActionEvent a_event) {
 		Object EventSource = a_event.getSource();
+		Spiel sp = (Spiel) frame.getS();
+		Spieler lokalAmZug = sp.getAmZug();
 		if (EventSource == ButtonBeenden) {
 			System.exit(0);
 		}
@@ -143,13 +150,23 @@ public class eventHandling extends JFrame implements ActionListener, iBediener,C
 				frame.getSpiel().initSpiel();
 				frame.getDialogFenster().setVisible(false);
 				frame.getDialogFenster().dispose();
-				frame.spiel();
+				frame.spielFenster();
+				String s="";
+				for(int i=0; i<sp.getSpieler().size(); i++){
+					s+="Spieler "+(i+1)+": "+sp.getSpieler().get(i)+"\n";
+				}
+				frame.getAusgabe().setText("****************************************************************\n"
+										 + "NEUES SPIEL ANGELEGT\n" + s
+										 + "****************************************************************\n"
+										 + sp.getAmZug()+" ist am Zug\n"
+										 + sp.getAmZug().getWuerfel().getErgebnis()+" gewuerfelt");
+				
 			}
 		}
 
 		if (EventSource == ButtonStart) {
 
-			frame.dialogfenster();
+			frame.dialogFenster();
 		}
 		if (EventSource == ButtonUeber) {
 			{
@@ -182,8 +199,7 @@ public class eventHandling extends JFrame implements ActionListener, iBediener,C
 			laden(chooser.getSelectedFile().getName(), "csv");
 		}
 
-		Spiel sp = (Spiel) frame.getS();
-		Spieler lokalAmZug = sp.getAmZug();
+		
 
 		if (EventSource == figurenRot[0]) {
 			if (lokalAmZug.getFarbe().equals(FarbEnum.RED)) {
@@ -334,6 +350,8 @@ public class eventHandling extends JFrame implements ActionListener, iBediener,C
 				if(lokalAmZug.getSpielfigur(spielfigurID).getSpielfeld().getID().contains("E")){
 					int posEndfeld=Integer.parseInt(lokalAmZug.getSpielfigur(spielfigurID).getSpielfeld().getID().substring(1));
 					frame.getRed()[posEndfeld+3].add(aktuelleFigur);
+				}else if(lokalAmZug.getSpielfigur(spielfigurID).istAufStartfeld() && lokalAmZug.getWuerfel().getErgebnis() != 6){
+					return;
 				}else{
 					frame.getFields()[newPos - 1].add(aktuelleFigur);					
 				}
@@ -342,6 +360,9 @@ public class eventHandling extends JFrame implements ActionListener, iBediener,C
 				if(lokalAmZug.getSpielfigur(spielfigurID).getSpielfeld().getID().contains("E")){
 					int posEndfeld=Integer.parseInt(lokalAmZug.getSpielfigur(spielfigurID).getSpielfeld().getID().substring(1));
 					frame.getBlue()[posEndfeld+3].add(aktuelleFigur);
+				}
+				else if(lokalAmZug.getSpielfigur(spielfigurID).istAufStartfeld() && lokalAmZug.getWuerfel().getErgebnis() != 6){
+					return;
 				}else{
 					frame.getFields()[newPos - 1].add(aktuelleFigur);					
 				}
@@ -350,6 +371,9 @@ public class eventHandling extends JFrame implements ActionListener, iBediener,C
 				if(lokalAmZug.getSpielfigur(spielfigurID).getSpielfeld().getID().contains("E")){
 					int posEndfeld=Integer.parseInt(lokalAmZug.getSpielfigur(spielfigurID).getSpielfeld().getID().substring(1));
 					frame.getGreen()[posEndfeld+3].add(aktuelleFigur);
+				}
+				else if(lokalAmZug.getSpielfigur(spielfigurID).istAufStartfeld() && lokalAmZug.getWuerfel().getErgebnis() != 6){
+					return;
 				}else{
 					frame.getFields()[newPos - 1].add(aktuelleFigur);					
 				}
@@ -358,6 +382,9 @@ public class eventHandling extends JFrame implements ActionListener, iBediener,C
 				if(lokalAmZug.getSpielfigur(spielfigurID).getSpielfeld().getID().contains("E")){
 					int posEndfeld=Integer.parseInt(lokalAmZug.getSpielfigur(spielfigurID).getSpielfeld().getID().substring(1));
 					frame.getYellow()[posEndfeld+3].add(aktuelleFigur);
+				}
+				else if(lokalAmZug.getSpielfigur(spielfigurID).istAufStartfeld() && lokalAmZug.getWuerfel().getErgebnis() != 6){
+					return;
 				}else{
 					frame.getFields()[newPos - 1].add(aktuelleFigur);					
 				}
@@ -419,6 +446,10 @@ public class eventHandling extends JFrame implements ActionListener, iBediener,C
 			
 			frame.getpCen().repaint();
 			ziehen.setEnabled(false);
+		}
+		
+		if(EventSource == aussetzen){
+			sp.setNaechster(sp.getAmZug());
 		}
 	}
 

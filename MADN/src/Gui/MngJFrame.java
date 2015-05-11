@@ -2,93 +2,64 @@ package Gui;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Component;
-import java.awt.Dimension;
 import java.awt.FlowLayout;
-import java.awt.Font;
 import java.awt.Graphics;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.MediaTracker;
-import java.awt.Toolkit;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
 
-import javax.imageio.ImageIO;
-import javax.swing.BoxLayout;
-import javax.swing.ButtonGroup;
-import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
-import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
-import javax.swing.JSpinner;
-import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
-import javax.swing.SpinnerListModel;
-import javax.swing.SwingConstants;
 
 import backend.Spiel;
+import backend.Spieler.Spielfigur;
 import frontend.iBediener;
 
 public class MngJFrame extends JFrame {
 
-	private JTextArea ausgabe;
+	private static final long serialVersionUID = 1L;
+	private JButton start;
 	private JButton laden;
 	private JButton ueber;
 	private JButton beenden;
-	private JButton start;
 	private JButton ok;
-	private JButton wuerfel;
+	private JButton ziehen;
 	private JButton kiWeiter;
-	
+	private JButton aussetzen;
+	private JButton wuerfel;
+	private JTextArea ausgabe;
+	private JFrame dialogfenster;
+	private JTextField namen[];
+	private JComboBox farbwahl[];
+	private JComboBox kiwahl[];
+	private JFrame fmSpiel;
+	private JPanel mainPanel;
+	private JPanel pCen;
+	private JPanel[] red;
+	private JPanel[] blue;
+	private JPanel[] green;
+	private JPanel[] yellow;
+	private JPanel[] fields;
+	private JButton[] figurenRed;
+	private JButton[] figurenBlue;
+	private JButton[] figurenGreen;
+	private JButton[] figurenYellow;
 
 	private eventHandling e;
-
-	private JFrame dialogfenster = new JFrame("Startfenster");
-	private JTextField namen[] = new JTextField[4];
-	private JComboBox farbwahl[] = new JComboBox[4];
-	private JComboBox kiwahl[] = new JComboBox[4];
-
-	private JFrame fmSpiel = new JFrame();
-	private JPanel mainPanel = new JPanel();
-	private JPanel pCen = new JPanel();
-	private JPanel[] red = new JPanel[8];
-
-	public JPanel[] getRed() {
-		return red;
-	}
-
-	private JPanel[] blue = new JPanel[8];
-	private JPanel[] green = new JPanel[8];
-	private JPanel[] yellow = new JPanel[8];
-	private JPanel[] fields = new JPanel[40];
-
-	private JButton[] figurenRed = new JButton[4];
-	private JButton[] figurenBlue = new JButton[4];
-	private JButton[] figurenGreen = new JButton[4];
-	private JButton[] figurenYellow = new JButton[4];
-
-	private JButton ziehen;
-
 	private iBediener s;
 
 	public MngJFrame() {
-
 		this.e = new eventHandling(this);
 		setTitle("Mensch ärger dich nicht");
 		initComponents();
-		initUI();
+		startFenster();
 		this.e.setButtonBeenden(beenden);
 		this.e.setButtonLaden(laden);
 		this.e.setButtonStart(start);
@@ -97,66 +68,36 @@ public class MngJFrame extends JFrame {
 		this.e.setButtonWuerfel(wuerfel);
 		
 		s = new Spiel(this);
-
-		// dialogfenster();
-
-	}
-	
-	public JButton getKiWeiter() {
-		return kiWeiter;
 	}
 
-	public JFrame getDialogFenster() {
-		return dialogfenster;
-	}
-
-	public JTextField[] getNamen() {
-		return namen;
-	}
-
-	public JComboBox[] getFarbe() {
-		return farbwahl;
-	}
-
-	public JComboBox[] getKI() {
-		return kiwahl;
-	}
-
-	public iBediener getSpiel() {
-		return s;
-	}
-
-	public JTextArea getAusgabe() {
-		return ausgabe;
-	}
-
-	private void initUI() {
-
-		setTitle("Mensch aergere dich nicht");
-		setSize(800, 600);
-		setLocationRelativeTo(null);
-		setDefaultCloseOperation(EXIT_ON_CLOSE);
-
-		JPanel panel3 = new JPanel();
-		panel3.setLayout(new FlowLayout());
-
+	private void initComponents() {
+		ausgabe = new JTextArea(8, 0);
 		start = new JButton("Start");
 		laden = new JButton("Laden");
 		beenden = new JButton("Beenden");
 		ueber = new JButton("Ueber");
-
-		ausgabe = new JTextArea(8, 0);
-
-		start.addActionListener(e);
-		laden.addActionListener(e);
-		beenden.addActionListener(e);
-		ueber.addActionListener(e);
-
-		panel3.add(start, BorderLayout.CENTER);
-		panel3.add(laden, BorderLayout.CENTER);
-		panel3.add(beenden, BorderLayout.CENTER);
-		panel3.add(ueber, BorderLayout.CENTER);
-		getContentPane().add(panel3, BorderLayout.PAGE_END);
+		ok = new JButton("Spiel starten");
+		wuerfel = new JButton();
+		ziehen = new JButton("Ziehen");
+		kiWeiter = new JButton("KI Weiter");
+		kiWeiter.setEnabled(false);
+		aussetzen = new JButton("aussetzen");
+		dialogfenster = new JFrame("Startfenster");
+		namen = new JTextField[4];
+		farbwahl = new JComboBox[4];
+		kiwahl = new JComboBox[4];
+		fmSpiel = new JFrame();
+		mainPanel = new JPanel();
+		pCen = new JPanel();
+		red = new JPanel[8];
+		blue = new JPanel[8];
+		green = new JPanel[8];
+		yellow = new JPanel[8];
+		fields = new JPanel[40];
+		figurenRed = new JButton[4];
+		figurenBlue = new JButton[4];
+		figurenGreen = new JButton[4];
+		figurenYellow = new JButton[4];
 		
 		for (int i = 0; i < 8; i++) {
 			red[i] = new JPanel();
@@ -176,17 +117,43 @@ public class MngJFrame extends JFrame {
 			pCen.add(green[i]);
 			pCen.add(yellow[i]);
 		}
+		for (int i = 0; i < 40; i++) {
+			fields[i] = new JPanel();
+			fields[i].setBackground(Color.DARK_GRAY);
+			fields[i].setLayout(null);
+			pCen.add(fields[i]);
+		}
 		figurenSetzen();
-
-
+		
 	}
 
-	private void initComponents() {
 
+
+	private void startFenster() {
+		initStartBild();
+		setTitle("Mensch aergere dich nicht");
+		setSize(800, 600);
+		setLocationRelativeTo(null);
+		setDefaultCloseOperation(EXIT_ON_CLOSE);
+
+		JPanel panel3 = new JPanel();
+		panel3.setLayout(new FlowLayout());
+
+
+		start.addActionListener(e);
+		laden.addActionListener(e);
+		beenden.addActionListener(e);
+		ueber.addActionListener(e);
+
+		panel3.add(start, BorderLayout.CENTER);
+		panel3.add(laden, BorderLayout.CENTER);
+		panel3.add(beenden, BorderLayout.CENTER);
+		panel3.add(ueber, BorderLayout.CENTER);
+		getContentPane().add(panel3, BorderLayout.PAGE_END);
+	}
+
+	private void initStartBild() {
 		setContentPane(new JPanel() {
-			/**
-			 * 
-			 */
 			private static final long serialVersionUID = 1L;
 			private Image img;
 			{
@@ -209,7 +176,7 @@ public class MngJFrame extends JFrame {
 		});
 	}
 
-	public void dialogfenster() {
+	public void dialogFenster() {
 
 		JPanel panel = new JPanel();
 		dialogfenster.setSize(500, 500);
@@ -224,7 +191,6 @@ public class MngJFrame extends JFrame {
 		panel.add(ki1);
 		// panel.add(ki2);
 		
-		JButton ok = new JButton("Spiel starten");
 		
 		ok.setEnabled(false);
 
@@ -239,17 +205,8 @@ public class MngJFrame extends JFrame {
 
 			kiwahl[i] = new JComboBox(k);
 			panel.add(kiwahl[i]);
-
-			// kiAgg[i] = new JRadioButton();
-			// kiDef[i] = new JRadioButton();
-			// group[i] = new ButtonGroup();
-			// group[i].add(kiAgg[i]);
-			// group[i].add(kiDef[i]);
-			// panel.add(kiAgg[i]);
-			// panel.add(kiDef[i]);
 		}
 
-		
 		panel.add(ok);
 		ok.addActionListener(e);
 		e.setButtonOk(ok);
@@ -262,36 +219,13 @@ public class MngJFrame extends JFrame {
 		dialogfenster.pack();
 	}
 
-	public void spiel() {
-		// File imageFile = new
-		// File("/Users/tobi/Desktop/2000px-Menschenaergern.png");
-		//
-		// BufferedImage image = null;
-		// try {
-		// image = ImageIO.read(imageFile);
-		// }
-		// catch(IOException ioex) {
-		// System.exit(1);
-		// }
-		JLabel bild = new JLabel();
-		ImageIcon icon = new ImageIcon("/Users/tobi/Desktop/2000px-Menschenaergern.png");
-		bild.add(new JLabel(icon));
-		bild.setIcon(icon);
-
+	public void spielFenster() {
 		fmSpiel.add(mainPanel);
 		mainPanel.setLayout(new BorderLayout());
-
 		mainPanel.add(pCen, BorderLayout.CENTER);
-		// pCen.add(new JLabel(new ImageIcon(image)));
-		// pCen.add(bild);
-
 		pCen.setLayout(null);
 		pCen.setBackground(Color.WHITE);
-		// JButton but1 = new JButton("asd");
-		// but1.setEnabled(false);
-		// pCen.add(but1);
-		// but1.setBounds(20, 20, 30, 30);
-		// pCen.setBackground(new Color(255,0,0));
+
 
 		/* Spielfeld aus JPanel */
 
@@ -300,12 +234,6 @@ public class MngJFrame extends JFrame {
 			pCen.add(blue[i]);
 			pCen.add(green[i]);
 			pCen.add(yellow[i]);
-		}
-		for (int i = 0; i < 40; i++) {
-			fields[i] = new JPanel();
-			fields[i].setBackground(Color.DARK_GRAY);
-			fields[i].setLayout(null);
-			pCen.add(fields[i]);
 		}
 
 		red[0].setBounds(20, 20, 30, 30);
@@ -395,30 +323,15 @@ public class MngJFrame extends JFrame {
 		fields[38].setBounds(20, 320, 30, 30);
 		fields[39].setBounds(20, 270, 30, 30);
 
-
-
-		// pCen.setLayout(new GridLayout(12,12));
-		// JButton array[] = new JButton[144];
-		// for(int i=0; i<144; i++){
-		// array[i] = new JButton(""+i);
-		// array[i].setVisible(true);
-		// pCen.add(array[i]);
-		// }
-
-		// ausgabe = new JTextArea(8,0);
+		
 		ausgabe.setEditable(false);
-		// ausgabe.setText("123");
 		mainPanel.add(new JScrollPane(ausgabe), BorderLayout.SOUTH);
 
 		
 		JPanel pWest = new JPanel();
-		JLabel b1 = new JLabel("Wuerfelergebnis");
-		ImageIcon erg1 = new ImageIcon("erg1.png"); 
 		pWest.setLayout(new BorderLayout());
-		wuerfel= new JButton("Ergebniss");
-		wuerfel.setSize(100,100);
 		
-		pWest.add(b1);
+		wuerfel.setSize(100,100);
 		pWest.add(wuerfel);
 		
 		
@@ -426,15 +339,19 @@ public class MngJFrame extends JFrame {
 
 		JPanel pEast = new JPanel();
 		pEast.setLayout(new GridLayout(6,1));
-		ziehen = new JButton("Figur ziehen");
+		
 		ziehen.setEnabled(false);
 		pEast.add(ziehen);
 		
-		kiWeiter = new JButton("ki weiter");
-		kiWeiter.setEnabled(false);
 		kiWeiter.addActionListener(e);
 		e.setButtonKiWeiter(kiWeiter);
 		pEast.add(kiWeiter);
+		
+		
+		aussetzen.setEnabled(true);
+		aussetzen.addActionListener(e);
+		e.setButtonAussetzen(aussetzen);
+		pEast.add(aussetzen);
 		
 		
 		mainPanel.add(pEast, BorderLayout.EAST);
@@ -446,6 +363,7 @@ public class MngJFrame extends JFrame {
 		fmSpiel.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		fmSpiel.setVisible(true);
 	}
+	
 	public void setIconNeu(int erg){
 		ImageIcon erg1 = new ImageIcon("erg1.png");
 		ImageIcon erg2 = new ImageIcon("erg2.png");
@@ -479,45 +397,7 @@ public class MngJFrame extends JFrame {
 		}
 	}
 	
-	public JPanel[] getBlue() {
-		return blue;
-	}
 
-	public JPanel[] getGreen() {
-		return green;
-	}
-
-	public JPanel[] getYellow() {
-		return yellow;
-	}
-
-	public JPanel getpCen() {
-		return pCen;
-	}
-
-	public JButton[] getFigurenBlue() {
-		return figurenBlue;
-	}
-
-	public JButton[] getFigurenGreen() {
-		return figurenGreen;
-	}
-
-	public JButton[] getFigurenYellow() {
-		return figurenYellow;
-	}
-
-	public iBediener getS() {
-		return s;
-	}
-
-	public JPanel[] getFields() {
-		return fields;
-	}
-
-	public JButton[] getFigurenRed() {
-		return figurenRed;
-	}
 
 	public static void main(String[] args) {
 
@@ -526,9 +406,6 @@ public class MngJFrame extends JFrame {
 
 	}
 
-	public JButton getZiehen() {
-		return ziehen;
-	}
 
 	public void figurButton(String farbe) {
 		farbe=farbe.toUpperCase();
@@ -593,5 +470,128 @@ public class MngJFrame extends JFrame {
 			figurenYellow[i].setVisible(false);
 		}
 	}
+	
+	public void KIFigurenZiehen(Spielfigur spielfigur){
+		int newPos=spielfigur.getSpielfeld().getPosition();
+		System.out.println("newpos: "+newPos);
+		switch(spielfigur.getFarbe()){
+		case RED:
+			if(spielfigur.getSpielfeld().getID().contains("E")){
+				int posEndfeld=Integer.parseInt(spielfigur.getSpielfeld().getID().substring(1));
+				red[posEndfeld+3].add(figurenRed[spielfigur.getID()-1]);
+				pCen.repaint();
+				return;
+			}
+			fields[newPos-1].add(figurenRed[spielfigur.getID()-1]);
+			break;
+		case BLUE:
+			if(spielfigur.getSpielfeld().getID().contains("E")){
+				int posEndfeld=Integer.parseInt(spielfigur.getSpielfeld().getID().substring(1));
+				red[posEndfeld+3].add(figurenBlue[spielfigur.getID()-1]);
+				pCen.repaint();
+				return;
+			}
+			fields[newPos-1].add(figurenBlue[spielfigur.getID()-1]);
+			break;
+		case GREEN:
+			if(spielfigur.getSpielfeld().getID().contains("E")){
+				int posEndfeld=Integer.parseInt(spielfigur.getSpielfeld().getID().substring(1));
+				red[posEndfeld+3].add(figurenGreen[spielfigur.getID()-1]);
+				pCen.repaint();
+				return;
+			}
+			fields[newPos-1].add(figurenGreen[spielfigur.getID()-1]);
+			break;
+		case YELLOW:
+			if(spielfigur.getSpielfeld().getID().contains("E")){
+				int posEndfeld=Integer.parseInt(spielfigur.getSpielfeld().getID().substring(1));
+				red[posEndfeld+3].add(figurenYellow[spielfigur.getID()-1]);
+				pCen.repaint();
+				return;
+			}
+			fields[newPos-1].add(figurenYellow[spielfigur.getID()-1]);
+			break;
+		}
+		
+		pCen.repaint();
+	}
+	
 
+	public JButton getZiehen() {
+		return ziehen;
+	}
+	
+	public JButton getKiWeiter() {
+		return kiWeiter;
+	}
+
+	public JFrame getDialogFenster() {
+		return dialogfenster;
+	}
+
+	public JTextField[] getNamen() {
+		return namen;
+	}
+
+	public JComboBox[] getFarbe() {
+		return farbwahl;
+	}
+
+	public JComboBox[] getKI() {
+		return kiwahl;
+	}
+
+	public iBediener getSpiel() {
+		return s;
+	}
+
+	public JTextArea getAusgabe() {
+		return ausgabe;
+	}
+
+	public JPanel[] getBlue() {
+		return blue;
+	}
+
+	public JPanel[] getGreen() {
+		return green;
+	}
+
+	public JPanel[] getYellow() {
+		return yellow;
+	}
+
+	public JPanel getpCen() {
+		return pCen;
+	}
+
+	public JButton[] getFigurenBlue() {
+		return figurenBlue;
+	}
+
+	public JButton[] getFigurenGreen() {
+		return figurenGreen;
+	}
+
+	public JButton[] getFigurenYellow() {
+		return figurenYellow;
+	}
+
+	public iBediener getS() {
+		return s;
+	}
+
+	public JPanel[] getFields() {
+		return fields;
+	}
+
+	public JButton[] getFigurenRed() {
+		return figurenRed;
+	}
+	public JButton getAussetzen() {
+		return aussetzen;
+	}
+	public JPanel[] getRed() {
+		return red;
+	}
 }

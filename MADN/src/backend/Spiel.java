@@ -24,14 +24,6 @@ public class Spiel implements iBediener, Serializable {
 	private ArrayList<Spieler> spieler;
 	private Spieler amZug;
 	private Spielfigur geschmissen;
-	public Spielfigur getGeschmissen() {
-		return geschmissen;
-	}
-
-	public void setGeschmissen(Spielfigur geschmissen) {
-		this.geschmissen = geschmissen;
-	}
-
 	private Regelwerk regelwerk;
 	private String dateiname;
 	private MngJFrame gui;
@@ -39,7 +31,7 @@ public class Spiel implements iBediener, Serializable {
 	private iDatenzugriff d = new DatenzugriffCSV();
 	private iDatenzugriff s = new DatenzugriffSerialisiert();
 
-	/*
+	/**
 	 * Konstruktor der Spielklasse Spielbrett, Regelwerk und Spieler werden
 	 * initialisiert
 	 */
@@ -94,15 +86,15 @@ public class Spiel implements iBediener, Serializable {
 	 * @param amZug
 	 */
 	public void setAmZug(Spieler amZug) {
+		
 		this.amZug = amZug;
 		System.out.println(getAmZug().toString() + " ist am Zug");
-		gui.getAusgabe().setText(gui.getAusgabe().getText()+"\n"+getAmZug().toString() + " ist am Zug");
+		if(gui != null)
+			gui.getAusgabe().setText(gui.getAusgabe().getText()+"\n"+getAmZug().toString() + " ist am Zug");
 		getAmZug().getWuerfel().wuerfeln();
-		// getAmZug().getWuerfel().wurf6();
-		// Zum Testen wird nur 2 gewuerfelt:
 //		getAmZug().getWuerfel().wuerfel2();
-		gui.getAusgabe().setText(gui.getAusgabe().getText()+"\n"+getAmZug().getWuerfel().getErgebnis()+" gewuerfelt");
-		
+		if(gui != null)
+			gui.getAusgabe().setText(gui.getAusgabe().getText()+"\n"+getAmZug().getWuerfel().getErgebnis()+" gewuerfelt");
 
 		if (amZug.getKi() != null) {
 			amZug.getKi().kiZug();
@@ -110,7 +102,7 @@ public class Spiel implements iBediener, Serializable {
 			System.out.println(amZug.getKienum());
 		}
 		
-		
+		setIconBild(getAmZug().getWuerfel().getErgebnis());
 		// System.out.println(brett.toString());
 	}
 
@@ -215,9 +207,10 @@ public class Spiel implements iBediener, Serializable {
 				break;
 			}
 		}
-
+		
 //		System.out.println(brett.toString());
 		setAmZug(spieler.get(0));
+		
 	}
 
 	@Override
@@ -323,12 +316,13 @@ public class Spiel implements iBediener, Serializable {
 	public void zugDurchfuehren(int ID) {
 		setGeschmissen(null);
 		regelwerk.aktionsWahl(getAmZug(), getAmZug().getSpielfigur(ID), getAmZug().getWuerfel().getErgebnis());
-		setIconBild(getAmZug().getWuerfel().getErgebnis());
+//		setIconBild(getAmZug().getWuerfel().getErgebnis());
 		System.out.println(brett.toString());
 	}
 	@Override
 	public int setIconBild(int erg){
-		gui.setIconNeu(erg);
+		if(gui != null)
+			gui.setIconNeu(erg);
 		return erg;
 	}
 	/**
@@ -547,6 +541,13 @@ public class Spiel implements iBediener, Serializable {
 
 	public MngJFrame getGui() {
 		return gui;
+	}
+	public Spielfigur getGeschmissen() {
+		return geschmissen;
+	}
+
+	public void setGeschmissen(Spielfigur geschmissen) {
+		this.geschmissen = geschmissen;
 	}
 
 }

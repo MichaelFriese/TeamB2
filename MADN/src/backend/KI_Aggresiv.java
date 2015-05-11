@@ -22,30 +22,42 @@ public class KI_Aggresiv extends KI implements Serializable {
 
 	@Override
 	public void kiZug() {
-
+		int id = 0;
+		boolean keinZug = false;
 		if (KIVersucheSchmeissen() != null) {
-//			System.out.println("nr1");
-			int id = KIVersucheSchmeissen().getID();
+			id = KIVersucheSchmeissen().getID();
 			super.getSpiel().zugDurchfuehren(id);
 
 		} else if (KIVersucheRauskommen() != null) {
-//			System.out.println("nr2");
-			int id = KIVersucheRauskommen().getID();
+			id = KIVersucheRauskommen().getID();
+			super.getSpiel().zugDurchfuehren(id);
+
+		} else if (KIVersucheZiehenStartpos() != null) {
+			id = KIVersucheZiehenStartpos().getID();
 			super.getSpiel().zugDurchfuehren(id);
 
 		} else if (KIVersucheInsEndfeld() != null) {
-			int id = KIVersucheInsEndfeld().getID();
+			id = KIVersucheInsEndfeld().getID();
+			super.getSpiel().zugDurchfuehren(id);
+
+		} else if (KIVersucheImEndfeldLaufen() != null) {
+			id = KIVersucheImEndfeldLaufen().getID();
 			super.getSpiel().zugDurchfuehren(id);
 
 		} else if (KIVersucheFigurZiehen() != null) {
-//			System.out.println("nr4");
-			int id = KIVersucheFigurZiehen().getID();
+			id = KIVersucheFigurZiehen().getID();
 			super.getSpiel().zugDurchfuehren(id);
 
-		} else
+		} else{
 			super.getSpiel().setNaechster(super.getSpieler());
-			setGezogenButton(true);
+			keinZug = true;
+		}
+		
+		if(!keinZug){
 			super.getSpiel().getGui().getKiWeiter().setEnabled(true);
+			super.getSpiel().getGui().KIFigurenZiehen(super.getSpieler().getSpielfigur(id));
+			setGezogenButton(true);
+		}
 	}
 
 }

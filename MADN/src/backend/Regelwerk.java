@@ -38,7 +38,7 @@ public class Regelwerk implements Serializable {
 	 */
 
 	public void aktionsWahl(Spieler spieler, Spielfigur spielfigur, int ergebnis) {
-		if (spielfigur.getSpielfeld().getID().contains("S")) { // && ergebnis==6){
+		if (spielfigur.getSpielfeld().getID().contains("S") && ergebnis==6){
 			rauskommen(spieler, spielfigur);
 		}else if(spielfigur.getSpielfeld().getID().contains("E")){
 			imEndfeldLaufen(spieler,spielfigur,ergebnis);
@@ -135,10 +135,14 @@ public class Regelwerk implements Serializable {
 	 */
 
 	public void figurZiehen(Spieler spieler, Spielfigur spielfigur) {
-		if (spielfigur.istAufStartfeld()) {
-			System.out.println(spielfigur.toString() + " sitzt noch auf Startfeld!");
+		if (spielfigur.istAufStartfeld() && spieler.getWuerfel().getErgebnis() == 6) {
+			rauskommen(spieler, spielfigur);
+			return;
+		}else if(spielfigur.istAufStartfeld() && spieler.getWuerfel().getErgebnis() != 6){
+			System.out.println("Rauskommen nicht moeglich!");
 			return;
 		}
+		
 		int erg = spieler.getWuerfel().getErgebnis();
 		System.err.println(erg);
 		int oldPos = spielfigur.getSpielfeld().getPosition() - 1;
@@ -271,10 +275,14 @@ public class Regelwerk implements Serializable {
 			break;
 		}
 
-		if (spieler.getWuerfel().getErgebnis() != 6 && spiel.getAmZug().getKi()==null) {
-			spiel.setNaechster(spieler);
-		} else if(spiel.getAmZug().getKi()==null){
-			spiel.setAmZug(spieler);
+		if(!spielBeendet(spieler)){
+			if (spieler.getWuerfel().getErgebnis() != 6 && spiel.getAmZug().getKi()==null) {
+				spiel.setNaechster(spieler);
+			} else if(spiel.getAmZug().getKi()==null){
+				spiel.setAmZug(spieler);
+			}
+		}else{
+			System.out.println(spieler.toString()+" hat gewonnen!");
 		}
 	}
 
@@ -356,7 +364,7 @@ public class Regelwerk implements Serializable {
 			break;
 		case BLUE:
 			if(posEndfeld+erg < 5){
-				for(int i=erg-1; i>0; i++){
+				for(int i=erg-1; i>0; i--){
 					if(spiel.getBrett().getSpielbrett()[9].getFelder()[posEndfeld+erg-i].getSpielfigur() != null){
 						System.err.println("besetzt/kein ueberspringen"+(posEndfeld+erg-i));
 						return;
@@ -373,7 +381,7 @@ public class Regelwerk implements Serializable {
 			break;
 		case GREEN:
 			if(posEndfeld+erg < 5){
-				for(int i=erg-1; i>0; i++){
+				for(int i=erg-1; i>0; i--){
 					if(spiel.getBrett().getSpielbrett()[19].getFelder()[posEndfeld+erg-i].getSpielfigur() != null){
 						System.out.println("besetzt/kein ueberspringen");
 						return;
@@ -390,7 +398,7 @@ public class Regelwerk implements Serializable {
 			break;
 		case YELLOW:
 			if(posEndfeld+erg < 5){
-				for(int i=erg-1; i>0; i++){
+				for(int i=erg-1; i>0; i--){
 					if(spiel.getBrett().getSpielbrett()[29].getFelder()[posEndfeld+erg-i].getSpielfigur() != null){
 						System.out.println("besetzt/kein ueberspringen");
 						return;
@@ -406,14 +414,61 @@ public class Regelwerk implements Serializable {
 			}
 			break;
 		}
-
-		if(gelaufen == true){
-			if (spieler.getWuerfel().getErgebnis() != 6 && spiel.getAmZug().getKi()==null) {
-				spiel.setNaechster(spieler);
-			} else if(spiel.getAmZug().getKi()==null){
-				spiel.setAmZug(spieler);
+		
+		if(!spielBeendet(spieler)){
+			if(gelaufen == true){
+				if (spieler.getWuerfel().getErgebnis() != 6 && spiel.getAmZug().getKi()==null) {
+					spiel.setNaechster(spieler);
+				} else if(spiel.getAmZug().getKi()==null){
+					spiel.setAmZug(spieler);
+				}
 			}
+		}else {
+			System.out.println(spieler.toString()+" hat gewonnen!");
 		}
+	}
+	
+	public boolean spielBeendet(Spieler spieler){
+		int anzBesetzt=0;
+		switch(spieler.getFarbe()){
+		case RED:
+			for(int i=1; i<5; i++){
+				if(spiel.getBrett().getSpielbrett()[39].getFelder()[i].getSpielfigur() != null){
+					anzBesetzt++;
+				}
+			}
+			if(anzBesetzt == 4) 
+				return true;
+			break;
+		case BLUE:
+			for(int i=1; i<5; i++){
+				if(spiel.getBrett().getSpielbrett()[9].getFelder()[i].getSpielfigur() != null){
+					anzBesetzt++;
+				}
+			}
+			if(anzBesetzt == 4) 
+				return true;
+			break;
+		case GREEN:
+			for(int i=1; i<5; i++){
+				if(spiel.getBrett().getSpielbrett()[19].getFelder()[i].getSpielfigur() != null){
+					anzBesetzt++;
+				}
+			}
+			if(anzBesetzt == 4) 
+				return true;
+			break;
+		case YELLOW:
+			for(int i=1; i<5; i++){
+				if(spiel.getBrett().getSpielbrett()[29].getFelder()[i].getSpielfigur() != null){
+					anzBesetzt++;
+				}
+			}
+			if(anzBesetzt == 4) 
+				return true;
+			break;
+		}
+		return false;
 	}
 
 }

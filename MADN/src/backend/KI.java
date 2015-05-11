@@ -35,11 +35,10 @@ public abstract class KI implements Serializable {
 	 */
 
 	public Spielfigur KIVersucheRauskommen() {
-//		System.out.println("raus");
 		for (int i = 0; i < spieler.getSpielfiguren().length; i++) {
 
-			Spielfigur s = spieler.getSpielfigur(i);
-			if (s.getSpielfeld().getID().contains("S")){ //&& spieler.getWuerfel().getErgebnis() == 6) {
+			Spielfigur s = spieler.getSpielfigurNeu(i);
+			if (s.getSpielfeld().getID().contains("S") && spieler.getWuerfel().getErgebnis() == 6) {
 				
 				if(spieler.getFarbe().equals(FarbEnum.RED) && spiel.getBrett().getSpielbrett()[0].getFelder()[0].getSpielfigur() != null){
 					if(spieler.getFarbe().equals(spiel.getBrett().getSpielbrett()[0].getFelder()[0].getSpielfigur().getFarbe())){
@@ -48,9 +47,8 @@ public abstract class KI implements Serializable {
 					}
 				}
 				if(spieler.getFarbe().equals(FarbEnum.BLUE) && spiel.getBrett().getSpielbrett()[10].getFelder()[0].getSpielfigur() != null){
-					System.out.println("hier");
 					if(spieler.getFarbe().equals(spiel.getBrett().getSpielbrett()[10].getFelder()[0].getSpielfigur().getFarbe())){
-						KIVersucheFigurZiehen();
+//						KIVersucheFigurZiehen();
 						return null;
 					}
 				}
@@ -81,7 +79,7 @@ public abstract class KI implements Serializable {
 	public Spielfigur KIVersucheInsEndfeld() {
 		for (int i = 0; i < spieler.getSpielfiguren().length; i++) {
 
-			Spielfigur s = spieler.getSpielfigur(i);
+			Spielfigur s = spieler.getSpielfigurNeu(i);
 
 //			int oldPos = spiel.getBrett().getSpielbrett()[s.getSpielfeld().getPosition()].getFelder()[0].getSpielfigur().getSpielfeld().getPosition();
 			int oldPos = s.getSpielfeld().getPosition();
@@ -121,15 +119,13 @@ public abstract class KI implements Serializable {
 	 * @return Spielfigur
 	 */
 	public Spielfigur KIVersucheSchmeissen() {
-//		System.out.println("schmeiss");
 		for (int i = 0; i < spieler.getSpielfiguren().length; i++) {
 
-			Spielfigur s = spieler.getSpielfigur(i);
+			Spielfigur s = spieler.getSpielfigurNeu(i);
 			int newPos = (s.getSpielfeld().getPosition() + spieler.getWuerfel().getErgebnis())-1;
 			
 			if(newPos < 40){
 				Spielfigur s2 = spiel.getBrett().getSpielbrett()[newPos].getFelder()[0].getSpielfigur();
-//				System.out.println("pos"+(s.getSpielfeld().getPosition() + spieler.getWuerfel().getErgebnis()));
 				if (s2 != null && !(s2.getFarbe().equals(s.getFarbe()))) {
 					return s;
 				}
@@ -147,26 +143,88 @@ public abstract class KI implements Serializable {
 
 		for (int i = 0; i < spieler.getSpielfiguren().length; i++) {
 
-			Spielfigur s = spieler.getSpielfigur(i);
+			Spielfigur s = spieler.getSpielfigurNeu(i);
 			int newPos = (s.getSpielfeld().getPosition() + spieler.getWuerfel().getErgebnis()) -1;
 			if(newPos < 40){
-				if (!(s.getSpielfeld().getID().contains("S")) && spiel.getBrett().getSpielbrett()[newPos].getFelder()[0].getSpielfigur() == null) {
+//				if (!(s.getSpielfeld().getID().contains("S")) && spiel.getBrett().getSpielbrett()[newPos].getFelder()[0].getSpielfigur() == null) {
+//					return s;
+//				} else{
+//					KIVersucheRauskommen();
+//				}
+				if (s.getSpielfeld().getPosition() != 0 && spiel.getBrett().getSpielbrett()[newPos].getFelder()[0].getSpielfigur() == null) {
 					return s;
-				} else{
-					KIVersucheRauskommen();
-				}
+				} 
 			}
 		}
 		return null;
 
 	}
+	
+	public Spielfigur KIVersucheImEndfeldLaufen(){
+		for (int k = 0; k < spieler.getSpielfiguren().length; k++) {
+			Spielfigur s = spieler.getSpielfigurNeu(k);
+
+			if(s.getSpielfeld().getID().contains("E")){
+				int posEndfeld=Integer.parseInt(s.getSpielfeld().getID().substring(1));
+				int erg = spieler.getWuerfel().getErgebnis();
+				if(posEndfeld+erg < 5){
+					switch (spieler.getFarbe()) {
+					case RED:
+						for(int i=erg-1; i>0; i--){
+							if(spiel.getBrett().getSpielbrett()[39].getFelder()[posEndfeld+erg-i].getSpielfigur() != null){
+								System.err.println("kein ueberspringen"+(posEndfeld+erg-i));
+								return null;
+							}
+						}
+						if(spiel.getBrett().getSpielbrett()[39].getFelder()[posEndfeld+erg].getSpielfigur() != null){
+							return null;
+						}
+						return s;
+					case BLUE:
+						
+						break;
+					case GREEN:
+			
+						break;
+					case YELLOW:
+			
+						break;
+					}
+				}
+			}
+		}
+		return null;
+	}
+	
+	public Spielfigur KIVersucheZiehenStartpos(){
+		for (int i = 0; i < spieler.getSpielfiguren().length; i++) {
+			Spielfigur s = spieler.getSpielfigurNeu(i);
+			switch (spieler.getFarbe()) {
+			case RED:
+				if(s.getSpielfeld().getPosition() == 1){
+					return s;
+				}
+				break;
+			case BLUE:
+				
+				break;
+			case GREEN:
+	
+				break;
+			case YELLOW:
+	
+				break;
+			}
+		}
+		return null;
+	}
+	
 
 	/**
 	 * getter für den Spieler
 	 * 
 	 * @return spieler
 	 */
-
 	public Spieler getSpieler() {
 		return spieler;
 	}
