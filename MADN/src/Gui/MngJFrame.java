@@ -13,11 +13,13 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
+import backend.FarbEnum;
 import backend.Spiel;
 import backend.Spieler.Spielfigur;
 import frontend.iBediener;
@@ -220,6 +222,7 @@ public class MngJFrame extends JFrame {
 	}
 
 	public void spielFenster() {
+		gewonnenDialog();
 		fmSpiel.add(mainPanel);
 		mainPanel.setLayout(new BorderLayout());
 		mainPanel.add(pCen, BorderLayout.CENTER);
@@ -473,7 +476,10 @@ public class MngJFrame extends JFrame {
 	
 	public void KIFigurenZiehen(Spielfigur spielfigur){
 		int newPos=spielfigur.getSpielfeld().getPosition();
-		System.out.println("newpos: "+newPos);
+		Spiel spiel = (Spiel) s;
+
+		
+
 		switch(spielfigur.getFarbe()){
 		case RED:
 			if(spielfigur.getSpielfeld().getID().contains("E")){
@@ -512,8 +518,61 @@ public class MngJFrame extends JFrame {
 			fields[newPos-1].add(figurenYellow[spielfigur.getID()-1]);
 			break;
 		}
+	
+		if(spiel.getGeschmissen() != null){
+			switch(spiel.getGeschmissen().getFarbe()){
+			case RED:
+				if(spiel.getGeschmissen().getSpielfeld().getID().contains("1")){
+					red[0].add(figurenRed[spiel.getGeschmissen().getID()-1]);
+				}else if(spiel.getGeschmissen().getSpielfeld().getID().contains("2")){
+					red[1].add(figurenRed[spiel.getGeschmissen().getID()-1]);
+				}else if(spiel.getGeschmissen().getSpielfeld().getID().contains("3")){
+					red[2].add(figurenRed[spiel.getGeschmissen().getID()-1]);
+				}else if(spiel.getGeschmissen().getSpielfeld().getID().contains("4")){
+					red[3].add(figurenRed[spiel.getGeschmissen().getID()-1]);
+				}
+				break;
+			case BLUE:
+				if(spiel.getGeschmissen().getSpielfeld().getID().contains("1")){
+					blue[0].add(figurenBlue[spiel.getGeschmissen().getID()-1]);
+				}else if(spiel.getGeschmissen().getSpielfeld().getID().contains("2")){
+					blue[1].add(figurenBlue[spiel.getGeschmissen().getID()-1]);
+				}else if(spiel.getGeschmissen().getSpielfeld().getID().contains("3")){
+					blue[2].add(figurenBlue[spiel.getGeschmissen().getID()-1]);
+				}else if(spiel.getGeschmissen().getSpielfeld().getID().contains("4")){
+					blue[3].add(figurenBlue[spiel.getGeschmissen().getID()-1]);
+				}
+				break;
+			case GREEN:
+				if(spiel.getGeschmissen().getSpielfeld().getID().contains("1")){
+					green[0].add(figurenGreen[spiel.getGeschmissen().getID()-1]);
+				}else if(spiel.getGeschmissen().getSpielfeld().getID().contains("2")){
+					green[1].add(figurenGreen[spiel.getGeschmissen().getID()-1]);
+				}else if(spiel.getGeschmissen().getSpielfeld().getID().contains("3")){
+					green[2].add(figurenGreen[spiel.getGeschmissen().getID()-1]);
+				}else if(spiel.getGeschmissen().getSpielfeld().getID().contains("4")){
+					green[3].add(figurenGreen[spiel.getGeschmissen().getID()-1]);
+				}
+				break;
+			case YELLOW:
+				if(spiel.getGeschmissen().getSpielfeld().getID().contains("1")){
+					yellow[0].add(figurenYellow[spiel.getGeschmissen().getID()-1]);
+				}else if(spiel.getGeschmissen().getSpielfeld().getID().contains("2")){
+					yellow[1].add(figurenYellow[spiel.getGeschmissen().getID()-1]);
+				}else if(spiel.getGeschmissen().getSpielfeld().getID().contains("3")){
+					yellow[2].add(figurenYellow[spiel.getGeschmissen().getID()-1]);
+				}else if(spiel.getGeschmissen().getSpielfeld().getID().contains("4")){
+					yellow[3].add(figurenYellow[spiel.getGeschmissen().getID()-1]);
+				}
+				break;
+			}
+		}
 		
 		pCen.repaint();
+	}
+	
+	public void gewonnenDialog(){
+		JOptionPane.showMessageDialog(null, "gewonnen", "Gewonnen", JOptionPane.INFORMATION_MESSAGE, null);
 	}
 	
 

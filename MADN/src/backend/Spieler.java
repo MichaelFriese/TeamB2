@@ -158,7 +158,9 @@ public class Spieler implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Spieler_" + getName() + "_" + getFarbe() + "_"+ getKienum();
+		if(getKienum() == null)
+			return "Spieler_" + getName() + "_" + getFarbe();
+		return "Spieler_" + getName() + "_" + getFarbe() + "_KI-"+ getKienum();
 	}
 
 	/**

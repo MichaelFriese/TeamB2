@@ -18,6 +18,7 @@ public class Regelwerk implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 	private Spiel spiel;
+	private boolean gewonnen;
 
 	/**
 	 * Konstruktor des Regelwekes, bekommt das Spiel uebergeben
@@ -134,7 +135,7 @@ public class Regelwerk implements Serializable {
 	 * @param spielfigur
 	 */
 
-	public void figurZiehen(Spieler spieler, Spielfigur spielfigur) {
+	private void figurZiehen(Spieler spieler, Spielfigur spielfigur) {
 		if (spielfigur.istAufStartfeld() && spieler.getWuerfel().getErgebnis() == 6) {
 			rauskommen(spieler, spielfigur);
 			return;
@@ -341,7 +342,7 @@ public class Regelwerk implements Serializable {
 	}
 
 	// TODO: Methode im Endfeld vorlaufen!
-	public void imEndfeldLaufen(Spieler spieler, Spielfigur spielfigur, int erg){
+	private void imEndfeldLaufen(Spieler spieler, Spielfigur spielfigur, int erg){
 		int posEndfeld=Integer.parseInt(spielfigur.getSpielfeld().getID().substring(1));
 		boolean gelaufen = false;
 		switch (spielfigur.getFarbe()) {
@@ -428,7 +429,7 @@ public class Regelwerk implements Serializable {
 		}
 	}
 	
-	public boolean spielBeendet(Spieler spieler){
+	private boolean spielBeendet(Spieler spieler){
 		int anzBesetzt=0;
 		switch(spieler.getFarbe()){
 		case RED:
@@ -437,8 +438,10 @@ public class Regelwerk implements Serializable {
 					anzBesetzt++;
 				}
 			}
-			if(anzBesetzt == 4) 
+			if(anzBesetzt == 4) {
+				gewonnen = true;
 				return true;
+			}
 			break;
 		case BLUE:
 			for(int i=1; i<5; i++){
@@ -446,8 +449,10 @@ public class Regelwerk implements Serializable {
 					anzBesetzt++;
 				}
 			}
-			if(anzBesetzt == 4) 
+			if(anzBesetzt == 4){
+				gewonnen = true;
 				return true;
+			}
 			break;
 		case GREEN:
 			for(int i=1; i<5; i++){
@@ -455,8 +460,10 @@ public class Regelwerk implements Serializable {
 					anzBesetzt++;
 				}
 			}
-			if(anzBesetzt == 4) 
+			if(anzBesetzt == 4){
+				gewonnen = true;
 				return true;
+			}
 			break;
 		case YELLOW:
 			for(int i=1; i<5; i++){
@@ -464,11 +471,17 @@ public class Regelwerk implements Serializable {
 					anzBesetzt++;
 				}
 			}
-			if(anzBesetzt == 4) 
+			if(anzBesetzt == 4){
+				gewonnen = true;
 				return true;
+			}
 			break;
 		}
 		return false;
+	}
+	
+	public boolean getGewonnen(){
+		return gewonnen;
 	}
 
 }

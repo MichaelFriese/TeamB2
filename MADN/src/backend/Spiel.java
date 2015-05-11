@@ -86,13 +86,13 @@ public class Spiel implements iBediener, Serializable {
 	 * @param amZug
 	 */
 	public void setAmZug(Spieler amZug) {
-		
 		this.amZug = amZug;
 		System.out.println(getAmZug().toString() + " ist am Zug");
 		if(gui != null)
 			gui.getAusgabe().setText(gui.getAusgabe().getText()+"\n"+getAmZug().toString() + " ist am Zug");
 		getAmZug().getWuerfel().wuerfeln();
 //		getAmZug().getWuerfel().wuerfel2();
+//		getAmZug().getWuerfel().wurf6();
 		if(gui != null)
 			gui.getAusgabe().setText(gui.getAusgabe().getText()+"\n"+getAmZug().getWuerfel().getErgebnis()+" gewuerfelt");
 

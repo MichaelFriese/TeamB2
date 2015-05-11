@@ -248,4 +248,5 @@ public abstract class KI implements Serializable {
 	}
 	public abstract void kiZug();
 
+
 }

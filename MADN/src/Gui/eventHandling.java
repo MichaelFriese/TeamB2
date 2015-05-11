@@ -202,9 +202,7 @@ public class eventHandling extends JFrame implements ActionListener, iBediener,C
 		
 
 		if (EventSource == figurenRot[0]) {
-			if (lokalAmZug.getFarbe().equals(FarbEnum.RED)) {
-				// figurenRot[0].setFont(new
-				// Font(figurenRot[0].getFont().getName(),Font.BOLD,figurenRot[0].getFont().getSize()));
+			if (lokalAmZug.getFarbe().equals(FarbEnum.RED) && lokalAmZug.getKi()==null) {
 				frame.getZiehen().setEnabled(true);
 				spielfigurID = 1;
 				aktuelleFigur = figurenRot[0];
@@ -212,7 +210,7 @@ public class eventHandling extends JFrame implements ActionListener, iBediener,C
 		}
 
 		if (EventSource == figurenRot[1]) {
-			if (lokalAmZug.getFarbe().equals(FarbEnum.RED)) {
+			if (lokalAmZug.getFarbe().equals(FarbEnum.RED) && lokalAmZug.getKi()==null) {
 				frame.getZiehen().setEnabled(true);
 				spielfigurID = 2;
 				aktuelleFigur = figurenRot[1];
@@ -220,7 +218,7 @@ public class eventHandling extends JFrame implements ActionListener, iBediener,C
 		}
 
 		if (EventSource == figurenRot[2]) {
-			if (lokalAmZug.getFarbe().equals(FarbEnum.RED)) {
+			if (lokalAmZug.getFarbe().equals(FarbEnum.RED) && lokalAmZug.getKi()==null) {
 				frame.getZiehen().setEnabled(true);
 				spielfigurID = 3;
 				aktuelleFigur = figurenRot[2];
@@ -228,7 +226,7 @@ public class eventHandling extends JFrame implements ActionListener, iBediener,C
 		}
 
 		if (EventSource == figurenRot[3]) {
-			if (lokalAmZug.getFarbe().equals(FarbEnum.RED)) {
+			if (lokalAmZug.getFarbe().equals(FarbEnum.RED) && lokalAmZug.getKi()==null) {
 				frame.getZiehen().setEnabled(true);
 				spielfigurID = 4;
 				aktuelleFigur = figurenRot[3];
@@ -236,7 +234,7 @@ public class eventHandling extends JFrame implements ActionListener, iBediener,C
 		}
 
 		if (EventSource == figurenBlau[0]) {
-			if (lokalAmZug.getFarbe().equals(FarbEnum.BLUE)) {
+			if (lokalAmZug.getFarbe().equals(FarbEnum.BLUE) && lokalAmZug.getKi()==null) {
 				frame.getZiehen().setEnabled(true);
 				spielfigurID = 1;
 				aktuelleFigur = figurenBlau[0];
@@ -244,7 +242,7 @@ public class eventHandling extends JFrame implements ActionListener, iBediener,C
 		}
 
 		if (EventSource == figurenBlau[1]) {
-			if (lokalAmZug.getFarbe().equals(FarbEnum.BLUE)) {
+			if (lokalAmZug.getFarbe().equals(FarbEnum.BLUE) && lokalAmZug.getKi()==null) {
 				frame.getZiehen().setEnabled(true);
 				spielfigurID = 2;
 				aktuelleFigur = figurenBlau[1];
@@ -252,7 +250,7 @@ public class eventHandling extends JFrame implements ActionListener, iBediener,C
 		}
 
 		if (EventSource == figurenBlau[2]) {
-			if (lokalAmZug.getFarbe().equals(FarbEnum.BLUE)) {
+			if (lokalAmZug.getFarbe().equals(FarbEnum.BLUE) && lokalAmZug.getKi()==null) {
 				frame.getZiehen().setEnabled(true);
 				spielfigurID = 3;
 				aktuelleFigur = figurenBlau[2];
@@ -260,7 +258,7 @@ public class eventHandling extends JFrame implements ActionListener, iBediener,C
 		}
 
 		if (EventSource == figurenBlau[3]) {
-			if (lokalAmZug.getFarbe().equals(FarbEnum.BLUE)) {
+			if (lokalAmZug.getFarbe().equals(FarbEnum.BLUE) && lokalAmZug.getKi()==null) {
 				frame.getZiehen().setEnabled(true);
 				spielfigurID = 4;
 				aktuelleFigur = figurenBlau[3];
@@ -268,7 +266,7 @@ public class eventHandling extends JFrame implements ActionListener, iBediener,C
 		}
 
 		if (EventSource == figurenGelb[0]) {
-			if (lokalAmZug.getFarbe().equals(FarbEnum.YELLOW)) {
+			if (lokalAmZug.getFarbe().equals(FarbEnum.YELLOW) && lokalAmZug.getKi()==null) {
 				frame.getZiehen().setEnabled(true);
 				spielfigurID = 1;
 				aktuelleFigur = figurenGelb[0];
@@ -276,7 +274,7 @@ public class eventHandling extends JFrame implements ActionListener, iBediener,C
 		}
 
 		if (EventSource == figurenGelb[1]) {
-			if (lokalAmZug.getFarbe().equals(FarbEnum.YELLOW)) {
+			if (lokalAmZug.getFarbe().equals(FarbEnum.YELLOW) && lokalAmZug.getKi()==null) {
 				frame.getZiehen().setEnabled(true);
 				spielfigurID = 2;
 				aktuelleFigur = figurenGelb[1];
@@ -284,7 +282,7 @@ public class eventHandling extends JFrame implements ActionListener, iBediener,C
 		}
 
 		if (EventSource == figurenGelb[2]) {
-			if (lokalAmZug.getFarbe().equals(FarbEnum.YELLOW)) {
+			if (lokalAmZug.getFarbe().equals(FarbEnum.YELLOW) && lokalAmZug.getKi()==null) {
 				frame.getZiehen().setEnabled(true);
 				spielfigurID = 3;
 				aktuelleFigur = figurenGelb[2];
@@ -292,7 +290,7 @@ public class eventHandling extends JFrame implements ActionListener, iBediener,C
 		}
 
 		if (EventSource == figurenGelb[3]) {
-			if (lokalAmZug.getFarbe().equals(FarbEnum.YELLOW)) {
+			if (lokalAmZug.getFarbe().equals(FarbEnum.YELLOW) && lokalAmZug.getKi()==null) {
 				frame.getZiehen().setEnabled(true);
 				spielfigurID = 4;
 				aktuelleFigur = figurenGelb[3];
@@ -300,7 +298,7 @@ public class eventHandling extends JFrame implements ActionListener, iBediener,C
 		}
 
 		if (EventSource == figurenGruen[0]) {
-			if (lokalAmZug.getFarbe().equals(FarbEnum.GREEN)) {
+			if (lokalAmZug.getFarbe().equals(FarbEnum.GREEN) && lokalAmZug.getKi()==null) {
 				frame.getZiehen().setEnabled(true);
 				spielfigurID = 1;
 				aktuelleFigur = figurenGruen[0];
@@ -308,7 +306,7 @@ public class eventHandling extends JFrame implements ActionListener, iBediener,C
 		}
 
 		if (EventSource == figurenGruen[1]) {
-			if (lokalAmZug.getFarbe().equals(FarbEnum.GREEN)) {
+			if (lokalAmZug.getFarbe().equals(FarbEnum.GREEN) && lokalAmZug.getKi()==null) {
 				frame.getZiehen().setEnabled(true);
 				spielfigurID = 2;
 				aktuelleFigur = figurenGruen[1];
@@ -316,7 +314,7 @@ public class eventHandling extends JFrame implements ActionListener, iBediener,C
 		}
 
 		if (EventSource == figurenGruen[2]) {
-			if (lokalAmZug.getFarbe().equals(FarbEnum.GREEN)) {
+			if (lokalAmZug.getFarbe().equals(FarbEnum.GREEN) && lokalAmZug.getKi()==null) {
 				frame.getZiehen().setEnabled(true);
 				spielfigurID = 3;
 				aktuelleFigur = figurenGruen[2];
@@ -324,7 +322,7 @@ public class eventHandling extends JFrame implements ActionListener, iBediener,C
 		}
 
 		if (EventSource == figurenGruen[3]) {
-			if (lokalAmZug.getFarbe().equals(FarbEnum.GREEN)) {
+			if (lokalAmZug.getFarbe().equals(FarbEnum.GREEN) && lokalAmZug.getKi()==null) {
 				frame.getZiehen().setEnabled(true);
 				spielfigurID = 4;
 				aktuelleFigur = figurenGruen[3];
@@ -446,6 +444,10 @@ public class eventHandling extends JFrame implements ActionListener, iBediener,C
 			
 			frame.getpCen().repaint();
 			ziehen.setEnabled(false);
+			if(sp.getRegelwerk().getGewonnen()){
+				frame.gewonnenDialog();
+			}
+			
 		}
 		
 		if(EventSource == aussetzen){

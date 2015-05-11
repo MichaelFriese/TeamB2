@@ -50,10 +50,10 @@ public class Wuerfel implements Serializable {
 	 * Pseudowuerfel zum testen 
 	 * @return  6
 	 */
-	public int wurf6(){
+	public void wurf6(){
 		System.out.println("gewuerfelt");
 		ergebnis = 6;
-		return 6;
+//		return 6;
 	}
 }
 	
