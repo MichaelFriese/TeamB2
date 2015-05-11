@@ -8,6 +8,8 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.Serializable;
 
+import com.itextpdf.text.DocumentException;
+
 import frontend.iDatenzugriff;
 
 public class DatenzugriffCSV implements iDatenzugriff, Serializable {
@@ -40,7 +42,7 @@ public class DatenzugriffCSV implements iDatenzugriff, Serializable {
 			try{
 				s = (String)o;
 			}catch(Exception e){
-				System.err.println("Kein String übergeben");
+				System.err.println("Kein String ï¿½bergeben");
 			}
 			pw.write(s);
 			pw.flush();
@@ -82,4 +84,10 @@ public class DatenzugriffCSV implements iDatenzugriff, Serializable {
 		}
 		return null;
 		}
+	@Override
+	public void spielfeld(Spiel spiel) throws FileNotFoundException,
+			DocumentException {
+		// TODO Auto-generated method stub
+		
+	}
 }
