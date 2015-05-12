@@ -55,11 +55,12 @@ public class DatenzugriffSerialisiert implements iDatenzugriff, Serializable {
 		Object s=null;
 		ObjectInputStream ois = null;
 		try{
-			ois = new ObjectInputStream ( new FileInputStream (dateiname+".ser"));
+			ois = new ObjectInputStream ( new FileInputStream (dateiname));
 		
 			try {
 				s = ois.readObject();
 				System.out.println("Spiel geladen");
+				System.out.println(s);
 				return s;
 				
 			} catch (ClassNotFoundException e) {
@@ -67,7 +68,7 @@ public class DatenzugriffSerialisiert implements iDatenzugriff, Serializable {
 			}
 		}
 		catch (FileNotFoundException e) {
-			System.err.println("konnte 'out.ser' nicht finden");
+			System.err.println("konnte 'Datei' nicht finden");
 		} catch (IOException e) {
 			System.err.println("Fehler bei der Ein-/Ausgabe" + e);
 

@@ -56,6 +56,7 @@ public class MngJFrame extends JFrame implements Serializable{
 	private JButton[] figurenGreen;
 	private JButton[] figurenYellow;
 	private JButton PDF;
+	private JButton Hauptmenu;
 
 	private eventHandling e;
 	private iBediener s;
@@ -369,6 +370,11 @@ public class MngJFrame extends JFrame implements Serializable{
 		PDF.addActionListener(e);
 		e.setButtonPDF(PDF);
 		pEast.add(PDF);
+		
+//		Hauptmenu.setEnabled(true);
+//		Hauptmenu.addActionListener(e);
+//		e.setButtonHauptmenu(Hauptmenu);
+//		pEast.add(Hauptmenu);
 		
 		mainPanel.add(pEast, BorderLayout.EAST);
 		ziehen.addActionListener(e);

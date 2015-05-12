@@ -28,6 +28,7 @@ import javax.swing.event.CaretListener;
 import com.itextpdf.text.DocumentException;
 
 import backend.DatenzugriffPDF;
+import backend.DatenzugriffSerialisiert;
 import backend.FarbEnum;
 import backend.Spiel;
 import backend.Spieler;
@@ -63,11 +64,15 @@ public class eventHandling extends JFrame implements ActionListener, iBediener, 
 	private JButton buttonKiWeiter;
 	private JButton aussetzen;
 	private JButton ButtonPDF;
+	private JButton ButtonHauptmenu;
 	
 	public void setButtonPDF(JButton PDF){
 		this.ButtonPDF = PDF;
 	}
 
+	public void setButtonHauptmenu(JButton Hauptmenu){
+		this.ButtonHauptmenu=Hauptmenu;
+	}
 	public void setButtonAussetzen(JButton aussetzen) {
 		this.aussetzen = aussetzen;
 	}
@@ -221,6 +226,7 @@ public class eventHandling extends JFrame implements ActionListener, iBediener, 
 		if (EventSource == ButtonStart) {
 
 			frame.dialogFenster();
+			frame.hide();
 		}
 		if (EventSource == ButtonUeber) {
 			{
@@ -248,9 +254,10 @@ public class eventHandling extends JFrame implements ActionListener, iBediener, 
 		}
 
 		if (EventSource == ButtonLaden) {
+			DatenzugriffSerialisiert s = new DatenzugriffSerialisiert();
 			JFileChooser chooser = new JFileChooser();
 			chooser.showOpenDialog(null);
-			laden(chooser.getSelectedFile().getName(), "csv");
+			s.laden("Spielstandser");
 		}
 
 		if (EventSource == figurenRot[0]) {
