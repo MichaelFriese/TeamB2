@@ -87,7 +87,7 @@ public class Spiel implements iBediener, Serializable {
 	 */
 	public void setAmZug(Spieler amZug) {
 		this.amZug = amZug;
-		System.out.println(getAmZug().toString() + " ist am Zug");
+//		System.out.println(getAmZug().toString() + " ist am Zug");
 		if(gui != null)
 			gui.getAusgabe().setText(gui.getAusgabe().getText()+"\n"+getAmZug().toString() + " ist am Zug");
 		getAmZug().getWuerfel().wuerfeln();
@@ -99,7 +99,7 @@ public class Spiel implements iBediener, Serializable {
 		if (amZug.getKi() != null) {
 			amZug.getKi().kiZug();
 		} else {
-			System.out.println(amZug.getKienum());
+//			System.out.println(amZug.getKienum());
 		}
 		
 		setIconBild(getAmZug().getWuerfel().getErgebnis());
@@ -185,7 +185,6 @@ public class Spiel implements iBediener, Serializable {
 					s.getSpielfigur(i+1).setSpielfeld(brett.getSpielbrett()[0].getFelder()[i + 1]);
 					brett.getSpielbrett()[0].getFelder()[i + 1].setSpielfigur(s.getSpielfigur(i + 1));
 				}
-//				s.getSpielfigur(4).setSpielfeld(brett.getSpielbrett()[0].getFelder()[4]);
 				break;
 			case BLUE:
 				for (int i = 0; i < s.getSpielfiguren().length; i++) {
@@ -317,7 +316,7 @@ public class Spiel implements iBediener, Serializable {
 		setGeschmissen(null);
 		regelwerk.aktionsWahl(getAmZug(), getAmZug().getSpielfigur(ID), getAmZug().getWuerfel().getErgebnis());
 //		setIconBild(getAmZug().getWuerfel().getErgebnis());
-		System.out.println(brett.toString());
+//		System.out.println(brett.toString());
 	}
 	@Override
 	public int setIconBild(int erg){
@@ -393,7 +392,7 @@ public class Spiel implements iBediener, Serializable {
 			// hier Spieler am Zug einbauen!!
 			// i++;
 			if (a[0].contains("AmZug")) {
-				System.err.println(a[3]);
+//				System.err.println(a[3]);
 				for (Spieler searched : this.getSpieler()) {
 
 					if ((searched.getFarbe() == FarbEnum.RED && a[3].equals("RED"))) {
@@ -409,7 +408,7 @@ public class Spiel implements iBediener, Serializable {
 						setAmZug(searched);
 					}
 				}
-				System.err.println(getAmZug());
+//				System.err.println(getAmZug());
 			}
 			a = x[i].split("_");
 			// hier SPieler am zug einbauen!!

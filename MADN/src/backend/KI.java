@@ -48,7 +48,7 @@ public abstract class KI implements Serializable {
 				}
 				if(spieler.getFarbe().equals(FarbEnum.BLUE) && spiel.getBrett().getSpielbrett()[10].getFelder()[0].getSpielfigur() != null){
 					if(spieler.getFarbe().equals(spiel.getBrett().getSpielbrett()[10].getFelder()[0].getSpielfigur().getFarbe())){
-//						KIVersucheFigurZiehen();
+						KIVersucheFigurZiehen();
 						return null;
 					}
 				}
@@ -144,14 +144,14 @@ public abstract class KI implements Serializable {
 		for (int i = 0; i < spieler.getSpielfiguren().length; i++) {
 
 			Spielfigur s = spieler.getSpielfigurNeu(i);
-			int newPos = (s.getSpielfeld().getPosition() + spieler.getWuerfel().getErgebnis()) -1;
+			int newPos = (s.getSpielfeld().getPosition() + spieler.getWuerfel().getErgebnis());
 			if(newPos < 40){
 //				if (!(s.getSpielfeld().getID().contains("S")) && spiel.getBrett().getSpielbrett()[newPos].getFelder()[0].getSpielfigur() == null) {
 //					return s;
 //				} else{
 //					KIVersucheRauskommen();
 //				}
-				if (s.getSpielfeld().getPosition() != 0 && spiel.getBrett().getSpielbrett()[newPos].getFelder()[0].getSpielfigur() == null) {
+				if (s.getSpielfeld().getPosition() != 0 && spiel.getBrett().getSpielbrett()[newPos-1].getFelder()[0].getSpielfigur() == null) {
 					return s;
 				} 
 			}
@@ -172,7 +172,7 @@ public abstract class KI implements Serializable {
 					case RED:
 						for(int i=erg-1; i>0; i--){
 							if(spiel.getBrett().getSpielbrett()[39].getFelder()[posEndfeld+erg-i].getSpielfigur() != null){
-								System.err.println("kein ueberspringen"+(posEndfeld+erg-i));
+//								System.err.println("kein ueberspringen"+(posEndfeld+erg-i));
 								return null;
 							}
 						}
@@ -181,14 +181,38 @@ public abstract class KI implements Serializable {
 						}
 						return s;
 					case BLUE:
-						
-						break;
+						for(int i=erg-1; i>0; i--){
+							if(spiel.getBrett().getSpielbrett()[9].getFelder()[posEndfeld+erg-i].getSpielfigur() != null){
+//								System.err.println("kein ueberspringen"+(posEndfeld+erg-i));
+								return null;
+							}
+						}
+						if(spiel.getBrett().getSpielbrett()[9].getFelder()[posEndfeld+erg].getSpielfigur() != null){
+							return null;
+						}
+						return s;
 					case GREEN:
-			
-						break;
+						for(int i=erg-1; i>0; i--){
+							if(spiel.getBrett().getSpielbrett()[19].getFelder()[posEndfeld+erg-i].getSpielfigur() != null){
+//								System.err.println("kein ueberspringen"+(posEndfeld+erg-i));
+								return null;
+							}
+						}
+						if(spiel.getBrett().getSpielbrett()[19].getFelder()[posEndfeld+erg].getSpielfigur() != null){
+							return null;
+						}
+						return s;
 					case YELLOW:
-			
-						break;
+						for(int i=erg-1; i>0; i--){
+							if(spiel.getBrett().getSpielbrett()[29].getFelder()[posEndfeld+erg-i].getSpielfigur() != null){
+//								System.err.println("kein ueberspringen"+(posEndfeld+erg-i));
+								return null;
+							}
+						}
+						if(spiel.getBrett().getSpielbrett()[29].getFelder()[posEndfeld+erg].getSpielfigur() != null){
+							return null;
+						}
+						return s;
 					}
 				}
 			}
@@ -206,13 +230,19 @@ public abstract class KI implements Serializable {
 				}
 				break;
 			case BLUE:
-				
+				if(s.getSpielfeld().getPosition() == 11){
+					return s;
+				}
 				break;
 			case GREEN:
-	
+				if(s.getSpielfeld().getPosition() == 21){
+					return s;
+				}
 				break;
 			case YELLOW:
-	
+				if(s.getSpielfeld().getPosition() == 31){
+					return s;
+				}
 				break;
 			}
 		}

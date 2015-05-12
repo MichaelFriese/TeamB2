@@ -58,7 +58,9 @@ public class Regelwerk implements Serializable {
 				spielfigur.getSpielfeld().setSpielfigur(spielfigur);
 			} else if (spiel.getBrett().getSpielbrett()[0].getFelder()[0].getSpielfigur() != null) {
 				if (spieler.getFarbe().equals(spiel.getBrett().getSpielbrett()[0].getFelder()[0].getSpielfigur().getFarbe())) {
-					System.out.println("Feld von eigener Spielfigur besetzt!");
+//					System.out.println("Feld von eigener Spielfigur besetzt!");
+					if(spiel.getGui() != null)
+						spiel.getGui().getAusgabe().setText(spiel.getGui().getAusgabe().getText()+"\n"+ "Feld von eigener Spielfigur besetzt!");
 				} else {
 					schmeissen(spiel.getBrett().getSpielbrett()[0].getFelder()[0].getSpielfigur());
 					spiel.getBrett().getSpielbrett()[0].getFelder()[spielfigur.getID()].setSpielfigur(null);
@@ -77,7 +79,9 @@ public class Regelwerk implements Serializable {
 				spielfigur.getSpielfeld().setSpielfigur(spielfigur);
 			} else if (spiel.getBrett().getSpielbrett()[10].getFelder()[0].getSpielfigur() != null) {
 				if (spieler.getFarbe().equals(spiel.getBrett().getSpielbrett()[10].getFelder()[0].getSpielfigur().getFarbe())) {
-					System.out.println("Feld von eigener Spielfigur besetzt!");
+//					System.out.println("Feld von eigener Spielfigur besetzt!");
+					if(spiel.getGui() != null)
+						spiel.getGui().getAusgabe().setText(spiel.getGui().getAusgabe().getText()+"\n"+ "Feld von eigener Spielfigur besetzt!");
 				} else {
 					schmeissen(spiel.getBrett().getSpielbrett()[10].getFelder()[0].getSpielfigur());
 					spiel.getBrett().getSpielbrett()[10].getFelder()[spielfigur.getID()].setSpielfigur(null);
@@ -95,7 +99,9 @@ public class Regelwerk implements Serializable {
 				spielfigur.getSpielfeld().setSpielfigur(spielfigur);
 			} else if (spiel.getBrett().getSpielbrett()[20].getFelder()[0].getSpielfigur() != null) {
 				if (spieler.getFarbe().equals(spiel.getBrett().getSpielbrett()[20].getFelder()[0].getSpielfigur().getFarbe())) {
-					System.out.println("Feld von eigener Spielfigur besetzt!");
+//					System.out.println("Feld von eigener Spielfigur besetzt!");
+					if(spiel.getGui() != null)
+						spiel.getGui().getAusgabe().setText(spiel.getGui().getAusgabe().getText()+"\n"+ "Feld von eigener Spielfigur besetzt!");
 				} else {
 					schmeissen(spiel.getBrett().getSpielbrett()[20].getFelder()[0].getSpielfigur());
 					spiel.getBrett().getSpielbrett()[20].getFelder()[spielfigur.getID()].setSpielfigur(null);
@@ -113,7 +119,9 @@ public class Regelwerk implements Serializable {
 				spielfigur.getSpielfeld().setSpielfigur(spielfigur);
 			} else if (spiel.getBrett().getSpielbrett()[30].getFelder()[0].getSpielfigur() != null) {
 				if (spieler.getFarbe().equals(spiel.getBrett().getSpielbrett()[30].getFelder()[0].getSpielfigur().getFarbe())) {
-					System.out.println("Feld von eigener Spielfigur besetzt!");
+//					System.out.println("Feld von eigener Spielfigur besetzt!");
+					if(spiel.getGui() != null)
+						spiel.getGui().getAusgabe().setText(spiel.getGui().getAusgabe().getText()+"\n"+ "Feld von eigener Spielfigur besetzt!");
 				} else {
 					schmeissen(spiel.getBrett().getSpielbrett()[30].getFelder()[0].getSpielfigur());
 					spiel.getBrett().getSpielbrett()[30].getFelder()[spielfigur.getID()].setSpielfigur(null);
@@ -140,12 +148,11 @@ public class Regelwerk implements Serializable {
 			rauskommen(spieler, spielfigur);
 			return;
 		}else if(spielfigur.istAufStartfeld() && spieler.getWuerfel().getErgebnis() != 6){
-			System.out.println("Rauskommen nicht moeglich!");
+//			System.out.println("Rauskommen nicht moeglich!");
+			
 			return;
 		}
 		
-		int erg = spieler.getWuerfel().getErgebnis();
-		System.err.println(erg);
 		int oldPos = spielfigur.getSpielfeld().getPosition() - 1;
 		int newPos = oldPos + spieler.getWuerfel().getErgebnis();
 
@@ -163,7 +170,6 @@ public class Regelwerk implements Serializable {
 					
 				}
 				return;
-//				break;
 			case BLUE:
 				if (newPos >= 10) {
 					newPos -= 9;
@@ -200,7 +206,9 @@ public class Regelwerk implements Serializable {
 			spielfigur.getSpielfeld().setSpielfigur(spielfigur);
 		} else if (spiel.getBrett().getSpielbrett()[newPos].getFelder()[0].getSpielfigur() != null) {
 			if (spieler.getFarbe().equals(spiel.getBrett().getSpielbrett()[newPos].getFelder()[0].getSpielfigur().getFarbe())) {
-				System.out.println("Feld von eigener Spielfigur besetzt!");
+//				System.out.println("Feld von eigener Spielfigur besetzt!");
+				if(spiel.getGui() != null)
+					spiel.getGui().getAusgabe().setText(spiel.getGui().getAusgabe().getText()+"\n"+ "Feld von eigener Spielfigur besetzt!");
 				return;
 			} else {
 				schmeissen(spiel.getBrett().getSpielbrett()[newPos].getFelder()[0].getSpielfigur());
@@ -233,7 +241,9 @@ public class Regelwerk implements Serializable {
 		case RED:
 			for (int i = 1; i <= newPos; i++) {
 				if (spiel.getBrett().getSpielbrett()[39].getFelder()[i].getSpielfigur() != null) {
-					System.out.println("Ueberspringen nicht moeglich");
+//					System.out.println("Ueberspringen nicht moeglich");
+					if(spiel.getGui() != null)
+						spiel.getGui().getAusgabe().setText(spiel.getGui().getAusgabe().getText()+"\n"+ "Ueberspringen im Endfeld nicht moeglich!");
 					return;
 				}
 			}
@@ -244,7 +254,9 @@ public class Regelwerk implements Serializable {
 		case BLUE:
 			for (int i = 1; i <= newPos; i++) {
 				if (spiel.getBrett().getSpielbrett()[9].getFelder()[i].getSpielfigur() != null) {
-					System.out.println("Ueberspringen nicht moeglich");
+//					System.out.println("Ueberspringen nicht moeglich");
+					if(spiel.getGui() != null)
+						spiel.getGui().getAusgabe().setText(spiel.getGui().getAusgabe().getText()+"\n"+ "Ueberspringen im Endfeld nicht moeglich!");
 					return;
 				}
 			}
@@ -255,7 +267,9 @@ public class Regelwerk implements Serializable {
 		case GREEN:
 			for (int i = 1; i <= newPos; i++) {
 				if (spiel.getBrett().getSpielbrett()[19].getFelder()[i].getSpielfigur() != null) {
-					System.out.println("Ueberspringen nicht moeglich");
+//					System.out.println("Ueberspringen nicht moeglich");
+					if(spiel.getGui() != null)
+						spiel.getGui().getAusgabe().setText(spiel.getGui().getAusgabe().getText()+"\n"+ "Ueberspringen im Endfeld nicht moeglich!");
 					return;
 				}
 			}
@@ -266,7 +280,9 @@ public class Regelwerk implements Serializable {
 		case YELLOW:
 			for (int i = 1; i <= newPos; i++) {
 				if (spiel.getBrett().getSpielbrett()[29].getFelder()[i].getSpielfigur() != null) {
-					System.out.println("Ueberspringen nicht moeglich");
+//					System.out.println("Ueberspringen nicht moeglich");
+					if(spiel.getGui() != null)
+						spiel.getGui().getAusgabe().setText(spiel.getGui().getAusgabe().getText()+"\n"+ "Ueberspringen im Endfeld nicht moeglich!");
 					return;
 				}
 			}
@@ -283,7 +299,9 @@ public class Regelwerk implements Serializable {
 				spiel.setAmZug(spieler);
 			}
 		}else{
-			System.out.println(spieler.toString()+" hat gewonnen!");
+//			System.out.println(spieler.toString()+" hat gewonnen!");
+			if(spiel.getGui() != null)
+				spiel.getGui().getAusgabe().setText(spiel.getGui().getAusgabe().getText()+"\n"+ spieler.toString() +" hat gewonnen!");
 		}
 	}
 
@@ -305,7 +323,9 @@ public class Regelwerk implements Serializable {
 					spielfigur.getSpielfeld().setSpielfigur(spielfigur);
 				}
 			}
-			System.out.println(spielfigur.toString() + " Wurde auf Startfeld geschmissen");
+//			System.out.println(spielfigur.toString() + " Wurde auf Startfeld geschmissen");
+			if(spiel.getGui() != null)
+				spiel.getGui().getAusgabe().setText(spiel.getGui().getAusgabe().getText()+"\n"+ spielfigur.toString() +"Wurde auf Startfeld geschmissen");
 			break;
 		case BLUE:
 			for (int i = 0; i < spiel.getBrett().getSpielbrett()[10].getFelder().length; i++) {
@@ -315,7 +335,9 @@ public class Regelwerk implements Serializable {
 					spielfigur.getSpielfeld().setSpielfigur(spielfigur);
 				}
 			}
-			System.out.println(spielfigur.toString() + " Wurde auf Startfeld geschmissen");
+//			System.out.println(spielfigur.toString() + " Wurde auf Startfeld geschmissen");
+			if(spiel.getGui() != null)
+				spiel.getGui().getAusgabe().setText(spiel.getGui().getAusgabe().getText()+"\n"+ spielfigur.toString() +"Wurde auf Startfeld geschmissen");
 			break;
 		case GREEN:
 			for (int i = 0; i < spiel.getBrett().getSpielbrett()[20].getFelder().length; i++) {
@@ -325,7 +347,9 @@ public class Regelwerk implements Serializable {
 					spielfigur.getSpielfeld().setSpielfigur(spielfigur);
 				}
 			}
-			System.out.println(spielfigur.toString() + " Wurde auf Startfeld geschmissen");
+//			System.out.println(spielfigur.toString() + " Wurde auf Startfeld geschmissen");
+			if(spiel.getGui() != null)
+				spiel.getGui().getAusgabe().setText(spiel.getGui().getAusgabe().getText()+"\n"+ spielfigur.toString() +"Wurde auf Startfeld geschmissen");
 			break;
 		case YELLOW:
 			for (int i = 0; i < spiel.getBrett().getSpielbrett()[30].getFelder().length; i++) {
@@ -335,7 +359,9 @@ public class Regelwerk implements Serializable {
 					spielfigur.getSpielfeld().setSpielfigur(spielfigur);
 				}
 			}
-			System.out.println(spielfigur.toString() + " Wurde auf Startfeld geschmissen");
+//			System.out.println(spielfigur.toString() + " Wurde auf Startfeld geschmissen");
+			if(spiel.getGui() != null)
+				spiel.getGui().getAusgabe().setText(spiel.getGui().getAusgabe().getText()+"\n"+ spielfigur.toString() +"Wurde auf Startfeld geschmissen");
 			break;
 		}
 		spiel.setGeschmissen(spielfigur);
@@ -350,7 +376,9 @@ public class Regelwerk implements Serializable {
 			if(posEndfeld+erg < 5){
 				for(int i=erg-1; i>0; i--){
 					if(spiel.getBrett().getSpielbrett()[39].getFelder()[posEndfeld+erg-i].getSpielfigur() != null){
-						System.err.println("kein ueberspringen"+(posEndfeld+erg-i));
+//						System.err.println("kein ueberspringen"+(posEndfeld+erg-i));
+						if(spiel.getGui() != null)
+							spiel.getGui().getAusgabe().setText(spiel.getGui().getAusgabe().getText()+"\n"+"kein Ueberspringen");
 						return;
 					}
 				}
@@ -367,7 +395,9 @@ public class Regelwerk implements Serializable {
 			if(posEndfeld+erg < 5){
 				for(int i=erg-1; i>0; i--){
 					if(spiel.getBrett().getSpielbrett()[9].getFelder()[posEndfeld+erg-i].getSpielfigur() != null){
-						System.err.println("besetzt/kein ueberspringen"+(posEndfeld+erg-i));
+//						System.err.println("besetzt/kein ueberspringen"+(posEndfeld+erg-i));
+						if(spiel.getGui() != null)
+							spiel.getGui().getAusgabe().setText(spiel.getGui().getAusgabe().getText()+"\n"+"kein Ueberspringen");
 						return;
 					}
 				}
@@ -384,7 +414,9 @@ public class Regelwerk implements Serializable {
 			if(posEndfeld+erg < 5){
 				for(int i=erg-1; i>0; i--){
 					if(spiel.getBrett().getSpielbrett()[19].getFelder()[posEndfeld+erg-i].getSpielfigur() != null){
-						System.out.println("besetzt/kein ueberspringen");
+//						System.out.println("besetzt/kein ueberspringen");
+						if(spiel.getGui() != null)
+							spiel.getGui().getAusgabe().setText(spiel.getGui().getAusgabe().getText()+"\n"+"kein Ueberspringen");
 						return;
 					}
 				}
@@ -401,7 +433,9 @@ public class Regelwerk implements Serializable {
 			if(posEndfeld+erg < 5){
 				for(int i=erg-1; i>0; i--){
 					if(spiel.getBrett().getSpielbrett()[29].getFelder()[posEndfeld+erg-i].getSpielfigur() != null){
-						System.out.println("besetzt/kein ueberspringen");
+//						System.out.println("besetzt/kein ueberspringen");
+						if(spiel.getGui() != null)
+							spiel.getGui().getAusgabe().setText(spiel.getGui().getAusgabe().getText()+"\n"+"kein Ueberspringen");
 						return;
 					}
 				}
@@ -425,7 +459,9 @@ public class Regelwerk implements Serializable {
 				}
 			}
 		}else {
-			System.out.println(spieler.toString()+" hat gewonnen!");
+//			System.out.println(spieler.toString()+" hat gewonnen!");
+			if(spiel.getGui() != null)
+				spiel.getGui().getAusgabe().setText(spiel.getGui().getAusgabe().getText()+"\n"+spieler.toString()+" hat gewonnen!");
 		}
 	}
 	

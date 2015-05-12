@@ -7,6 +7,7 @@ import java.awt.Graphics;
 import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.MediaTracker;
+import java.io.Serializable;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -24,7 +25,7 @@ import backend.Spiel;
 import backend.Spieler.Spielfigur;
 import frontend.iBediener;
 
-public class MngJFrame extends JFrame {
+public class MngJFrame extends JFrame implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 	private JButton start;
@@ -54,6 +55,7 @@ public class MngJFrame extends JFrame {
 	private JButton[] figurenBlue;
 	private JButton[] figurenGreen;
 	private JButton[] figurenYellow;
+	private JButton PDF;
 
 	private eventHandling e;
 	private iBediener s;
@@ -102,6 +104,7 @@ public class MngJFrame extends JFrame {
 		figurenBlue = new JButton[4];
 		figurenGreen = new JButton[4];
 		figurenYellow = new JButton[4];
+		PDF = new JButton("PDF speichern");
 		
 		for (int i = 0; i < 8; i++) {
 			red[i] = new JPanel();
@@ -134,7 +137,7 @@ public class MngJFrame extends JFrame {
 
 
 	private void startFenster() {
-		initStartBild();
+//		initStartBild();
 		setTitle("Mensch aergere dich nicht");
 		setSize(800, 600);
 		setLocationRelativeTo(null);
@@ -156,7 +159,7 @@ public class MngJFrame extends JFrame {
 		getContentPane().add(panel3, BorderLayout.PAGE_END);
 	}
 
-	private void initStartBild() {
+	private void initStartBild(){
 		setContentPane(new JPanel() {
 			private static final long serialVersionUID = 1L;
 			private Image img;
@@ -224,7 +227,6 @@ public class MngJFrame extends JFrame {
 	}
 
 	public void spielFenster() {
-		gewonnenDialog();
 		fmSpiel.add(mainPanel);
 		mainPanel.setLayout(new BorderLayout());
 		mainPanel.add(pCen, BorderLayout.CENTER);
@@ -363,6 +365,11 @@ public class MngJFrame extends JFrame {
 		e.setButtonSpeichern(speichern);
 		pEast.add(speichern);
 		
+		PDF.setEnabled(true);
+		PDF.addActionListener(e);
+		e.setButtonPDF(PDF);
+		pEast.add(PDF);
+		
 		mainPanel.add(pEast, BorderLayout.EAST);
 		ziehen.addActionListener(e);
 		e.setButtonZiehen(ziehen);
@@ -499,7 +506,7 @@ public class MngJFrame extends JFrame {
 		case BLUE:
 			if(spielfigur.getSpielfeld().getID().contains("E")){
 				int posEndfeld=Integer.parseInt(spielfigur.getSpielfeld().getID().substring(1));
-				red[posEndfeld+3].add(figurenBlue[spielfigur.getID()-1]);
+				blue[posEndfeld+3].add(figurenBlue[spielfigur.getID()-1]);
 				pCen.repaint();
 				return;
 			}
@@ -508,7 +515,7 @@ public class MngJFrame extends JFrame {
 		case GREEN:
 			if(spielfigur.getSpielfeld().getID().contains("E")){
 				int posEndfeld=Integer.parseInt(spielfigur.getSpielfeld().getID().substring(1));
-				red[posEndfeld+3].add(figurenGreen[spielfigur.getID()-1]);
+				green[posEndfeld+3].add(figurenGreen[spielfigur.getID()-1]);
 				pCen.repaint();
 				return;
 			}
@@ -517,7 +524,7 @@ public class MngJFrame extends JFrame {
 		case YELLOW:
 			if(spielfigur.getSpielfeld().getID().contains("E")){
 				int posEndfeld=Integer.parseInt(spielfigur.getSpielfeld().getID().substring(1));
-				red[posEndfeld+3].add(figurenYellow[spielfigur.getID()-1]);
+				yellow[posEndfeld+3].add(figurenYellow[spielfigur.getID()-1]);
 				pCen.repaint();
 				return;
 			}
@@ -581,6 +588,11 @@ public class MngJFrame extends JFrame {
 		JOptionPane.showMessageDialog(null, "gewonnen", "Gewonnen", JOptionPane.INFORMATION_MESSAGE, null);
 	}
 	
+	public void gleicheFarbeDialog(){
+
+		JOptionPane.showMessageDialog(null,"Keine doppelten Farben erlaubt!", "Warnung", JOptionPane.WARNING_MESSAGE);
+	}
+	
 
 	public JButton getZiehen() {
 		return ziehen;
@@ -606,8 +618,8 @@ public class MngJFrame extends JFrame {
 		return kiwahl;
 	}
 
-	public iBediener getSpiel() {
-		return s;
+	public Spiel getSpiel() {
+		return (Spiel) s;
 	}
 
 	public JTextArea getAusgabe() {
@@ -658,5 +670,9 @@ public class MngJFrame extends JFrame {
 	}
 	public JPanel[] getRed() {
 		return red;
+	}
+
+	public JButton getPDF() {
+		return PDF;
 	}
 }

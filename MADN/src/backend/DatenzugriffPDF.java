@@ -3,6 +3,7 @@ package backend;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.Serializable;
 
 import com.itextpdf.text.BaseColor;
 import com.itextpdf.text.Document;
@@ -15,12 +16,25 @@ import com.itextpdf.text.pdf.PdfWriter;
 
 import frontend.iDatenzugriff;
 
-public class DatenzugriffPDF implements iDatenzugriff {
+public class DatenzugriffPDF implements iDatenzugriff, Serializable {
 
 	
 	
 	
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+
+
+
+
+
+
+
+
 	@Override
 	public  void spielfeld(Spiel spiel) throws FileNotFoundException, DocumentException {
 		
