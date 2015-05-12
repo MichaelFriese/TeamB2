@@ -6,7 +6,9 @@ import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.ObjectOutputStream;
 
 import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
@@ -34,6 +36,7 @@ public class eventHandling extends JFrame implements ActionListener, iBediener,C
 	 */
 	private static final long serialVersionUID = 1L;
 	private JButton ButtonStart;
+	private JButton ButtonSpeichern;
 	private JButton ButtonLaden;
 	private JButton ButtonUeber;
 	private JButton ButtonBeenden;
@@ -102,7 +105,9 @@ public class eventHandling extends JFrame implements ActionListener, iBediener,C
 	public void setButtonWuerfel(JButton wuerfel){
 		this.ButtonWuerfel=wuerfel;
 	}
-
+	public void setButtonSpeichern(JButton speichern){
+		this.ButtonSpeichern=speichern;
+	}
 	public void setButtonLaden(JButton laden) {
 		this.ButtonLaden = laden;
 	}
@@ -128,6 +133,16 @@ public class eventHandling extends JFrame implements ActionListener, iBediener,C
 			System.exit(0);
 		}
 		if(EventSource == ButtonWuerfel){
+		}
+		if(EventSource==ButtonSpeichern){
+			ObjectOutputStream oos =null;
+			try{
+				oos = new ObjectOutputStream(new FileOutputStream("Spielstand"+"ser"));
+				oos.writeObject(frame.getSpiel());
+			}
+			catch (Exception e){
+				e.printStackTrace();
+			}
 		}
 		if (EventSource == ButtonOk) {
 			String label = a_event.getActionCommand();

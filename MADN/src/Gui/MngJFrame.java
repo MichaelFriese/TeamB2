@@ -35,6 +35,7 @@ public class MngJFrame extends JFrame {
 	private JButton ziehen;
 	private JButton kiWeiter;
 	private JButton aussetzen;
+	private JButton speichern;
 	private JButton wuerfel;
 	private JTextArea ausgabe;
 	private JFrame dialogfenster;
@@ -84,6 +85,7 @@ public class MngJFrame extends JFrame {
 		kiWeiter = new JButton("KI Weiter");
 		kiWeiter.setEnabled(false);
 		aussetzen = new JButton("aussetzen");
+		speichern= new JButton ("speichern");
 		dialogfenster = new JFrame("Startfenster");
 		namen = new JTextField[4];
 		farbwahl = new JComboBox[4];
@@ -356,6 +358,10 @@ public class MngJFrame extends JFrame {
 		e.setButtonAussetzen(aussetzen);
 		pEast.add(aussetzen);
 		
+		speichern.setEnabled(true);
+		speichern.addActionListener(e);
+		e.setButtonSpeichern(speichern);
+		pEast.add(speichern);
 		
 		mainPanel.add(pEast, BorderLayout.EAST);
 		ziehen.addActionListener(e);
