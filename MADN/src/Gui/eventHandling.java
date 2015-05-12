@@ -254,10 +254,56 @@ public class eventHandling extends JFrame implements ActionListener, iBediener, 
 		}
 
 		if (EventSource == ButtonLaden) {
+//			iDatenzugriff speicherSer = new DatenzugriffSerialisiert();
 			DatenzugriffSerialisiert s = new DatenzugriffSerialisiert();
+			frame.setS((Spiel)s.laden("spielstandser"));
+			
 			JFileChooser chooser = new JFileChooser();
 			chooser.showOpenDialog(null);
-			s.laden("Spielstandser");
+//			s.laden("Spielstandser");
+			System.out.println(frame.getSpiel().getSpieler().size());
+			for(int i=0; i<frame.getSpiel().getSpieler().size()-1; i++){
+				System.out.println(frame.getSpiel().getSpieler().toString());
+			}
+			frame.getSpiel().initSpiel();
+			
+			frame.spielFenster();
+			String s1 = "";
+			for (int i=0; i<frame.getSpiel().getSpieler().size(); i++) {
+				Spieler spieler = frame.getSpiel().getSpieler().get(i);
+//				s1 += "Spieler " + (i + 1) + ": " + frame.getSpiel().getSpieler().get(i) + "\n";
+				frame.figurButton(frame.getSpiel().getSpieler().get(i).getFarbe1());
+//				switch(spieler.getFarbe()){
+//				case BLUE:
+//					for(int k=0; k<4; k++){
+//						int pos = spieler.getSpielfigurNeu(k).getSpielfeld().getPosition();
+//						if(pos!=0){
+//							frame.getFields()[pos-1].add(frame.getFigurenBlue()[k]);
+//						}else if(spieler.getSpielfigurNeu(k).getSpielfeld().getID().contains("S")){
+//							int posStartfeld=Integer.parseInt(spieler.getSpielfigurNeu(k).getSpielfeld().getID().substring(1));
+//							frame.getBlue()[posStartfeld].add(frame.getFigurenBlue()[spieler.getSpielfigurNeu(k).getID()-1]);
+//						}else if(spieler.getSpielfigurNeu(k).getSpielfeld().getID().contains("E")){
+//							int posEndfeld=Integer.parseInt(spieler.getSpielfigurNeu(k).getSpielfeld().getID().substring(1));
+//							frame.getBlue()[posEndfeld+3].add(frame.getFigurenBlue()[spieler.getSpielfigurNeu(k).getID()-1]);
+//						}
+//					}
+//					break;
+//				case GREEN:
+//					break;
+//				case RED:
+//					break;
+//				case YELLOW:
+//					break;
+//				default:
+//					break;
+//				
+//				}
+			}
+//			frame.getAusgabe().setText(
+//					"****************************************************************\n" + "NEUES SPIEL ANGELEGT\n" + s1 + "****************************************************************\n"
+//							+ sp.getAmZug() + " ist am Zug\n" + sp.getAmZug().getWuerfel().getErgebnis() + " gewuerfelt");
+
+		
 		}
 
 		if (EventSource == figurenRot[0]) {

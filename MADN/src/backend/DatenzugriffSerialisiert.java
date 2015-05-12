@@ -59,8 +59,8 @@ public class DatenzugriffSerialisiert implements iDatenzugriff, Serializable {
 		
 			try {
 				s = ois.readObject();
-				System.out.println("Spiel geladen");
-				System.out.println(s);
+//				System.out.println("Spiel geladen");
+//				System.out.println(s);
 				return s;
 				
 			} catch (ClassNotFoundException e) {

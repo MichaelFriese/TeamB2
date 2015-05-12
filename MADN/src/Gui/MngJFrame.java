@@ -160,6 +160,10 @@ public class MngJFrame extends JFrame implements Serializable{
 		getContentPane().add(panel3, BorderLayout.PAGE_END);
 	}
 
+	public void setS(iBediener s) {
+		this.s = s;
+	}
+
 	private void initStartBild(){
 		setContentPane(new JPanel() {
 			private static final long serialVersionUID = 1L;

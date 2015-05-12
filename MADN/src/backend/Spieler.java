@@ -94,6 +94,23 @@ public class Spieler implements Serializable {
 	public FarbEnum getFarbe() {
 		return farbe;
 	}
+	
+	public String getFarbe1(){
+		switch(farbe){
+		case BLUE:
+			return "blue";
+		case GREEN:
+			return "green";
+		case RED:
+			return "red";
+		case YELLOW:
+			return "yellow";
+		default:
+			break;
+			
+		}
+		return null;
+	}
 
 	/**
 	 * gibt des Namen des Spielers zurueck
