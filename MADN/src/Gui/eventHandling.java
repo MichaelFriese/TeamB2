@@ -1,9 +1,5 @@
 package Gui;
 
-import java.awt.BorderLayout;
-import java.awt.Component;
-import java.awt.Font;
-import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.FileNotFoundException;
@@ -12,15 +8,9 @@ import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 
-import javax.swing.ButtonGroup;
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JComboBox;
-import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 import javax.swing.event.CaretEvent;
 import javax.swing.event.CaretListener;
@@ -30,9 +20,9 @@ import com.itextpdf.text.DocumentException;
 import backend.DatenzugriffPDF;
 import backend.DatenzugriffSerialisiert;
 import backend.FarbEnum;
+import backend.Mail;
 import backend.Spiel;
 import backend.Spieler;
-import backend.Spieler.Spielfigur;
 import frontend.iBediener;
 import frontend.iDatenzugriff;
 
@@ -65,6 +55,8 @@ public class eventHandling extends JFrame implements ActionListener, iBediener, 
 	private JButton aussetzen;
 	private JButton ButtonPDF;
 	private JButton ButtonHauptmenu;
+	private String mailSer = "";
+	private String mailPdf = "";
 	
 	public void setButtonPDF(JButton PDF){
 		this.ButtonPDF = PDF;
@@ -145,8 +137,43 @@ public class eventHandling extends JFrame implements ActionListener, iBediener, 
 	@Override
 	public void actionPerformed(ActionEvent a_event) {
 		Object EventSource = a_event.getSource();
-		Spiel sp = (Spiel) frame.getS();
+		Spiel sp = frame.getSpiel();
 		Spieler lokalAmZug = sp.getAmZug();
+		
+
+		if(EventSource == frame.getMail()){
+			mailSer = null;
+			mailPdf = null;
+			frame.getAnhang1().setText("Anhang 1: ---");
+			frame.getAnhang2().setText("Anhang 2: ---");
+			frame.mailFenster();
+		}
+		if(EventSource == frame.getMailAnhang()[0]){
+			ObjectOutputStream oos = null;
+			try {
+				oos = new ObjectOutputStream(new FileOutputStream("Spielstand." + "ser"));
+				oos.writeObject(frame.getSpiel());
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			frame.getAnhang1().setText("Anhang 1: Spielstand.ser");
+			mailSer = "Spielstand.ser";
+		}
+		if(EventSource == frame.getMailAnhang()[1]){
+			iDatenzugriff pdf = new DatenzugriffPDF();
+			try {
+				pdf.spielfeld(frame.getSpiel());
+			} catch (FileNotFoundException | DocumentException e) {
+				e.printStackTrace();
+			}
+			frame.getAnhang2().setText("Anhang 2: Spielstand.pdf");
+			mailPdf = "Spielstand.pdf";
+		}
+		if(EventSource == frame.getMailSenden()){
+			new Mail(frame.getMailAn().getText(),"test JavaMail", "testtext", mailSer, mailSer, mailPdf, mailPdf, frame);
+			frame.getMailFrame().setVisible(false);
+		}
+		
 		if (EventSource == ButtonBeenden) {
 			System.exit(0);
 		}
@@ -155,7 +182,7 @@ public class eventHandling extends JFrame implements ActionListener, iBediener, 
 		if (EventSource == ButtonSpeichern) {
 			ObjectOutputStream oos = null;
 			try {
-				oos = new ObjectOutputStream(new FileOutputStream("Spielstand" + "ser"));
+				oos = new ObjectOutputStream(new FileOutputStream("Spielstand." + "ser"));
 				oos.writeObject(frame.getSpiel());
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -254,54 +281,86 @@ public class eventHandling extends JFrame implements ActionListener, iBediener, 
 		}
 
 		if (EventSource == ButtonLaden) {
-//			iDatenzugriff speicherSer = new DatenzugriffSerialisiert();
 			DatenzugriffSerialisiert s = new DatenzugriffSerialisiert();
 			frame.setS((Spiel)s.laden("spielstandser"));
+			frame.getSpiel().setGui(frame);
+			sp = frame.getSpiel();
+			lokalAmZug = sp.getAmZug();
 			
-			JFileChooser chooser = new JFileChooser();
-			chooser.showOpenDialog(null);
-//			s.laden("Spielstandser");
-			System.out.println(frame.getSpiel().getSpieler().size());
-			for(int i=0; i<frame.getSpiel().getSpieler().size()-1; i++){
-				System.out.println(frame.getSpiel().getSpieler().toString());
-			}
-			frame.getSpiel().initSpiel();
-			
+//			JFileChooser chooser = new JFileChooser();
+//			chooser.showOpenDialog(null);
+			s.laden("Spielstandser");
+
 			frame.spielFenster();
-			String s1 = "";
+			frame.setIconNeu(frame.getSpiel().getSpieler().get(0).getWuerfel().getErgebnis());
+			frame.getAusgabe().setText("Spiel erfolgreich geladen\n----------------------\n"
+									  + sp.getAmZug() + " ist am Zug\n" + sp.getAmZug().getWuerfel().getErgebnis() + " gewuerfelt");
+
 			for (int i=0; i<frame.getSpiel().getSpieler().size(); i++) {
 				Spieler spieler = frame.getSpiel().getSpieler().get(i);
-//				s1 += "Spieler " + (i + 1) + ": " + frame.getSpiel().getSpieler().get(i) + "\n";
-				frame.figurButton(frame.getSpiel().getSpieler().get(i).getFarbe1());
-//				switch(spieler.getFarbe()){
-//				case BLUE:
-//					for(int k=0; k<4; k++){
-//						int pos = spieler.getSpielfigurNeu(k).getSpielfeld().getPosition();
-//						if(pos!=0){
-//							frame.getFields()[pos-1].add(frame.getFigurenBlue()[k]);
-//						}else if(spieler.getSpielfigurNeu(k).getSpielfeld().getID().contains("S")){
-//							int posStartfeld=Integer.parseInt(spieler.getSpielfigurNeu(k).getSpielfeld().getID().substring(1));
-//							frame.getBlue()[posStartfeld].add(frame.getFigurenBlue()[spieler.getSpielfigurNeu(k).getID()-1]);
-//						}else if(spieler.getSpielfigurNeu(k).getSpielfeld().getID().contains("E")){
-//							int posEndfeld=Integer.parseInt(spieler.getSpielfigurNeu(k).getSpielfeld().getID().substring(1));
-//							frame.getBlue()[posEndfeld+3].add(frame.getFigurenBlue()[spieler.getSpielfigurNeu(k).getID()-1]);
-//						}
-//					}
-//					break;
-//				case GREEN:
-//					break;
-//				case RED:
-//					break;
-//				case YELLOW:
-//					break;
-//				default:
-//					break;
-//				
-//				}
+				switch(spieler.getFarbe()){
+				case RED:
+					for(int k=0; k<4; k++){
+						int pos = spieler.getSpielfigurNeu(k).getSpielfeld().getPosition();
+						if(pos!=0){
+							frame.getFields()[pos-1].add(frame.getFigurenRed()[k]);
+						}else if(spieler.getSpielfigurNeu(k).getSpielfeld().getID().contains("S")){
+							int posStartfeld=Integer.parseInt(spieler.getSpielfigurNeu(k).getSpielfeld().getID().substring(1));
+							frame.getRed()[posStartfeld-1].add(frame.getFigurenRed()[spieler.getSpielfigurNeu(k).getID()-1]);
+						}else if(spieler.getSpielfigurNeu(k).getSpielfeld().getID().contains("E")){
+							int posEndfeld=Integer.parseInt(spieler.getSpielfigurNeu(k).getSpielfeld().getID().substring(1));
+							frame.getRed()[posEndfeld+3].add(frame.getFigurenRed()[spieler.getSpielfigurNeu(k).getID()-1]);
+						}
+						frame.getFigurenRed()[k].setVisible(true);
+					}
+					break;
+				case BLUE:
+					for(int k=0; k<4; k++){
+						int pos = spieler.getSpielfigurNeu(k).getSpielfeld().getPosition();
+						if(pos!=0){
+							frame.getFields()[pos-1].add(frame.getFigurenBlue()[k]);
+						}else if(spieler.getSpielfigurNeu(k).getSpielfeld().getID().contains("S")){
+							int posStartfeld=Integer.parseInt(spieler.getSpielfigurNeu(k).getSpielfeld().getID().substring(1));
+							frame.getBlue()[posStartfeld-1].add(frame.getFigurenBlue()[spieler.getSpielfigurNeu(k).getID()-1]);
+						}else if(spieler.getSpielfigurNeu(k).getSpielfeld().getID().contains("E")){
+							int posEndfeld=Integer.parseInt(spieler.getSpielfigurNeu(k).getSpielfeld().getID().substring(1));
+							frame.getBlue()[posEndfeld+3].add(frame.getFigurenBlue()[spieler.getSpielfigurNeu(k).getID()-1]);
+						}
+						frame.getFigurenBlue()[k].setVisible(true);
+					}
+					break;
+				case GREEN:
+					for(int k=0; k<4; k++){
+						int pos = spieler.getSpielfigurNeu(k).getSpielfeld().getPosition();
+						if(pos!=0){
+							frame.getFields()[pos-1].add(frame.getFigurenGreen()[k]);
+						}else if(spieler.getSpielfigurNeu(k).getSpielfeld().getID().contains("S")){
+							int posStartfeld=Integer.parseInt(spieler.getSpielfigurNeu(k).getSpielfeld().getID().substring(1));
+							frame.getGreen()[posStartfeld-1].add(frame.getFigurenGreen()[spieler.getSpielfigurNeu(k).getID()-1]);
+						}else if(spieler.getSpielfigurNeu(k).getSpielfeld().getID().contains("E")){
+							int posEndfeld=Integer.parseInt(spieler.getSpielfigurNeu(k).getSpielfeld().getID().substring(1));
+							frame.getGreen()[posEndfeld+3].add(frame.getFigurenGreen()[spieler.getSpielfigurNeu(k).getID()-1]);
+						}
+						frame.getFigurenGreen()[k].setVisible(true);
+					}
+					break;
+				case YELLOW:
+					for(int k=0; k<4; k++){
+						int pos = spieler.getSpielfigurNeu(k).getSpielfeld().getPosition();
+						if(pos!=0){
+							frame.getFields()[pos-1].add(frame.getFigurenYellow()[k]);
+						}else if(spieler.getSpielfigurNeu(k).getSpielfeld().getID().contains("S")){
+							int posStartfeld=Integer.parseInt(spieler.getSpielfigurNeu(k).getSpielfeld().getID().substring(1));
+							frame.getYellow()[posStartfeld-1].add(frame.getFigurenYellow()[spieler.getSpielfigurNeu(k).getID()-1]);
+						}else if(spieler.getSpielfigurNeu(k).getSpielfeld().getID().contains("E")){
+							int posEndfeld=Integer.parseInt(spieler.getSpielfigurNeu(k).getSpielfeld().getID().substring(1));
+							frame.getYellow()[posEndfeld+3].add(frame.getFigurenYellow()[spieler.getSpielfigurNeu(k).getID()-1]);
+						}
+						frame.getFigurenYellow()[k].setVisible(true);
+					}
+					break;
+				}
 			}
-//			frame.getAusgabe().setText(
-//					"****************************************************************\n" + "NEUES SPIEL ANGELEGT\n" + s1 + "****************************************************************\n"
-//							+ sp.getAmZug() + " ist am Zug\n" + sp.getAmZug().getWuerfel().getErgebnis() + " gewuerfelt");
 
 		
 		}
@@ -541,7 +600,7 @@ public class eventHandling extends JFrame implements ActionListener, iBediener, 
 				}
 
 			}
-			System.out.println("geschmissen " + sp.getGeschmissen());
+//			System.out.println("geschmissen " + sp.getGeschmissen());
 
 			frame.getpCen().repaint();
 			ziehen.setEnabled(false);

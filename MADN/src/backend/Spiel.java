@@ -538,6 +538,10 @@ public class Spiel implements iBediener, Serializable {
 		return dateiname;
 	}
 
+	public void setGui(MngJFrame gui) {
+		this.gui = gui;
+	}
+
 	public MngJFrame getGui() {
 		return gui;
 	}

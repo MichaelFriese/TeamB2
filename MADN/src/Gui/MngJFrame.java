@@ -20,7 +20,6 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
-import backend.FarbEnum;
 import backend.Spiel;
 import backend.Spieler.Spielfigur;
 import frontend.iBediener;
@@ -56,6 +55,14 @@ public class MngJFrame extends JFrame implements Serializable{
 	private JButton[] figurenGreen;
 	private JButton[] figurenYellow;
 	private JButton PDF;
+	private JButton mail;
+	private JFrame mailFrame;
+	private JPanel mailPanel;
+	private JTextField mailAn;
+	private JButton[] mailAnhang;
+	private JButton mailSenden;
+	private JLabel anhang1;
+	private JLabel anhang2;
 	private JButton Hauptmenu;
 
 	private eventHandling e;
@@ -77,7 +84,7 @@ public class MngJFrame extends JFrame implements Serializable{
 	}
 
 	private void initComponents() {
-		ausgabe = new JTextArea(8, 0);
+		ausgabe = new JTextArea(6, 0);
 		start = new JButton("Start");
 		laden = new JButton("Laden");
 		beenden = new JButton("Beenden");
@@ -106,6 +113,16 @@ public class MngJFrame extends JFrame implements Serializable{
 		figurenGreen = new JButton[4];
 		figurenYellow = new JButton[4];
 		PDF = new JButton("PDF speichern");
+		mail = new JButton("Mail senden");
+		mailFrame = new JFrame();
+		mailPanel = new JPanel();
+		mailAn = new JTextField("E-Mail-Adresse");
+		mailAnhang = new JButton[2];
+		mailAnhang[0] = new JButton("Spielstand.ser hinzufuegen");
+		mailAnhang[1] = new JButton("Spielstand.pdf hinzufuegen");
+		mailSenden = new JButton("Senden");
+		anhang1 = new JLabel("Anhang 1: ---");
+		anhang2 = new JLabel("Anhang 2: ---");
 		
 		for (int i = 0; i < 8; i++) {
 			red[i] = new JPanel();
@@ -134,7 +151,6 @@ public class MngJFrame extends JFrame implements Serializable{
 		figurenSetzen();
 		
 	}
-
 
 
 	private void startFenster() {
@@ -375,6 +391,10 @@ public class MngJFrame extends JFrame implements Serializable{
 		e.setButtonPDF(PDF);
 		pEast.add(PDF);
 		
+		mail.setEnabled(true);
+		mail.addActionListener(e);
+		pEast.add(mail);
+		
 //		Hauptmenu.setEnabled(true);
 //		Hauptmenu.addActionListener(e);
 //		e.setButtonHauptmenu(Hauptmenu);
@@ -384,7 +404,7 @@ public class MngJFrame extends JFrame implements Serializable{
 		ziehen.addActionListener(e);
 		e.setButtonZiehen(ziehen);
 
-		fmSpiel.setSize(1000, 800);
+		fmSpiel.setSize(820, 690);
 		fmSpiel.setResizable(false);
 		fmSpiel.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		fmSpiel.setVisible(true);
@@ -603,6 +623,26 @@ public class MngJFrame extends JFrame implements Serializable{
 		JOptionPane.showMessageDialog(null,"Keine doppelten Farben erlaubt!", "Warnung", JOptionPane.WARNING_MESSAGE);
 	}
 	
+	public void mailFenster(){
+		mailFrame.add(mailPanel);
+		mailPanel.setLayout(new GridLayout(6,1));
+		mailPanel.add(mailAn);
+		mailPanel.add(mailAnhang[0]);
+		mailPanel.add(mailAnhang[1]);
+		mailPanel.add(anhang1);
+		mailPanel.add(anhang2);
+		mailPanel.add(mailSenden);
+		
+		mailAnhang[0].addActionListener(e);
+		mailAnhang[1].addActionListener(e);
+		mailSenden.addActionListener(e);
+		
+		mailFrame.setAlwaysOnTop(true);
+		mailFrame.setVisible(true);
+		mailFrame.pack();
+		mailFrame.setResizable(false);
+	}
+	
 
 	public JButton getZiehen() {
 		return ziehen;
@@ -684,5 +724,32 @@ public class MngJFrame extends JFrame implements Serializable{
 
 	public JButton getPDF() {
 		return PDF;
+	}
+
+	public JButton getMail() {
+		return mail;
+	}
+	public JTextField getMailAn() {
+		return mailAn;
+	}
+
+	public JButton[] getMailAnhang() {
+		return mailAnhang;
+	}
+
+	public JButton getMailSenden() {
+		return mailSenden;
+	}
+
+	public JLabel getAnhang1() {
+		return anhang1;
+	}
+
+	public JLabel getAnhang2() {
+		return anhang2;
+	}
+
+	public JFrame getMailFrame() {
+		return mailFrame;
 	}
 }
