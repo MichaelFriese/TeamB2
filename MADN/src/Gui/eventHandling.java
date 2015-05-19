@@ -172,7 +172,10 @@ public class eventHandling extends JFrame implements ActionListener, iBediener, 
 			mailPdf = "Spielstand.pdf";
 		}
 		if(EventSource == frame.getMailSenden()){
-			new Mail(frame.getMailAn().getText(),"test JavaMail", "testtext", mailSer, mailSer, mailPdf, mailPdf, frame);
+			String text;
+			
+			text= " Hallo Spieler, \n im Anhang befindet sich Dein aktueller Spielstand deines Mensch ärger dich nicht Spiel. \n Mit freundlichen Grüßen \n dein Team B2   ";
+			new Mail(frame.getMailAn().getText(),"Spielstand MADN", text, mailSer, mailSer, mailPdf, mailPdf, frame);
 			frame.getMailFrame().setVisible(false);
 		}
 		
