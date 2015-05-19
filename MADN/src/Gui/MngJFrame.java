@@ -24,6 +24,12 @@ import backend.Spiel;
 import backend.Spieler.Spielfigur;
 import frontend.iBediener;
 
+
+/**
+ * Manager JFrame enthaelt gesamte GUI
+ * 
+ * @author Michi, Doerte, Tobi
+ */
 public class MngJFrame extends JFrame implements Serializable{
 
 	private static final long serialVersionUID = 1L;
@@ -68,6 +74,7 @@ public class MngJFrame extends JFrame implements Serializable{
 	private eventHandling e;
 	private iBediener s;
 
+	
 	public MngJFrame() {
 		this.e = new eventHandling(this);
 		setTitle("Mensch ärger dich nicht");
@@ -83,6 +90,9 @@ public class MngJFrame extends JFrame implements Serializable{
 		s = new Spiel(this);
 	}
 
+	/**
+	 * initialisiert alle Komponenten
+	 */
 	private void initComponents() {
 		ausgabe = new JTextArea(6, 0);
 		start = new JButton("Start");
@@ -152,7 +162,9 @@ public class MngJFrame extends JFrame implements Serializable{
 		
 	}
 
-
+	/**
+	 * Oeffnet erstes Startfenster zur bedienung des Spiels
+	 */
 	private void startFenster() {
 //		initStartBild();
 		setTitle("Mensch aergere dich nicht");
@@ -180,6 +192,9 @@ public class MngJFrame extends JFrame implements Serializable{
 		this.s = s;
 	}
 
+	/**
+	 * Initialisiert Startbild im Startfenster
+	 */
 	private void initStartBild(){
 		setContentPane(new JPanel() {
 			private static final long serialVersionUID = 1L;
@@ -204,6 +219,10 @@ public class MngJFrame extends JFrame implements Serializable{
 		});
 	}
 
+	/**
+	 * Dialogfenster zum anlegen der Spieler
+	 * und des Spiels
+	 */
 	public void dialogFenster() {
 
 		JPanel panel = new JPanel();
@@ -247,6 +266,10 @@ public class MngJFrame extends JFrame implements Serializable{
 		dialogfenster.pack();
 	}
 
+	
+	/**
+	 * Oeffnet das Spielbrett mit allen notwendigen Elementen
+	 */
 	public void spielFenster() {
 		fmSpiel.add(mainPanel);
 		mainPanel.setLayout(new BorderLayout());
@@ -410,6 +433,10 @@ public class MngJFrame extends JFrame implements Serializable{
 		fmSpiel.setVisible(true);
 	}
 	
+	/**
+	 * Erstellt das Wuerfelergebnis als JButton mit Bild
+	 * @param erg Wuerfelergebnis
+	 */
 	public void setIconNeu(int erg){
 		ImageIcon erg1 = new ImageIcon("erg1.png");
 		ImageIcon erg2 = new ImageIcon("erg2.png");
@@ -452,7 +479,10 @@ public class MngJFrame extends JFrame implements Serializable{
 
 	}
 
-
+	/**
+	 * Setzt Spielfiguren die benoetigt werden sichtbar
+	 * @param farbe Spielerfarbe
+	 */
 	public void figurButton(String farbe) {
 		farbe=farbe.toUpperCase();
 		switch (farbe) {
@@ -481,6 +511,9 @@ public class MngJFrame extends JFrame implements Serializable{
 		}
 	}
 	
+	/**
+	 * setzt alle Spielfiguren auf ihre Startposition
+	 */
 	public void figurenSetzen(){
 		for (int i = 0; i < 4; i++) {
 			figurenRed[i] = new JButton("" + (i + 1));
@@ -517,6 +550,12 @@ public class MngJFrame extends JFrame implements Serializable{
 		}
 	}
 	
+	
+	/**
+	 * Aktualisiert die Spielfigur der gezogenen KI
+	 * auf dem Spielfeld
+	 * @param spielfigur gezogene Spielfigur
+	 */
 	public void KIFigurenZiehen(Spielfigur spielfigur){
 		int newPos=spielfigur.getSpielfeld().getPosition();
 		Spiel spiel = (Spiel) s;
@@ -614,15 +653,23 @@ public class MngJFrame extends JFrame implements Serializable{
 		pCen.repaint();
 	}
 	
+	/**
+	 * Zeigt ein gewonnen-Dialogfenster an
+	 */
 	public void gewonnenDialog(){
 		JOptionPane.showMessageDialog(null, "gewonnen", "Gewonnen", JOptionPane.INFORMATION_MESSAGE, null);
 	}
 	
+	/**
+	 * Zeigt Dialogfenster zum vermeiden von doppelten farben
+	 */
 	public void gleicheFarbeDialog(){
-
 		JOptionPane.showMessageDialog(null,"Keine doppelten Farben erlaubt!", "Warnung", JOptionPane.WARNING_MESSAGE);
 	}
 	
+	/**
+	 * Oeffnet neues Fenster fuer Mailversand
+	 */
 	public void mailFenster(){
 		mailFrame.add(mailPanel);
 		mailPanel.setLayout(new GridLayout(6,1));

@@ -28,11 +28,15 @@ import backend.Spieler;
 import frontend.iBediener;
 import frontend.iDatenzugriff;
 
+/**
+ * Klasse EventHandling von Manager JFrame
+ * 
+ * @author Michi, Doerte, Tobi
+ *
+ */
+
 public class eventHandling extends JFrame implements ActionListener, iBediener, CaretListener, Serializable {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	private JButton ButtonStart;
 	private JButton ButtonSpeichern;
@@ -136,6 +140,10 @@ public class eventHandling extends JFrame implements ActionListener, iBediener, 
 		this.ButtonSchliessen = schliessen;
 	}
 
+	
+	/**
+	 * Methode enthaelt alle Button Events
+	 */
 	@Override
 	public void actionPerformed(ActionEvent a_event) {
 		Object EventSource = a_event.getSource();
@@ -640,7 +648,10 @@ public class eventHandling extends JFrame implements ActionListener, iBediener, 
 			}
 		}
 	}
-
+	
+	/**
+	 * Datein laden
+	 */
 	public Object laden(String dateiname, String dateieinde) {
 		iBediener s = new Spiel();
 		return s.laden(dateiname, "");
@@ -707,13 +718,16 @@ public class eventHandling extends JFrame implements ActionListener, iBediener, 
 		// TODO Auto-generated method stub
 	}
 
+	/**
+	 * "Spiel starten" Button ausgrauen falls kein Spieler
+	 * eingegeben wurde
+	 */
 	@Override
 	public void caretUpdate(CaretEvent e) {
 		JTextField field = (JTextField) e.getSource();
 
 		String text = field.getText();
 		btn.setEnabled(!text.trim().isEmpty());
-
 	}
 
 	@Override
