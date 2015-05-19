@@ -9,11 +9,13 @@ import java.io.ObjectOutputStream;
 import java.io.Serializable;
 
 import javax.swing.JButton;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.event.CaretEvent;
 import javax.swing.event.CaretListener;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 import com.itextpdf.text.DocumentException;
 
@@ -180,14 +182,23 @@ public class eventHandling extends JFrame implements ActionListener, iBediener, 
 		if (EventSource == ButtonWuerfel) {
 		}
 		if (EventSource == ButtonSpeichern) {
+			JFileChooser chooser = new JFileChooser();
+			chooser.showSaveDialog(null);
+			if(chooser.getSelectedFile() == null) return;
+			
 			ObjectOutputStream oos = null;
 			try {
-				oos = new ObjectOutputStream(new FileOutputStream("Spielstand." + "ser"));
+				if(chooser.getSelectedFile().toString().contains(".ser"))
+					oos = new ObjectOutputStream(new FileOutputStream(chooser.getSelectedFile().toString()));
+				else
+					oos = new ObjectOutputStream(new FileOutputStream(chooser.getSelectedFile().toString() + ".ser"));
 				oos.writeObject(frame.getSpiel());
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
+			frame.getAusgabe().setText(frame.getAusgabe().getText()+"\nSpiel erfolgreich gespreichert!");
 		}
+		
 		if (EventSource == ButtonOk) {
 			String[] spielerNamen = new String[4];
 			String[] spielerFarbe = new String[4];
@@ -282,14 +293,16 @@ public class eventHandling extends JFrame implements ActionListener, iBediener, 
 
 		if (EventSource == ButtonLaden) {
 			DatenzugriffSerialisiert s = new DatenzugriffSerialisiert();
-			frame.setS((Spiel)s.laden("spielstandser"));
+			JFileChooser chooser = new JFileChooser();
+			FileNameExtensionFilter filter = new FileNameExtensionFilter("serialized *.ser", "ser");
+			chooser.setFileFilter(filter);
+			chooser.showOpenDialog(null);
+			if(chooser.getSelectedFile() == null) return;
+			
+			frame.setS((Spiel)s.laden(chooser.getSelectedFile().toString()));
 			frame.getSpiel().setGui(frame);
 			sp = frame.getSpiel();
 			lokalAmZug = sp.getAmZug();
-			
-//			JFileChooser chooser = new JFileChooser();
-//			chooser.showOpenDialog(null);
-			s.laden("Spielstandser");
 
 			frame.spielFenster();
 			frame.setIconNeu(frame.getSpiel().getSpieler().get(0).getWuerfel().getErgebnis());
